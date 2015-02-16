@@ -1,0 +1,139 @@
+
+\definecolor{lgray}{gray}{0.90}
+\definecolor{lblue}{RGB}{170,200,255}
+
+\newcommand{\command}[1]{\textbf{\textit{#1}}\xspace}
+
+\newcommand{\chemin}[1]{\textit{#1}\xspace}
+
+\newcommand{\acroread}[0]{\command{acroread}}
+\newcommand{\ant}[0]{\command{ant}}
+\newcommand{\aspell}[0]{\command{aspell}}
+\newcommand{\avconv}[0]{\command{avconv}}
+\newcommand{\awk}[0]{\command{awk}}
+\newcommand{\basename}[0]{\command{basename}}
+\newcommand{\bashcmd}[0]{\command{bash}}
+\newcommand{\bibtex}[0]{\command{bibtex}}
+\newcommand{\cat}[0]{\command{cat}}
+\newcommand{\cd}[0]{\command{cd}}
+\newcommand{\convert}[0]{\command{convert}}
+\newcommand{\cut}[0]{\command{cut}}
+\newcommand{\cmake}[0]{\command{cmake}}
+\newcommand{\diff}[0]{\command{diff}}
+\newcommand{\du}[0]{\command{du}}
+\newcommand{\echo}[0]{\command{echo}}
+\newcommand{\egrep}[0]{\command{egrep}}
+\newcommand{\emacs}[0]{\command{emacs}}
+\newcommand{\evince}[0]{\command{evince}}
+\newcommand{\find}[0]{\command{find}}
+\newcommand{\ffmpeg}[0]{\command{ffmpeg}}
+\newcommand{\gawk}[0]{\command{gawk}}
+\newcommand{\gimp}[0]{\command{Gimp}}
+\newcommand{\graphicsmagick}[0]{\command{GraphicsMagick}}
+\newcommand{\grep}[0]{\command{grep}}
+\newcommand{\gzip}[0]{\command{gzip}}
+\newcommand{\head}[0]{\command{head}}
+\newcommand{\hunspell}[0]{\command{hunspell}}
+\newcommand{\imagemagick}[0]{\command{ImageMagick}}
+\newcommand{\ispell}[0]{\command{ispell}}
+\newcommand{\join}[0]{\command{join}}
+\newcommand{\less}[0]{\command{less}}
+\newcommand{\ls}[0]{\command{ls}}
+\newcommand{\LanguageTool}[0]{\command{LanguageTool}}
+\newcommand{\locate}[0]{\command{locate}}
+\newcommand{\lynx}[0]{\command{lynx}}
+\newcommand{\make}[0]{\command{make}}
+\newcommand{\makefile}[0]{\command{makefile}}
+\newcommand{\man}[0]{\command{man}}
+\newcommand{\matplotlib}[0]{\command{matplotlib}}
+\newcommand{\mencoder}[0]{\command{mencoder}}
+\newcommand{\mkdir}[0]{\command{mkdir}}
+\newcommand{\mplayer}[0]{\command{mplayer}}
+\newcommand{\myspell}[0]{\command{myspell}}
+\newcommand{\numpy}[0]{\command{numpy}}
+\newcommand{\okular}[0]{\command{okular}}
+\newcommand{\pdflatex}[0]{\command{pdflatex}}
+\newcommand{\pdftk}[0]{\command{pdftk}}
+\newcommand{\python}[0]{\command{python}}
+\newcommand{\pwd}[0]{\command{pwd}}
+\newcommand{\qmake}[0]{\command{qmake}}
+\newcommand{\readcmd}[0]{\command{read}}
+\newcommand{\recordMyDesktop}[0]{\command{recordmydesktop}}
+\newcommand{\myrm}[0]{\command{rm}}
+\newcommand{\shutter}[0]{\command{shutter}}
+\newcommand{\scons}[0]{\command{scons}}
+\newcommand{\sed}[0]{\command{sed}}
+\newcommand{\sort}[0]{\command{sort}}
+\newcommand{\tail}[0]{\command{tail}}
+\newcommand{\tar}[0]{\command{tar}}
+\newcommand{\UnetBootin}[0]{\command{unetbootin}}
+\newcommand{\unzip}[0]{\command{unzip}}
+\newcommand{\updatedb}[0]{\command{updatedb}}
+\newcommand{\wget}[0]{\command{wget}}
+\newcommand{\xfig}[0]{\command{xfig}}
+\newcommand{\zenity}[0]{\command{Zenity}}
+\newcommand{\zip}[0]{\command{zip}}
+\newcommand{\zmore}[0]{\command{zmore}}
+\newcommand{\zgrep}[0]{\command{zgrep}}
+
+\newcommand{\bash}[1]{{\texttt{#1}}}
+
+\newcommand{\todo}[0]{\textbf{!!!todo!!!}}
+
+
+%\newcommand{\dollar}[0]{$}
+
+\newcommand{\encadreUtilisation}[1]{
+\noindent\fcolorbox{black}{lgray}{
+\begin{minipage}{\columnwidth}
+#1
+\end{minipage}
+}
+}
+
+% Pour les TP
+\newcommand{\datesoleil}[0]{31 août 2012\xspace}
+\newcommand{\lambdasoleil}[0]{211 \si{\AA}\xspace}
+\newcommand{\urlsoleil}[0]{\url{http://jsoc.stanford.edu/data/aia/images}\xspace}
+
+\newenvironment{exempleResultat}{
+\VerbatimEnvironment 
+\begin{framed}
+\begin{center}
+\begin{footnotesize}
+\begin{alltt}
+}
+{
+\end{alltt}
+\end{footnotesize}
+\end{center}
+\end{framed}
+}
+
+% Defines a `datastore' shape for use in DFDs.  This inherits from a
+% rectangle and only draws two horizontal lines.
+\makeatletter
+\pgfdeclareshape{datastore}{
+  \inheritsavedanchors[from=rectangle]
+  \inheritanchorborder[from=rectangle]
+  \inheritanchor[from=rectangle]{center}
+  \inheritanchor[from=rectangle]{base}
+  \inheritanchor[from=rectangle]{north}
+  \inheritanchor[from=rectangle]{north east}
+  \inheritanchor[from=rectangle]{east}
+  \inheritanchor[from=rectangle]{south east}
+  \inheritanchor[from=rectangle]{south}
+  \inheritanchor[from=rectangle]{south west}
+  \inheritanchor[from=rectangle]{west}
+  \inheritanchor[from=rectangle]{north west}
+  \backgroundpath{
+    %  store lower right in xa/ya and upper right in xb/yb
+    \southwest \pgf@xa=\pgf@x \pgf@ya=\pgf@y
+    \northeast \pgf@xb=\pgf@x \pgf@yb=\pgf@y
+    \pgfpathmoveto{\pgfpoint{\pgf@xa}{\pgf@ya}}
+    \pgfpathlineto{\pgfpoint{\pgf@xb}{\pgf@ya}}
+    \pgfpathmoveto{\pgfpoint{\pgf@xa}{\pgf@yb}}
+    \pgfpathlineto{\pgfpoint{\pgf@xb}{\pgf@yb}}
+ }
+}
+\makeatother

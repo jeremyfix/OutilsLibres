@@ -1,0 +1,1433 @@
+%%% LaTeX Template: Article/Thesis/etc. with colored headings and special fonts
+%%%
+%%% Source: http://www.howtotex.com/
+%%% Feel free to distribute this template, but please keep to referal to http://www.howtotex.com/ here.
+%%% February 2011
+
+%%%%% Preamble
+\documentclass[10pt,a4paper]{article}
+\usepackage{xspace}
+%\usepackage[T1]{fontenc}
+\usepackage[bitstream-charter]{mathdesign}
+
+\usepackage{textcomp} % To get get \textquotesingle
+
+\usepackage{tikz}
+\usetikzlibrary{trees}
+\usetikzlibrary{arrows}
+\usepackage{pgfplots}
+
+\usepackage{environ} % For merging environments
+\usepackage{framed}
+
+%\usepackage{fancybox}
+
+\usepackage[utf8]{inputenc}							% Input encoding
+\usepackage{amsmath}									% Math
+
+\newcommand{\angstrom}{\textup{\AA}}
+
+\usepackage{xcolor}
+\definecolor{bl}{rgb}{0.0,0.2,0.6} 
+
+\definecolor{background-image}{rgb}{1.0,0.9,0.7} 
+
+% Translating the section, part, ... names into French
+\usepackage[french]{babel}
+
+% Setup the margins
+\usepackage{geometry}
+\newgeometry{margin=2cm}
+
+% Customize the hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+    bookmarks=true,         % show bookmarks bar?
+    unicode=false,          % non-Latin characters in Acrobat’s bookmarks
+    pdftoolbar=true,        % show Acrobat’s toolbar?
+    pdfmenubar=true,        % show Acrobat’s menu?
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
+    pdftitle={les outils du logiciel libre pour l'ingénieur},    % title
+    pdfauthor={Jeremy Fix},     % author
+    pdfsubject={Outils du logiciels libres pour l'ingénieur},   % subject of the document
+    pdfcreator={Supélec},   % creator of the document
+    pdfproducer={Producer}, % producer of the document
+    pdfkeywords={keyword1} {key2} {key3}, % list of keywords
+    pdfnewwindow=true,      % links in new window
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=bl,          % color of internal links (change box color with linkbordercolor)
+    citecolor=green,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=bl           % color of external links
+}
+
+% For getting the caption on the side of an image
+\usepackage{calc}
+\usepackage{graphicx}
+\usepackage{floatrow}
+\floatsetup{style=ruled,footposition=caption}
+
+\newcommand{\myfig}[2]{
+\begin{figure}[htbp]
+\floatbox[{\capbeside\thisfloatsetup{capbesideposition={right,top},capbesidewidth=4cm}}]{figure}[\FBwidth]
+         {\caption{#2}\label{fig:#1}}
+         {\includegraphics[width=5cm]{#1}}
+\end{figure}
+}
+
+
+\newcommand{\question}[1]{
+\textbf{Question :} #1
+}
+\newcommand{\indications}[0]{
+\textbf{Indications :}
+}
+
+%\usepackage{sidecap}
+
+\usepackage{sectsty}
+\usepackage[compact]{titlesec} 
+\allsectionsfont{\color{bl}\scshape\selectfont}
+
+%%%%% Definitions
+% Define a new command that prints the title only
+\makeatletter							% Begin definition
+\def\printtitle{%						% Define command: \printtitle
+    {\color{bl} \centering \huge \sc \textbf{\@title}\par}}		% Typesetting
+\makeatother							% End definition
+
+\title{Les outils du logiciel libre pour l'ingénieur \\ 
+		\large \vspace*{-10pt} Support de cours\vspace*{10pt}}
+
+% Define a new command that prints the author(s) only
+\makeatletter							% Begin definition
+\def\printauthor{%					% Define command: \printauthor
+    {\centering \small \@author}}				% Typesetting
+\makeatother							% End definition
+
+\author{%
+	Jérémy Fix \\
+	Jeremy.Fix@Supelec.fr \\
+	\vspace{20pt}
+	}
+
+% Custom headers and footers
+\usepackage{fancyhdr}
+	\pagestyle{fancy}					% Enabling the custom headers/footers
+\usepackage{lastpage}	
+	% Header (empty)
+	\lhead{}
+	\chead{}
+	\rhead{}
+	% Footer (you may change this to your own needs)
+	\lfoot{\footnotesize }
+	\cfoot{}
+	\rfoot{\footnotesize page \thepage\ / \pageref{LastPage}}	% "Page 1 of 2"
+	\renewcommand{\headrulewidth}{0.0pt}
+	\renewcommand{\footrulewidth}{0.4pt}
+
+% Change the abstract environment
+\usepackage[runin]{abstract}			% runin option for a run-in title
+\setlength\absleftindent{30pt}		% left margin
+\setlength\absrightindent{30pt}		% right margin
+\abslabeldelim{\quad}						% 
+\setlength{\abstitleskip}{-10pt}
+\renewcommand{\abstractname}{}
+\renewcommand{\abstracttextfont}{\color{bl} \small \slshape}	% slanted text
+
+% Pour gérer les lettrines
+\usepackage{lettrine}
+
+% Environnement Verbatim, 
+\usepackage{fancyvrb}
+\usepackage{color}
+\usepackage{alltt}
+\usepackage{upquote}
+
+%  To be able to put verbatim within environments
+\usepackage{cprotect}
+
+\usepackage{siunitx}
+
+
+% Allow linebreak in long inline equations separated by commas
+\mathchardef\breakingcomma\mathcode`\,
+{\catcode`,=\active
+  \gdef,{\breakingcomma\discretionary{}{}{}}
+}
+\newcommand{\mathlist}[1]{$\mathcode`\,=\string"8000 #1$}
+
+%% \makeatletter
+%% \def\old@comma{,}
+%% \catcode`\,=13
+%% \def,{%
+%%   \ifmmode%
+%%     \old@comma\discretionary{}{}{}%
+%%   \else%
+%%     \old@comma%
+%%   \fi%
+%% }
+%% \makeatother
+
+% Some definitions
+\input{commands.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Start of the document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%% Top of the page: Author, Title and Abstact
+\printtitle 
+
+\printauthor
+
+\begin{abstract}
+On décrit dans ce document un ensemble d'outils libres permettant de
+résoudre notamment des problèmes que des ingénieurs seront amenés à
+rencontrer. Ce document peut être considéré comme une boite à outils
+avec un ensemble de références et d'exemples d'utilisation de
+logiciels libres. Il a pour but d'avoir un aspect pratique en ne se
+focalisant que sur quelques exemples d'utilisation de ces logiciels
+sans en faire une description exhaustive.
+\end{abstract}
+
+\tableofcontents
+
+%% \pagebreak
+%% \part{Introduction au logiciel libre}
+
+%% Introduction à Unix, les différentes distributions vite fait, la
+%% notion de licence (BSD, Creative commons, BSD, GPL, ...)\\
+
+%% \url{http://fr.slideshare.net/eurolinux/introduction-aux-logiciels-libres-2459812}
+
+\pagebreak
+
+\part{Familiarisation avec l'environnement Unix}
+
+Il existe un très grand nombre de distributions linux, vous en trouverez quelques unes mentionnées sur le site distrowatch \url{http://distrowatch.com/dwres.php?resource=major}. Nous allons nous intéresser uniquement aux distributions Fedora (la distribution installée sur les machines de l'école) et Ubuntu. 
+
+%Sur le site du zéro: \url{http://fr.openclassrooms.com/informatique/cours/reprenez-le-controle-a-l-aide-de-linux}
+
+%% \section{Distribution Ubuntu}
+
+%% Il existe un grand nombre de distributions Linux, les plus populaires étant Ubuntu et Fedora (\todo). Les développeurs de Fedora produisent également une version payante RedHat. Cette version payante est ... ; 
+
+%% Dans ce cours, nous allons utiliser Ubuntu.  
+
+\section{En route pour Linux: Live CD/USB}
+\label{sec:unetbootin}
+
+La plupart des distributions Linux peuvent être exécutées à partir d'une clef USB, ce qui fait qu'il est extrêmement simple de tester une distribution de manière non invasive. Certaines de ces distributions, comme Ubuntu, autorisent également un espace de stockage permanent sur la cle. Si vous installez des logiciels depuis votre Ubuntu USB, ces logiciels seront toujours installés lorsque vous aurez redémarré votre PC. Pour créer une clé USB bootable, vous pouvez utiliser le logiciel \UnetBootin. Il est téléchargeable pour différentes plateformes à l'adresse \url{http://unetbootin.sourceforge.net/}. Vous devez disposer d'une clé USB formattée en fat-32. Les figures~\ref{fig:unetbootin} illustrent quelques copies d'écran d'unetbootin utilisé pour créer une live USB d'Ubuntu.
+
+\begin{figure}[htbp]
+\begin{tabular}{ccc}
+\includegraphics[width=0.3\columnwidth]{Figs/unetbootin1.png}&
+\includegraphics[width=0.3\columnwidth]{Figs/unetbootin2.png}&
+\includegraphics[width=0.3\columnwidth]{Figs/unetbootin3.png}\\
+a) & b) & c)
+\end{tabular}
+\caption{\label{fig:unetbootin} a) Unetbootin une fois lancé; b) On commence par sélectionner la distribution pour laquelle créer une live USB, ici Ubuntu 12.04 Live; c) On précise l'emplacement de la clé USB et l'espace permanent à réserver. Et c'est fini.}
+\end{figure}
+
+Une fois que la clé est créée, il vous suffit de redémarrer la machine en indiquant au BIOS de booter en priorité sur la clé USB (surtout, avant le disque dur). Vous arrivez donc sur le bureau Unity (fig.~\ref{fig:ubuntu_live}). Vous pouvez tester Ubuntu, tout sera sauvegardé sur l'espace permanent de la clé USB. 
+
+\begin{figure}[htbp]
+\includegraphics[width=0.5\columnwidth]{Figs/ubuntu_12_04_live.png}
+\caption{\label{fig:ubuntu_live} Votre premier contact avec Ubuntu 12.04}
+\end{figure}
+
+
+%% \subsection{Système de fichier}
+
+%% L'organisation des fichiers ..
+
+
+%% Pour naviguer dans le système de fichier, on utilisera les commandes $cd, pwd, ls$. 
+
+%% \subsection{Utilisateurs, groupes et permissions}
+%% \label{sec:permissions}
+%% Chaque utilisateur est identifié par un login, disons \emph{toto}, et dispose d'un espace personnel accessible à \chemin{/home/toto}. Il appartient également au groupe \emph{toto}. Par défaut, un utilisateur n'appartient qu'au groupe qui porte son nom. Il est possible et même fréquent qu'un utilisateur appartiennent à plusieurs groupes; par exemple, un groupe correspond aux personnes ayant le droit d'administrer les imprimantes, un autre groupe correspond aux personnes ayant le droit d'administrer le système, ... . Il existe un utilisateur particulier, \emph{root}, qui a les droits \todo.\\
+
+
+
+
+
+%% \subsection{Gestion de packages}
+
+%% voir par exemple comment installer des paquets, et comment l'inclure
+%% dans la suite du document...
+
+%% \subsection{Obtenir des informations sur une commande}
+
+%% man page, info ou parfois simplement exécuter le binaire et un message
+%% d'aide s'affiche, ou binaire --help ou binaire -h
+
+\pagebreak
+\part{Outils pour la manipulation et l'édition de fichiers}
+
+%% \section{TODO}
+%% \begin{itemize}
+%% \item Astuce pour vérifier l'orthographe de plusieurs fichiers : \bash{find
+%%   . -name "*.tex" -exec aspell --lang=en --mode=tex check "{}" \;}
+%% \item les redirections avec les pipes
+%% \item diff, man ,...
+%% \item doxygen
+%% \item django, .. des frameworks pour le web
+%% \item pour egrep: \url{http://www-etud.iro.umontreal.ca/~tsikhana/IFT1215-H11/files/Unix3.pdf}
+%% \end{itemize}
+
+\section{Les outils GNU}
+
+Dans les prochaines sections, on verra un certain nombre de programme. Certains d'entre sont des outils GNU dont la philosophie est décrite dans le manuel \bash{info coreutils 'Toolbox Introduction'}. Cette description est rappelée ci-dessous;
+
+This month's column is only peripherally related to the GNU Project, in
+that it describes a number of the GNU tools on your GNU/Linux system
+and how they might be used.  What it's really about is the "Software
+Tools" philosophy of program development and usage.
+
+   The software tools philosophy was an important and integral concept
+in the initial design and development of Unix (of which Linux and GNU
+are essentially clones).  Unfortunately, in the modern day press of
+Internetworking and flashy GUIs, it seems to have fallen by the
+wayside.  This is a shame, since it provides a powerful mental model
+for solving many kinds of problems.
+
+   Many people carry a Swiss Army knife around in their pants pockets
+(or purse).  A Swiss Army knife is a handy tool to have: it has several
+knife blades, a screwdriver, tweezers, toothpick, nail file, corkscrew,
+and perhaps a number of other things on it.  For the everyday, small
+miscellaneous jobs where you need a simple, general purpose tool, it's
+just the thing.
+
+   On the other hand, an experienced carpenter doesn't build a house
+using a Swiss Army knife.  Instead, he has a toolbox chock full of
+specialized tools--a saw, a hammer, a screwdriver, a plane, and so on.
+And he knows exactly when and where to use each tool; you won't catch
+him hammering nails with the handle of his screwdriver.
+
+   The Unix developers at Bell Labs were all professional programmers
+and trained computer scientists.  They had found that while a
+one-size-fits-all program might appeal to a user because there's only
+one program to use, in practice such programs are
+
+  a. difficult to write,
+
+  b. difficult to maintain and debug, and
+
+  c. difficult to extend to meet new situations.
+
+   Instead, they felt that programs should be specialized tools.  In
+short, each program "should do one thing well."  No more and no less.
+Such programs are simpler to design, write, and get right--they only do
+one thing.
+
+   Furthermore, they found that with the right machinery for hooking
+programs together, that the whole was greater than the sum of the
+parts.  By combining several special purpose programs, you could
+accomplish a specific task that none of the programs was designed for,
+and accomplish it much more quickly and easily than if you had to write a special purpose program.  We will see some (classic) examples of this
+further on in the column.  (An important additional point was that, if
+necessary, take a detour and build any software tools you may need
+first, if you don't already have something appropriate in the toolbox.)
+
+\section{Éditeur de texte emacs}
+\label{sec:emacs}
+
+GNU Emacs\footnote{\url{http://www.gnu.org/software/emacs/}} est un
+éditeur de texte très largement personnalisable. Il dispose notamment
+d'un grand nombre de \emph{mode} chargé automatiquement en fonction de
+l'extension du fichier édité. Il existe par exemple des modes Python,
+C++, C, CamL, HTML, ... Ces modes introduisent les colorations
+syntaxiques et indentations spécifiques aux langages ainsi que des
+outils en personnalisant la barre des menus. Les figures~\ref{fig:emacs_python.eps},\ref{fig:emacs_cpp.eps} montrent
+des exemples d'emacs éditant un fichier Python et un fichier C++. On
+pourra remarquer qu'en fonction du fichier édité, la barre de menu est
+différente.\\
+
+\begin{figure}[htbp]
+\begin{floatrow}[2]
+\ffigbox[.5\FBwidth]{\includegraphics[width=\columnwidth]{Figs/emacs_python.eps}}{\caption{Emacs
+  utilisé pour éditer un fichier Python}\label{fig:emacs_python.eps}}
+\ffigbox[.5\FBwidth]{\includegraphics[width=\columnwidth]{Figs/emacs_cpp.eps}}{\caption{Emacs
+  utilisé pour éditer un fichier C++}\label{fig:emacs_cpp.eps}}
+\end{floatrow}
+\end{figure}
+
+Emacs peut paraître un peu austère mais il s'avère extrêmement
+pratique à partir du moment o{\`u} on connaît un certain nombre de
+raccourcis clavier. Utiliser ces raccourcis clavier est un peu
+fastidieux au début mais devient rapidement un automatisme très
+confortable\footnote{Rappelez vous quand vous avez appris à faire du
+  vélo}. \textbf{Attention}: on indiquera un raccourcis comme
+\emph{\underline{Ctrl} - X - F} pour indiquer qu'il faut presser sur
+la touche Ctrl du clavier, la \underline{maintenir} enfoncée puis
+presser successivement les touches X et F. Lorsqu'on lance un
+raccourci, des informations peuvent être affichées dans la zone de
+texte tout en bas de l'éditeur. Voici une liste de
+raccourcis utiles~:\\
+\begin{tabular}{cl}
+ \underline{Ctrl} - G &: Annuler la commande en cours\\
+ \underline{Ctrl} - X - F &: Ouvrir un fichier existant ou le
+  créer\\
+ \underline{Ctrl} - \_ &: Annuler la dernière commande\\
+ \underline{Ctrl} - X - S &: Sauvegarder un fichier\\
+ \underline{Ctrl} - K &: Supprimer la ligne courante à partir du
+  curseur\\
+ \underline{Ctrl} - W &: Supprimer la sélection\\
+ \underline{Ctrl} - X puis H &: sélectionner tout le texte du
+  buffer courant \\
+&(pratique si on poursuit par Tab pour indenter tous
+  le buffer d'un coup)\\
+\underline{Tab} &: Indente la sélection (en fonction du mode courant)\\
+ \underline{Ctrl} - S &: Rechercher dans le fichier ouvert\\
+ \underline{Shift} - \underline{Alt} - \% &: Rechercher/Remplacer\\
+ \underline{Ctrl} - X puis \underline{Shift} - 1 &: Définir la
+  disposition des fenêtre pour n'éditer qu'un buffer à la foi\\
+& (voir
+  les deux prochains raccourcis pour mieux comprendre!)\\
+ \underline{Ctrl} - X puis \underline{Shift} - 2 &: Diviser en deux la
+  fenêtre d'édition verticalement\\
+ \underline{Ctrl} - X puis \underline{Shift} - 3 &: Diviser en deux la
+  fenêtre d'édition horizontalement\\
+ \underline{Alt} - X &: Saisir directement une commande dans la
+  zone de texte en bas de l'éditeur\\
+\end{tabular}
+
+
+Cette dernière commande qui se lit ``Meta-X'' permet d'accéder à la
+zone de texte sous l'éditeur (mini-buffer) et dans laquelle on peut saisir des
+commandes comme~:
+\begin{itemize}
+\item goto-line : suivie d'entrée, elle permet de saisir une ligne à
+  laquelle se rendre (pratique si la compilation d'un fichier échoue
+  et qu'un numéro de ligne o{\`u} se trouve l'erreur est mentionné
+\item comment-region : commente la sélection
+\item uncomment-region : décommente la sélection
+\item ispell-change-dictionnary : pour changer le dictionnaire utilisé
+  pour la correction orthographique en ligne
+\item flyspell-buffer : pour lancer le correcteur orthographique sur
+  tous le buffer courant
+\item flyspell-mode : pour activer/désactiver la correction
+  orthographique à la volée
+\item c++-mode : basculer en mode C++ (pour la coloration syntaxique,
+  l'indentation, etc...)
+\item python-mode : basculer en mode Python (pour la coloration syntaxique,
+  l'indentation, etc...)
+\item tuareg-mode : basculer en mode CamL (pour la coloration syntaxique,
+  l'indentation, etc...)
+\item octave-mode : basculer en mode Octave (pour la coloration syntaxique,
+  l'indentation, etc...)
+\end{itemize}
+
+N'oubliez pas que dans le monde Unix, la tabulation permet
+d'auto-compléter une commande. Par exemple, pour la commande
+\emph{uncomment-region}, il suffira de saisir \emph{unc} suivi de
+Tabulation pour que la commande soit complétée. Si plusieurs commandes
+ont le même préfixe, une liste des choix s'affiche si on appuis deux
+fois sur tabulation.\\
+
+
+Revenons quelques instants sur la notion de mode dans \emacs. \emacs
+est écrit pour être modulable et adaptable à ses besoins (plus besoin
+d'un éditeur spécifique pour éditer du texte, du latex, du C++,
+... \emacs se spécialise en fonction de l'extension du fichier édité). Les modes
+pour \emacs introduisent justement cette flexibilité. On parlait plus
+haut des modes c++, python, tuareg qui modifient les menus de
+l'éditeur, les raccourcis claviers, l'indentation, la coloration
+syntaxique. Ces modes sont appelés \textbf{modes majeurs}. Il en
+existe plusieurs pour les langages de programmation les plus répandus
+(\url{http://fr.wikipedia.org/wiki/Emacs}). En pratique, ces modes
+sont écrits comme des scripts Lisp. Il est également possible de
+personnaliser l'interface à l'aide de scripts Lisp.\\
+
+Pour la correction orthographique, il peut falloir installer des
+packages supplémentaires. Nous verrons dans la prochaine partie
+quelques outils qui permettent une correction orthographique à la
+volée et qui disposent de modes \emacs.\\
+
+Enfin, il existe des alternatives à \emacs mais que je trouve trop
+spécifique ou moins pratique d'utilisation qu'\emacs: gedit,
+LibreOffice, Kate, ... . Même si Libreoffice propose plus que de
+l'édition de texte, on verra plus tard des alternatives que je préfère
+(Latex pour produire des documents textuels, beamer pour faire des
+supports de présentation, python/matplotlib pour tracer des données).
+
+\section{Correction orthographique/grammaticale}
+\label{sec:correction_orthographique}
+
+Il existe un certain nombre de logiciels libres pour la correction
+orthographique et/ou grammaticale, notamment \ispell, \aspell,
+\myspell, \hunspell, \LanguageTool, ... . L'historique des différentes
+versions xxxspell n'est pas très clair. \ispell semble être le plus
+ancien, sur lequel est basé \myspell; \aspell semble avoir été
+développé pour prendre le relais d'\ispell. \hunspell quand à lui est
+le correcteur orthographique qui semble prendre la main; Il est
+utilisé dans un grand nombre d'applications comme Firefox,
+Thunderbird, Chrome, Eclipse, ...\footnote{Plus d'informations sont
+  disponibles sur la page
+  \url{http://en.wikipedia.org/wiki/Hunspell}}. \LanguageTool semble
+avoir été développé plus récemment et indépendemment. Contrairement
+aux xxx-spell, LanguageTool corrige les formes de style évitant ainsi,
+par exemple, l'utilisation de pléonasmes (au jour d'aujourd'hui),
+l'utilisation de deux virgules consécutives, etc. .\\
+
+Pour installer ces logiciels (on préférera \aspell, \hunspell ou
+\LanguageTool) sous Fedora :\\
+\begin{itemize}
+\item Aspell : \bash{yum install aspell aspell-fr aspell-en}, les
+  paquets aspell-fr aspell-en étant les dictionnaires français et
+  anglais,
+\item Hunspell : \bash{yum install hunspell hunspell-fr hunspell-en},
+  les paquets hunspell-fr hunspell-en étant les dictionnaires français
+  et anglais,
+\item LanguageTool : il faut aller chercher l'archive java fournis sur
+  le site : \url{http://www.languagetool.org/}
+\end{itemize}
+
+Tout ces outils sont utilisables en ligne de commande (i.e. dans un
+terminal, depuis un Makefile, ...). Pour tester les possibilités des
+différents correcteurs, on partira du texte ci-dessous, les fautes
+étant indiquées en rouge~:
+
+\begin{center}
+\fbox{\begin{minipage}{0.5\textwidth}
+Maître Corbeau, sur un arbre \textcolor{red}{perchai},\\
+\textcolor{red}{Tenais} en son \textcolor{red}{beck} un fromage.\\
+Maître Renard, par l'odeur alléché,\\
+Lui tint à peu près ce langage :\\
+"Hé ! bonjour, Monsieur du Corbeau.\\
+Que vous êtes joli ! que vous me semblez beau !\\
+Sans mentir, si votre ramage\\
+Se rapporte à votre plumage,\\
+Vous êtes le Phénix des hôtes de ces bois. "\\
+A ces mots le Corbeau ne se sent pas de joie ;\\
+Et pour montrer sa belle voix,\\
+Il ouvre un large bec, laisse tomber sa proie.\\
+Le Renard s'en \textcolor{red}{saisie}, et dis : "Mon bon Monsieur,\\
+\textcolor{red}{Apprené} que tout flatteur\\
+Vit aux dépens de celui qui l'écoute :\\
+Cette leçon vaut bien un fromage, sans doute. "\\
+Le Corbeau, honteux et confus,\\
+Jura, mais un peu tard, qu'on ne l'y prendrait plus.
+\end{minipage}}
+\end{center}
+
+\encadreUtilisation{
+\textbf{Utilisation d'Aspell}:\\
+
+\aspell s'appelle avec une commande de la forme :\\
+\centerline{\bash{aspell check [options] filename}}\\
+\noindent Plusieurs options sont disponibles, on ne liste que les plus utiles\footnote{les autres sont documentées sur la page \url{http://aspell.net/man-html/Spellchecking-Individual-Files.html\#Spellchecking-Individual-Files} }:
+\begin{itemize}
+\item \bash{-{}-lang=name}, avec name $\in$ \{fr, en, ..\} permet de spécifier le language
+\item \bash{-{}-mode=mode}, avec mode $\in$ \{none, url, email, sgml, tex, texinfo, nroff, ..\} permet de filtrer des mots clefs spécifiques de language (par exemple, le mode tex permet de ne pas considérer les mots clefs \LaTeX)
+\end{itemize}
+
+\noindent Pour avoir plus d'informations sur les options à passer au programme,
+on utilisera~:
+\begin{center}
+\bash{aspell -{}-help}
+\end{center}
+
+\noindent Par exemple, pour corriger les fautes d'orthographes d'un fichier
+texte, on utilisera:
+\begin{center}
+\bash{aspell check -lfr text.txt}
+\end{center}
+\noindent pour corriger les fautes d'orthographes d'un fichier
+\LaTeX, on utilisera:
+\begin{center}
+\bash{aspell check -lfr -{}-mode=tex text.tex}
+\end{center}
+Ces deux commandes lancent aspell en mode intéractif, permettant de
+corriger les fautes à la volée (le fichier original est modifié). On
+peut aussi lister les fautes, sans les corriger. Sur le texte de Jean
+de la Fontaine, \aspell retourne~:\\
+\bash{more original.txt | aspell -lfr list}\\
+\indent \indent beck\\
+\indent \indent Apprené\\
+}
+
+\encadreUtilisation{ \textbf{Utilisation d'Hunspell}:\\ 
+
+\hunspell
+  fonctionne de manière similaire à \aspell, les options étant
+  spécifiées de manière un peu différente. Pour avoir plus
+  d'informations sur les options à passer au programme, on utilisera~:
+\begin{center}
+\bash{hunspell --help}
+\end{center} 
+\noindent Pour vérifier l'orthographe
+d'un texte en Français, on utilisera la commande~:
+\begin{center}
+\bash{hunspell -d fr\_FR text.txt}
+\end{center}
+Pour vérifier un document \LaTeX, on précisera l'option \bash{-t}~:
+\begin{center}
+\bash{hunspell -d fr\_FR -t text.tex}
+\end{center}
+ On peut aussi lister les fautes, sans les corriger. Sur le texte de Jean
+de la Fontaine, \hunspell retourne~:\\
+\bash{hunspell -d fr\_FR -l original.txt}\\
+\indent \indent beck\\
+\indent \indent Apprené\\
+}
+
+\encadreUtilisation{ \textbf{Intégration dans \emacs}:\\ 
+\aspell et \hunspell peuvent être intégrés à \emacs pour avoir une
+correction orthographique à la volée. Comme nous l'avons vu dans la
+partie sur \emacs, on peut le personnaliser en ajoutant des commandes
+Lisp au fichier \bash{~/.emacs}. Pour indiquer qu'on souhaite utiliser
+aspell pour vérifier l'orthographe, on ajoutera la commande~:
+\begin{center}
+\bash{(setq-default ispell-program-name "aspell")}
+\end{center}
+On utilisera alors la correction orthographique avec les commandes
+ci-dessous, à exécuter dans le mini-buffer(``Meta-X'', \underline{Alt} - X)
+\begin{itemize}
+\item ispell-change-dictionnary , suivi de fr ou en par exemple :
+  change le dictionnaire courant
+\item flyspell-buffer : vérifie l'orthographe du fichier en cours d'édition
+\item flyspell-mode : active/désactive la correction à la volée
+\end{itemize}
+On fera bien attention que lorsque le dictionnaire est changé, il faut
+relancer la commande \bash{flyspell-buffer} pour le prendre en compte.
+}
+
+
+\section{Automatisation de tâches avec Makefile}
+\label{sec:makefile}
+
+On a vu et on verra des commandes à exécuter dans un terminal pour
+résoudre un certain nombre de problèmes (vérifier l'orthographe d'un
+texte, travailler des images, regrouper des images pour créer une
+vidéo, lister/modifier un ensemble de fichiers, compiler un document
+\LaTeX, compiler un programme, ...). Il peut devenir difficile de se souvenir de la syntaxe
+d'une commande et la syntaxe peut même devenir compliquée quand on
+souhaite enchaîner des commandes. GNU Make est un des outils qui
+permet d'automatiser l'exécution de tâches. L'outil \make est installé
+avec le paquet \emph{make} et en général installé par défaut avec la
+distribution. L'utilisation de \make passe par la
+définition de fichiers Makefile qui sont traités par la commande \make. Ces fichiers peuvent s'appeler
+\emph{GNUmakefile}, \emph{makefile}, ou \emph{Makefile}. Ils
+contiennent un ensemble de règles avec une forme canonique:
+\begin{verbatim}
+cible: dépendances
+       commandes
+\end{verbatim}
+Une règle doit être comprise comme définissant une recette de cuisine (les
+commandes) permettant de construire une cible si les dépendances ont
+changées. Les dépendances sont optionnelles, on en verra un exemple un
+peu plus loin. \textbf{Attention} chaque ligne de commande doit être
+précédée par une tabulation. On considère un exemple
+assez standard pour illustrer quelques concepts de Make, celui de
+compiler un document \LaTeX. On verra plus tard que pour compiler le
+document \emph{document.tex}, il faut appeler une fois \pdflatex, une
+fois \bibtex et enfin deux fois \pdflatex. Si on devait l'écrire dans
+le terminal on aurait alors~:
+\begin{center}
+\bash{pdflatex document.tex ; pdflatex document.tex ; bibtex document
+  ; pdflatex document.tex}
+\end{center}
+
+Avec \make, on peut définir une cible \emph{document.pdf} et un alias
+\emph{tex} de la manière suivante~:\\
+\cprotect\encadreUtilisation{ Fichier  \textbf{Makefile}\\
+\begin{verbatim}
+document.pdf: document.tex
+              pdflatex document.tex 
+              bibtex document
+              pdflatex document.tex 
+              pdflatex document.tex
+
+tex: document.pdf
+\end{verbatim}
+}
+
+
+Maintenant, plus besoin de se souvenir de la commande, un simple appel
+à 
+\begin{center}
+\bash{make tex}
+\end{center}
+suffit à recompiler le document. D'autre part, le
+document ne sera recompilé que si document.tex change. La compilation
+d'un document \LaTeX produit plusieurs fichiers temporaires qu'on peut
+avoir supprimer pour faire le ménage. La cible \emph{clean} ci-dessous
+est un exemple de cible sans dépendance. On ajoute également la cible
+\emph{all} qui est la cible appelée par défaut si on exécute \make
+sans préciser de cible ainsi qu'une cible \emph{help} pour afficher un
+message d'aide. \underline{\textbf{Attention}, je rappelle que chaque ligne de
+commande est précédée d'une tabulation!(et pas des espaces)}.\\
+
+\cprotect\encadreUtilisation{ Fichier  \textbf{Makefile}\\
+\begin{verbatim}
+document.pdf: document.tex
+              pdflatex document.tex 
+              bibtex document
+              pdflatex document.tex 
+              pdflatex document.tex
+
+tex: document.pdf
+
+clean:
+      rm document.aux document.log document.toc *~ -f 
+
+all:
+      make help
+
+help:
+      @echo "Cibles disponibles:"
+      @echo "clean : nettoie le répertoire"
+      @echo "tex  : compile le document"
+\end{verbatim}
+}
+
+Avec \make, il existe quelques variables et syntaxes particulières, du
+style \^{}@, \^{}<, \%.o qui permettent d'écrire des règles
+génériques. Ces variables ne sont qu'une partie des variables
+automatiques introduites par \make\footnote{voir
+  \url{http://www.gnu.org/software/make/manual/html\_node/Automatic-Variables.html\#Automatic-Variables}
+pour une liste complète des variables automatiques}. Par exemple, si vous écrivez un Makefile pour compiler un
+projet C++, la règle de compilation est de la forme : \bash{gcc -c
+  fichier.cc -o fichier.o  -O3 -Wall...}. Si mon projet comprend 3 fichiers c++
+à compiler et une phase d'édition de lien pour créer l'exécutable, on
+pourrait l'écrire ainsi (\underline{mais c'est la mauvaise façon de
+  procéder}):
+\begin{verbatim}
+fichier1.o : fichier1.cc
+          gcc -c fichier1.cc -o fichier1.o -O3 -Wall
+fichier2.o : fichier2.cc
+          gcc -c fichier2.cc -o fichier2.o -O3 -Wall
+fichier3.o : fichier3.cc
+          gcc -c fichier3.cc -o fichier3.o -O3 -Wall
+monbinaire: fichier1.o fichier2.o fichier3.o
+          gcc -o monbinaire fichier1.o fichier2.o fichier3.o
+\end{verbatim}
+Les commandes pour compiler fichier*.cc étant les mêmes, on peut les
+écrire de manière plus compacte~:\\
+\cprotect\encadreUtilisation{ Fichier  \textbf{Makefile}\\
+\begin{verbatim}
+%.o : %.cc
+     gcc -c $< -o $@ -O3 -Wall
+
+monbinaire: fichier1.o fichier2.o fichier3.o
+     gcc -o $^
+\end{verbatim}
+}
+En appelant \bash{make monbinaire}, \make s'occupe de recompiler les
+fichiers ainsi que le binaire si nécessaire. La variable \$@ fait
+référence à la cible de la règle, \$< fait référence à \underline{la}
+dépendance et \$\^{} à toutes les dépendances. On trouvera plus
+     d'informations sur ces variables spéciales à l'adresse \url{http://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html}\\
+
+Enfin, on peut également générer la liste des fichiers à compiler
+automatiquement. Pour cela, on dispose des fonctions wildcard et
+patsubst. \\
+\cprotect\encadreUtilisation{ Fichier  \textbf{Makefile}\\
+\begin{verbatim}
+OBJ := $(patsubst %.cc,%.o,$(wildcard *.cc))
+
+%.o : %.cc
+     gcc -c $< -o $@ -O3 -Wall
+
+monbinaire: $(OBJ)
+     gcc -o $^
+\end{verbatim}
+}
+On a ici construit une variable \emph{OBJ} qui est une liste
+construite de la manière suivante: on cherche tous les fichiers avec
+l'extension .cc (wildcard *.cc) et on remplace l'extension .cc par
+.o. Il suffit alors de changer la dépendance du binaire par le contenu
+de la variable \emph{OBJ} et le tour est joué. Maintenant, chaque fois
+qu'on ajoutera un fichier .cc, il sera automatiquement ajouté à la
+liste des fichiers à compiler. On trouvera plus de détails sur les
+     fonctions wildcard et patsubst ainsi que d'autres fonctions
+     utilisables dans les makefiles aux adresses suivantes : \url{http://www.gnu.org/software/make/manual/html_node/Wildcard-Function.html#Wildcard-Function}, \url{http://www.gnu.org/software/make/manual/html_node/Functions.html#Functions}\\
+
+Il y a plein d'autres aspects que nous n'avons pas abordés comme
+l'utilisation de makefile récursifs (un makefile à la racine
+  d'un projet appelant des makefile des répertoires fils), la
+  définition et manipulation de variables, et d'autres éléments
+  expliqués dans la documentation.\\
+
+On notera aussi qu'il existe une grande variété d'outils pour
+automatiser des tâches comme \cmake, \qmake (surtout
+utilisé pour des projets reposant sur la librairie Qt), \scons
+(surtout utilisé dans le monde Python), \ant (surtout utilisé
+dans le monde Java), ... . 
+
+\section{Manipulation d'images avec imagemagick et gimp}
+
+\label{sec:imagemagick}
+
+Si vous devez manipuler des images par exemple pour les convertir d'un
+format à un autre, pour changer leur résolution, en extraire une
+sous-partie, combiner des images, etc... \imagemagick (\url{http://www.imagemagick.org/script/index.php}) est un outil très
+pratique. ImageMagick fournit un ensemble d'outils en ligne de
+commande \bash{convert}, \bash{mogrify}, ... . On trouvera des
+exemples d'utilisation de ces outils sur la page d'ImageMagick
+(\url{http://www.imagemagick.org/Usage/}). ImageMagick fournit un
+ensemble d'outils (convert, mogrify, import, ...) dont on trouvera une
+liste à l'adresse
+\url{http://www.imagemagick.org/script/command-line-tools.php}. \emph{convert}
+permet entre autres de convertir une image d'un format en un autre, de
+re-dimensionner une image, d'en extraire une sous-partie, etc... On
+illustre quelques options de convert ci-dessous (et adapté de la
+documentation en ligne d'ImageMagick):
+
+\cprotect\encadreUtilisation{
+\textbf{Utilisation de convert (ImageMagick)}:\\
+convert gnu.svg -resize 20\% gnu.png \\
+
+\begin{center}
+\includegraphics{Figs/gnu.png}
+\end{center}
+
+convert -crop 75x50+20+20 +repage gnu.png gnu-eye.png
+
+\begin{center}
+\includegraphics{Figs/gnu-eye.png}
+\end{center}
+
+}
+
+\emph{mogrify} fonctionne comme \emph{convert} mais peut s'appliquer
+sur un ensemble d'images. Cet outil est donc très pratique pour
+appliquer les mêmes traitements à une grande collection d'images. On
+peut par exemple redimensionner et convertir un ensemble d'images JPEG
+en une ligne \bash{mogrify -crop 75x50+20+20 +repage -format png
+*.jpg}. Le dernier outil qu'on mentionne est \emph{animate} qui permet
+d'animer une séquence d'images; on verra dans la partie
+\ref{sec:ffmpeg} comment fabriquer une vidéo à partir d'une série d'images.\\
+
+Il existe également une variante, basée originalement sur une ancienne
+version d'\imagemagick et qui évolue depuis indépendemment, qui
+s'appelle \graphicsmagick (\url{http://www.graphicsmagick.org/}) et
+qui semble avoir de meilleures performances
+qu'\imagemagick. \imagemagick et \graphicsmagick ont des wrappers qui
+permettent d'utiliser ces outils depuis différentes langages de
+programmation.\\
+
+
+On peut aussi mentionner l'excellent Gimp (\url{http://www.gimp.org/})
+qui vous permet de retoucher des photos, appliquer des filtres,
+convertir l'image d'un format en un autre, etc... Si vous lancez gimp,
+l'interface graphique se lancera par défaut. Mais vous pouvez
+également appeler gimp en ligne de commande, pour par exemple,
+appliquer un filtre à une image\footnote{On peut même imaginer que ce ne soit
+qu'un élément d'une chaîne qui capture des images, les traitent et les
+assemble pour former une vidéo, le tout à l'aide d'un Makefile.}.
+
+\section{Capture d'écran: \shutter} \label{sec:shutter}
+
+Il y a plusieurs outils qui permettent de faire une capture
+d'écran. \gimp propose de capturer une fenêtre ou une zone de l'écran
+via le menu Fichier/Créer/Screenshot. \imagemagick fournit l'outil en
+ligne de commande \emph{import}. Certains de ces outils acceptent en
+argument un identifiant de fenêtre (\emph{Window id}) qu'on peut
+récupérer en lançant la commande \emph{xwininfo} et en cliquant la
+fenêtre dont on veut connaître l'identifiant. Un outil extrêmement pratique est
+\shutter dont on va donner quelques exemples d'utilisation.
+
+\cprotect\encadreUtilisation{
+\textbf{Utilisation de shutter}:
+\begin{center}
+shutter -e -s -o test.png
+\end{center}
+
+A l'exécution de cette commande, il est possible de sélectionner une
+région à capturer. La copie d'écran sera alors sauvegardée dans le
+fichier test.png. N'hésitez pas à lancer \emph{man shutter} pour plus
+d'informations sur les paramètres de shutter. Le paramètre ``-e''
+indique au programme de quitter après la capture. Le paramètre ``-s''
+indique de sélectionner une région à capturer. Enfin ``-o'' est suivi
+du nom de fichier dans lequel sauvegarder la capture. \\
+
+On peut également combiner shutter avec Zenity, dont on parlera un peu
+plus tard, pour ouvrir une fenêtre dans laquelle saisir le nom du
+fichier destination. On pourra alors, par exemple, se définir une
+cible \emph{grab} dans un Makefile pour capturer facilement des zones
+de l'écran. 
+
+\begin{verbatim}
+grab: 
+    shutter -e -s -o `zenity --forms --add-entry=filename --title="Fichier image" \
+    --text="Préciser un fichier dans lequel sauvegarder la copie d'écran" `
+\end{verbatim}
+}
+
+\section{Capture vidéo de l'écran: \recordMyDesktop}
+\label{sec:recordmydesktop}
+Imaginons que vous ayez à faire la démonstration d'un logiciel et que
+pour cela vous souhaitiez capturer votre écran et éventuellement le
+son. recordMyDesktop vous permet de le faire. Il existe une interface
+graphique écrite en gtk mais on peut également l'appeler depuis la
+ligne de commande. Je trouve que l'interface graphique n'est pas très
+confortable pour sélectionner la région de l'écran à
+enregistrer et je vous conseille d'utiliser l'interface
+gtk-recordmydesktop pour vous sélectionner finement la région à
+capturer. Il suffit de lancer l'interface gtk et de se laisser guider.
+
+
+\section{Assembler des images en une vidéo : \ffmpeg} \label{sec:ffmpeg}
+
+Si vous disposez d'un ensemble d'images que vous souhaitez assembler
+en une vidéo \ffmpeg vous le permet. Par exemple, vous lancez une
+simulation depuis laquelle vous sauvegardez des images et vous
+souhaitez les animer. 
+
+\cprotect\encadreUtilisation{
+\textbf{Utilisation de \ffmpeg}:\\
+
+En imaginant que vous disposez d'une collection d'image dont le nom
+est de la forme Image-xxxx.ppm, vous pouvez les regrouper en une vidéo
+avec une commande du type:
+\begin{center}
+ffmpeg -i Image-\%05d.ppm -b 1M movie.avi
+\end{center}
+Sachez que ffmpeg gère plusieurs formats d'images
+(\url{http://ffmpeg.org/general.html#Image-Formats}). L'option ``-b
+1M'' contrôle la qualité (et la taille) de la vidéo générée.
+
+}
+
+J'en profite pour ajouter une petite note et reboucler avec la partie
+sur les Makefile. Si vous souhaitez créer une vidéo à partir d'une
+collection d'images mais que vous avez envie de travailler les images
+pour y incruster des éléments, pas de soucis, on peut combiner
+ImageMagick, Makefile et ffmpeg pour nous aider. On partira du
+principe que ce sont les mêmes traitements à appliquer à toutes les
+images. Makefile est capable de lister l'ensemble des images d'un
+répertoire (wildcard), de les ordonner (c'est plus facile de suivre
+o{\`u} en est le traitement, parce que
+sinon Makefile traitera les images dans un ordre
+aléatoire). ImageMagick peut ensuite appliquer un traitement à toutes
+ces images et enfin ffmpeg les assemble pour créer une
+vidéo. L'encadré ci-dessous donne un exemple de Makefile pour ce
+scénario.
+
+\cprotect\encadreUtilisation{
+\textbf{Utilisation de Makefile, ImageMagick et \ffmpeg}:\\
+
+\begin{verbatim}
+CIBLE=video.avi
+IMAGES_BRUTES=$(sort $(wildcard Image-*.png))
+IMAGES_FFMPEG=$(subst image, image-ffmpeg, $(IMAGES_BRUTES))
+
+image-ffmpeg-%.png: image-%.png
+    convert  test.png  -colorspace Gray   gray_colorspace.png
+
+$(CIBLE): 
+\end{verbatim}
+
+}
+
+%capture vidéo avec ffmpeg : \url{http://trac.ffmpeg.org/wiki/How%20to%20grab%20the%20desktop%20%28screen%29%20with%20FFmpeg}
+
+
+
+\section{Manipulation de documents PDF avec \pdftk} 
+\label{sec:pdftk}
+
+La visualisation de documents PDF n'est pas un problème en soi. On
+retrouve acrobat reader (\emph{acroread}) ou des outils comme evince,
+etc... \pdftk est un outil qui permet de manipuler des fichiers PDF pour en combiner
+plusieurs, en extraire des pages, etc.. On trouvera quelques exemples
+d'utilisation de \pdftk dans le cadre ci-dessous et plus
+d'informations sur la documentation en ligne (\url{http://www.pdflabs.com/docs/pdftk-cli-examples/}).\\
+
+\cprotect\encadreUtilisation{
+\textbf{Utilisation de pdftk}:\\
+Pour concaténer plusieurs fichiers PDF A.pdf B.pdf C.pdf et produire
+D.pdf:
+\begin{verbatim}
+pdftk A.pdf B.pdf C.pdf cat output D.pdf
+\end{verbatim}
+On peut extraire des sous parties d'un fichier PDF ou combiner des
+sous parties de plusieurs fichiers PDF. Il suffit de préciser les
+numéros des pages; le mot clef end pointe sur la dernière page du fichier.
+\begin{verbatim}
+pdftk A=A.pdf B=B.pdf cat A1 A5-8 B6-end output C.pdf
+\end{verbatim}
+}
+
+
+\section{Rechercher un fichier avec find et locate (findutils)}
+\label{sec:findutils}
+
+\find et \locate sont deux utilitaires en ligne de commande qui vous
+permettent de rechercher des fichiers sur votre disque dur. \locate
+utilise une base de données (sous Fedora, cette base de données est
+stockée dans le fichier /var/lib/mlocate/mlocate.db) des fichiers
+stockés sur le disque, qu'il va consulter lorsque vous faites une
+requête locate. Cette base de données n'est pas forcément mise à jour
+automatiquement et il peut être nécessaire de lancer la commande
+updatedb, en root, pour effectuer cette mise à jour. \find quand à lui
+parcours un répertoire cible que vous lui précisez à la recherche de
+votre fichier. Utiliser \locate est plus rapide que \find mais il faut
+bien s'assurer que la base est à jour pour que \locate vous retourne
+vos résultats. Ces programmes vous permettent de rechercher des
+fichiers dans un ou plusieurs répertoires qui
+\begin{itemize}
+\item ont des noms contenant un certain texte ou vérifiant une
+  expression régulière
+\item contiennent du texte vérifiant une certaine expression régulière
+\item sont des liens vers d'autres fichiers
+\item ont été utilisé pendant une certaine période, font une certaine taille
+\item sont d'un certain type, appartiennent à un utilisateur ou
+  groupe, ont des droits d'accès particuliers, 
+\item se trouvent à une certaine distance du répertoire d'o{\` u} la
+  recherche est initiée
+\end{itemize}
+Vous pouvez rechercher des fichiers selon les critères ci-dessus mais
+également les voir, éditer, ajouter à une archive, renommer, changer
+les permissions, utilisateur, etc.. On trouvera beaucoup de détails
+sur l'utilisation des outils \find et \locate sur la page findutils du
+projet GNU
+\url{http://www.gnu.org/software/findutils/manual/html_mono/find.html},
+on donne ci-dessous quelques exemples typiques d'utilisation.
+
+
+\cprotect\encadreUtilisation{
+\textbf{Utilisation de locate}:\\
+Si la base de données de locate n'est pas à jour, il faut lancer
+updatedb;
+\begin{verbatim}
+sudo updatedb
+\end{verbatim}
+Pour faire une requête simple sur un nom de fichier, on utilise alors locate:
+\begin{verbatim}
+locate toto.titi
+\end{verbatim}
+
+On peut aussi demander à updatedb d'indexer un répertoire et spécifier
+le fichier de base de données de sortie:
+\begin{verbatim}
+updatedb -U /chemin/a/indexer -o /chemin/vers/mabase.db -l 0
+\end{verbatim}
+On utilisera alors locate en lui précisant la base de données à
+utiliser
+\begin{verbatim}
+locate -d /chemin/vers/mabase.db toto.titi
+\end{verbatim}
+
+}
+
+Si vous avez besoin de rechercher un document dans un répertoire, il
+est plus facile d'utiliser la commande \find.
+
+\cprotect\encadreUtilisation{
+\textbf{Utilisation de find}:\\
+Pour rechercher un fichier dont vous connaissez le nom dans un
+répertoire donné (e.g. votre home):
+\begin{verbatim}
+find ~ -iname monfichier.txt
+\end{verbatim}
+
+Pour rechercher tous les fichiers PDF d'au moins 3 Mo:
+\begin{verbatim}
+find ~ -name '*.pdf' -size 4M
+\end{verbatim}
+La requête peut également être construite à l'aide d'une expression
+régulière. Par exemple, pour chercher tous les fichiers Makefile ou
+makefile sur son home, on utilisera\footnote{On trouvera plus de
+  détails sur les expressions régulières à l'adresse
+  \url{http://www.gnu.org/software/findutils/manual/html_mono/find.html\#Regular-Expressions} }:
+\begin{verbatim}
+find ~ -regex '.*/[Mm]akefile'
+\end{verbatim}
+On n'a montré ici que la façon d'appeler \find pour rechercher des
+fichiers mais on peut également exécuter des commandes sur les
+fichiers listés. Des exemples sont fournis dans la documentation en ligne.
+}
+
+\section{Filtrage de documents avec grep, awk, sed}
+\label{sec:grepawksed}
+
+Les utilitaires \grep, \awk et \sed vous permettent de filtrer des
+documents selon leur contenu, voir d'effectuer des opérations sur ce
+contenu (pour \awk et \sed). Je ne vous cacherais pas que
+l'utilisation des outils \awk et \sed n'est pas immédiate notamment
+parce que ces outils reposent sur l'utilisation d'expressions
+régulières.\\
+
+\cprotect\encadreUtilisation{
+\textbf{Utilisation de grep}:\\
+
+\grep vous permet de rechercher dans un fichier, les lignes qui
+contiennent un élément défini par une expression. On peut par exemple
+rechercher un mot dans un fichier:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+grep outils support.tex --color
+> Les \color{red}outils \color{black}du logiciel libre pour l'ingénieur 
+> On décrit dans ce document un ensemble d'\color{red}outils \color{black}libres permettant de
+> rencontrer. Ce document peut être considéré comme une boite à \color{red}outils
+\end{Verbatim}
+}
+
+\section{Comparer deux fichiers ou deux arborescences : diff}
+
+L'outil \diff permet de comparer le contenu, ligne à ligne, de deux fichiers, ou de comparer deux arborescences.
+
+\section{Archiver/désarchiver : tar, gzip, zip}
+
+Pour créer une archive, on dispose de plusieurs outils comme \tar,
+\gzip, \zip. On donne quelques exemples ci-dessous d'utilisation de
+\tar pour créer et extraire une archive.
+
+\cprotect\encadreUtilisation{
+\textbf{Utilisation de tar}:\\
+
+\tar de créer et d'extraire des archives avec les extensions .tar ou
+.tar.gz. 
+
+Pour compresser le répertoire Toto dans l'archive toto.tar.gz, on
+utilisera la commande~:
+
+\begin{Verbatim}
+tar -zcvf toto.tar.gz Toto
+\end{Verbatim}
+
+Pour extraire l'archive toto.tar.gzon utilisera la commande (notez que
+c'est juste le \emph{c} changé en \emph{x} pour \underline{\textbf{c}}ompress vs e\underline{\textbf{x}}tract)~:
+\begin{Verbatim}
+tar -zxvf toto.tar.gz Toto
+\end{Verbatim}
+}
+
+\section{Interface utilisateur avec Zenity}
+
+\label{sec:zenity}
+
+\zenity est un utilitaire en ligne de commande qui permet de créer des
+boites de dialogue. Ces boites de dialogue
+peuvent contenir des calendriers, sélecteur de fichier, listes,
+formulaires, messages, zones de texte, mot de passe, etc... Le
+principal intérêt de Zenity est qu'il est alors très facile de générer
+de petites interfaces graphiques, par exemple pour demander une
+information ou informer de l'avancement d'une tâche, sans avoir à
+passer par toute une moulinette de programme C++, Java, ou autre. On a
+déjà vu un exemple d'utilisation de Zenity dans la
+section~\ref{sec:shutter} pour saisir un nom de fichier dans lequel
+sauvegarder une capture d'écran. Ci-dessous je redonne quelques
+exemples que vous trouverez sur le site web de Zenity (\url{https://help.gnome.org/users/zenity/stable/}). Zenity produit deux
+sorties: un code de sortie stocké dans la variable $\$?$ dont la
+valeur est $0$ si tout va bien et $1, -1$ ou $5$ dans des cas
+d'erreur\footnote{regardez la page de Zenity pour la signification de
+  ces codes d'erreur :
+  \url{https://help.gnome.org/users/zenity/stable/usage.html.en}}. Ce
+qui est intéressant c'est que la commande elle-même retourne un
+résultat, par exemple le texte saisi dans une boite de dialogue, le
+lien vers le fichier sélectionné dans un sélecteur de fichier, etc...\\
+
+\cprotect\encadreUtilisation{
+\textbf{Utilisation de Zenity}:\\
+Pour afficher une simple zone de saisie:
+\begin{verbatim}
+zenity --entry --title="Sélection de fichier" \
+       --text="Saisissez un nom de fichier:" \
+       --entry-text "example.png" 
+\end{verbatim}
+Pour sélectionner un ou plusieurs fichiers, le résultat étant une
+liste des fichiers sélectionnés séparés par le séparateur précisé
+(``|'' pour l'exemple):
+\begin{verbatim}
+zenity --file-selection --title="Sélection de fichier" --separator="|" --multiple
+\end{verbatim}
+}
+
+%% \pagebreak
+%% \part{Document/Poster \LaTeX, Présentation Beamer}
+
+%% \label{sec:latex}
+
+%% \section{Introduction}
+
+%% Introduction avec latex et compilation de documents latex (avec schéma
+%% et explication des phases de compilation);
+
+%% \section{Gestion de la bibliographie}
+
+%% \subsection{Fichier bib}
+
+%% Structure d'un fichier \bibtex, inclusion dans un document latex
+
+%% \subsection{Outils pour la gestion de la bibliographie}
+
+%% kbibtex, ... autres ?
+
+%% \section{Illustrations}
+
+%% soit on génère des images de l'extérieur qu'on inclue (e.g. python
+%% matplotlib -> vectoriel), on peut
+%% utiliser xfig et export avec des formules latex, Tikz
+
+%% \subsection{Inclure des images}
+
+%% \subsection{Générer des images \emph{en ligne} avec Tikz}
+%% \label{sec:tikz}
+
+
+
+
+
+%% \section{Présentation Beamer}
+
+%% e.g. inclure des fichiers vidéos , ...
+
+
+%% \section{Poster}
+
+%% les \\AddToShipoutPicture
+
+%% \pagebreak
+%% \part{Réseau et versioning}
+
+%% ssh, scp, git, svn, ifconfig, traceroute
+
+\pagebreak
+\part{Python pour le calcul et l'illustration scientfique}
+
+\label{part:python}
+Python est un language de script qui offre un grand nombre de modules
+pour traiter du texte, se connecter à des bases de données, écrire un
+site web, faire du traitement d'image, de sons, etc... et tout ça en
+opensource\footnote{On trouvera une liste de modules disponibles pour
+  python à l'adresse \url{https://pypi.python.org/pypi/pip} }. Ici, on
+s'intéressera uniquement à deux modules: \numpy et \matplotlib. \numpy
+est un module qui permet de faire du calcul numérique (matriciel, al, \matplotlib
+gère le tracé de données (courbes, images, histogrammes, ..). On
+présente dans les parties suivantes, au travers de quelques scripts,
+l'utilisation de ces deux modules. On trouvera des tutoriels détaillés
+sur ces modules à l'adresse suivante~:
+\url{http://scipy-lectures.github.io/}. 
+
+\section{Numpy: calcul numérique}
+
+Numpy est une librairie pour le calcul numérique, notemment vectoriel. Un tutoriel détaillé sur numpy se trouve à l'adresse \url{http://scipy-lectures.github.io/intro/numpy/index.html}.
+
+\section{Scipy: Toolboxs pour le calcul scientifique}
+
+Vous trouverez un tutoriel sur l'utilisation de scipy à l'adresse suivante \url{http://scipy-lectures.github.io/intro/scipy.html}.
+
+\section{Matplotlib: tracé de données}
+
+Un tutoriel détaillé sur matplotlib se trouve à l'adresse
+\url{http://scipy-lectures.github.io/intro/matplotlib/matplotlib.html}. Une
+gallerie d'exemples et les scripts permettant de les tracer est
+disponible sur le site de matplotlib
+\url{http://matplotlib.org/gallery.html}.
+
+\vfill
+
+
+\pagebreak
+\part{Index des outils utilisés et pages web associées}
+\lettrine[lhang=1, nindent=0pt, lines=1]{A}{}\\
+\begin{itemize}
+\item Aspell (p.\pageref{sec:correction_orthographique}): \url{http://aspell.net/}
+\item Awk :
+\item avconv
+\end{itemize}
+
+\lettrine[lhang=1, nindent=0pt, lines=1]{B}{}\\
+\begin{itemize}
+\item Bibtex (p.\pageref{sec:latex}):
+\end{itemize}
+\lettrine[lhang=1, nindent=0pt, lines=1]{C}{}\\
+\begin{itemize}
+\item cut 
+\end{itemize}
+\lettrine[lhang=1, nindent=0pt, lines=1]{D}{}\\
+\lettrine[lhang=1, nindent=0pt, lines=1]{E}{}\\
+\begin{itemize}
+\item egrep (p. \pageref{sec:grepawksed}): 
+\item Emacs (p. \pageref{sec:emacs}): \url{http://www.gnu.org/software/emacs/} \\
+              la référence card~: \url{http://refcards.com/refcard/gnu-emacs-gildeas}
+\end{itemize}
+
+\lettrine[lhang=1, nindent=0pt, lines=1]{F}{}\\
+\begin{itemize}
+\item findutils (p. \pageref{sec:findutils}): \\
+  Documentation de find, locate, xargs \url{http://www.gnu.org/software/findutils/manual/html_mono/find.html}
+\item FFmpeg (p.\pageref{sec:ffmpeg}): \url{http://www.ffmpeg.org/}\\
+      Documentation : \url{http://ffmpeg.org/general.html}
+\end{itemize}
+\lettrine[lhang=1, nindent=0pt, lines=1]{G}{}\\
+\begin{itemize}
+\item Gimp (p.\pageref{sec:imagemagick}): \url{http://www.gimp.org/}
+\item GraphicsMagick (p.\pageref{sec:imagemagick}):
+\url{http://www.graphicsmagick.org/}\\
+      Documentation sur les outils: \url{http://www.graphicsmagick.org/utilities.html}\\
+      Wrapper dans différents langages:
+      \url{http://www.graphicsmagick.org/programming.html}
+\item grep (p. \pageref{sec:grepawksed}): \url{http://www.gnu.org/software/grep/manual/grep.html}
+\end{itemize}
+\lettrine[lhang=1, nindent=0pt, lines=1]{H}{}\\
+\begin{itemize}
+\item Hunspell (p.\pageref{sec:correction_orthographique}): \url{http://hunspell.sourceforge.net/} \\
+                 documentation : \url{http://sourceforge.net/projects/hunspell/files/Hunspell/Documentation/}
+\end{itemize}
+\lettrine[lhang=1, nindent=0pt, lines=1]{I}{}\\
+\begin{itemize}
+\item ImageMagick (p.\pageref{sec:imagemagick}):
+  \url{http://www.imagemagick.org/script/index.php}\\
+  Exemples d'utilisation : \url{http://www.imagemagick.org/Usage/}\\
+  Wrappers dans différents langages: \url{http://www.imagemagick.org/script/api.php}
+\item Ispell (p.\pageref{sec:correction_orthographique}): \url{http://fmg-www.cs.ucla.edu/geoff/ispell.html}
+\end{itemize}
+\lettrine[lhang=1, nindent=0pt, lines=1]{J}{}\\
+\begin{itemize}
+\item join (p. )
+\end{itemize}
+\lettrine[lhang=1, nindent=0pt, lines=1]{K}{}\\
+\lettrine[lhang=1, nindent=0pt, lines=1]{L}{}\\
+\begin{itemize}
+\item LanguageTool (p.\pageref{sec:correction_orthographique}):
+  \url{http://www.languagetool.org/}
+\item LibreOffice : \url{http://fr.libreoffice.org/}
+\item Lynx: \url{http://lynx.isc.org/}
+\end{itemize}
+\lettrine[lhang=1, nindent=0pt, lines=1]{M}{}\\
+\begin{itemize}
+\item Makefile (p.\pageref{sec:makefile}):
+  \url{http://www.gnu.org/software/make/}\\
+  documentation:
+  \url{http://www.gnu.org/software/make/manual/html_node/index.html}\\
+  variables spéciales:
+  \url{http://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html}\\
+  fonctions:
+  \url{http://www.gnu.org/software/make/manual/html_node/Functions.html#Functions}
+\item matplotlib (p. \pageref{part:python}):
+  \url{http://matplotlib.org/}\\
+      scripts d'exemple: \url{http://matplotlib.org/gallery.html}
+\item mencoder :
+\item MySpell (p.\pageref{sec:correction_orthographique}): \url{http://code.google.com/a/apache-extras.org/p/ooo-myspell/}
+\end{itemize}
+\lettrine[lhang=1, nindent=0pt, lines=1]{N}{}\\
+\begin{itemize}
+\item numpy (p. \pageref{part:python}): \url{http://www.numpy.org/}
+\end{itemize}
+\lettrine[lhang=1, nindent=0pt, lines=1]{O}{}\\
+\lettrine[lhang=1, nindent=0pt, lines=1]{P}{}\\
+\begin{itemize}
+\item pdflatex (p.\pageref{sec:latex}):
+\item pdftk (p. \pageref{sec:pdftk}):
+  \url{http://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/} \\
+  exemples d'utilisation :
+  \url{http://www.pdflabs.com/docs/pdftk-cli-examples/}\\
+  exemples supplémentaires (e.g. pour remplir un formulaire): \url{http://doc.ubuntu-fr.org/pdftk}
+\end{itemize}
+\lettrine[lhang=1, nindent=0pt, lines=1]{Q}{}\\
+\lettrine[lhang=1, nindent=0pt, lines=1]{R}{}\\
+\begin{itemize}
+\item recordmydesktop (p. \pageref{sec:recordmydesktop}):
+  \url{http://recordmydesktop.sourceforge.net}
+\end{itemize}
+\lettrine[lhang=1, nindent=0pt, lines=1]{S}{}\\
+\begin{itemize}
+\item shutter (p. \pageref{sec:shutter}):
+  \url{http://shutter-project.org/}
+\end{itemize}
+\lettrine[lhang=1, nindent=0pt, lines=1]{T}{}\\
+\begin{itemize}
+\item Tikz (p. \pageref{sec:tikz}):
+  \url{http://www.ctan.org/tex-archive/graphics/pgf/}
+  exemples d'utilisation : \url{http://www.texample.net/}\\
+  un tutoriel : \url{http://math.et.info.free.fr/TikZ/bdd/TikZ-Impatient.pdf}
+\end{itemize}
+\lettrine[lhang=1, nindent=0pt, lines=1]{U}{}\\
+\begin{itemize}
+\item Unetbootin (p. \pageref{sec:unetbootin}): 
+\end{itemize}
+\lettrine[lhang=1, nindent=0pt, lines=1]{V}{}\\
+\lettrine[lhang=1, nindent=0pt, lines=1]{W}{}\\
+\lettrine[lhang=1, nindent=0pt, lines=1]{X}{}\\
+\lettrine[lhang=1, nindent=0pt, lines=1]{Y}{}\\
+\lettrine[lhang=1, nindent=0pt, lines=1]{Z}{}\\
+\begin{itemize}
+\item Zenity (p. \pageref{sec:zenity}): documentation :
+  \url{https://help.gnome.org/users/zenity/stable/}\\
+\end{itemize}
+
+\pagebreak
+\part{Sujets de TP}
+
+\input{sujet_basics.tex}
+
+\pagebreak
+
+\input{sujet_soleil.tex}
+
+\pagebreak
+
+\input{sujet_makefile.tex}
+
+\pagebreak
+
+\input{sujet_meteo.tex}
+
+\pagebreak
+
+%% \section{Notes}
+
+%% dans info coreutils 'Toolbox Introduction' , il y a pas mal de description super intéressantes. J'aurais bien envie de réécrire le TP météo avec des filtres bash, python ,etc.. appliqués pour montrer la philosophie du filtrage des données.  D'ailleurs, gstreamer c'est aussi un peu le même principe de data source, sink, filtres, ...\\
+
+
+%% Une introduction aux filtres : \url{http://www.tuxradar.com/content/exploring-filters-and-pipes}.
+
+
+%% Aussi : process substitution
+%% \url{http://www.tldp.org/LDP/abs/html/process-sub.html}, \\
+
+%% Un filtre en python : \url{http://stackoverflow.com/questions/4429966/how-to-make-a-python-script-pipeable-in-bash}\\
+
+%% donc parler de stdout, stdin, stderr.\\
+
+%% voir aussi les coprocesses.\\
+
+%% \url{http://wiki.bash-hackers.org/doku.php} et des tutos : \url{http://wiki.bash-hackers.org/scripting/tutoriallist} (avec parfois des exos)\\
+
+%% \url{http://en.wikipedia.org/wiki/Pipeline_%28Unix%29} : Principe des pipelines; en particulier les programmes sont lancés en parallèle.
+
+%% \section{Notes d'installation}
+
+%% Basemap : Sous Fedora (au moins)
+%% \begin{itemize}
+%% \item chopper l'archive tar.gz sur matplotlib sourceforge, etc..
+%% \item s'assurer que GEOS* est installé (yum le trouve)
+%% \item l'installer avec   pip install basemapxxx.tar.gz --user
+%% \end{itemize}
+
+
+
+%% \pagebreak
+
+
+%% \part{Mise en page des parties}
+
+%% Pour chaque outil, mettre un lien cliquable vers la documentation et
+%% des références d'utilisation. 
+
+%% Style pour montrer des exemples :
+
+%% - une image encadrée sur toute la largeur
+
+%% Exemple de figure encadre Fig.~\ref{fig:Figs/test.eps}.
+
+%% \myfig{Figs/test.eps}{test}
+
+%% \colorbox{background-image}{du texte avec une couleur de fond}
+
+%% - une boite encadrée et coloration syntaxique ou un style sympa pour
+%% afficher des exemples en ligne de commande 
+
+
+%% - Un exemple de commande coloriée automatiquement \awk
+
+
+\end{document}

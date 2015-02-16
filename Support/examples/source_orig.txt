@@ -1,0 +1,10 @@
+Les ordinateurs des années 1960 étaient livrés avec des logiciels
+accompagnés de leurs sources que les clients pouvaient modifier et
+étendre. Il aurait en effet été impossible de vendre un ordinateur
+sans son logiciel d'accompagnement, et la plupart des clients
+estimaient trop aléatoire de faire fonctionner un logiciel dont ils ne
+pouvaient vérifier les caractéristiques internes. Les acquéreurs de
+logiciel obtenaient donc sur simple demande les sources des logiciels
+(y compris les systèmes d'exploitation) et pouvaient les modifier à
+leur convenance.
+
