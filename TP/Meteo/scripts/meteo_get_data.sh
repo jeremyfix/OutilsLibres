@@ -53,7 +53,7 @@ do
     # First, we extract all the entries for the current data ${year}${month}${day}
     cat Data/${daily_file} |                                   # Read the daily file
     awk -F, "\$2==${year}${month}${day} { print \$1,\$5 }" |   # Get the measurements of the current day
-    awk '$2!="M" { print $0 }' |                               # Filter out invalid measures
+    awk '$2!="M" && $2 != "-" { print $0 }' |                  # Filter out invalid measures
     sed 's/\*//g' |                                            # Remove the * symbol from the measures
     join Data/${station_file} - > Data/${day}${month}${year}.txt  # And merge with station.txt 
     
