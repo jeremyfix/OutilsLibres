@@ -12,6 +12,21 @@ MM=$2
 YYYY=$3
 lambda=$4
 
+if [ ! -d "./raw_images" ]; then
+    echo "raw_images does not exist, I'm creating it"
+    mkdir raw_images
+fi
+if [ ! -d "./images" ]; then
+    echo "images does not exist, I'm creating it"
+    mkdir images
+fi
+if [ ! -d "./postproc_images" ]; then
+    echo "postproc_images does not exist, I'm creating it"
+    mkdir postproc_images
+fi
+
+
+
 sun_get_image_list.sh $DD $MM $YYYY $lambda         |      # on récupère tout le contenu
 sun_extract_www_img_params.sh                       |      # dont on extrait les URL    
 #head -5 |         # Pour du débug, on ne retient que les 5 premières images
