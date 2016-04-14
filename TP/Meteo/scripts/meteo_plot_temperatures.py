@@ -86,3 +86,5 @@ while(True):
     sys.stdout.write("%s\n" % output_filename)
     #count = count + 1
     #plt.show()
+
+    plt.close(fig)
