@@ -20,7 +20,8 @@ do
     then
 	if [ $mode == "0" ]
 	then
-	    url="http://cdo.ncdc.noaa.gov/qclcd_ascii/$archive"
+	    url="http://www.ncdc.noaa.gov/orders/qclcd/$archive"
+	    echo "Downloading $url" 1>&2
 	    wget $url -c -q -P Data
 	    echo "Data/$archive downloaded" 1>&2
 	    # We then extract the files from the archive
@@ -31,7 +32,8 @@ do
 	    rm -f station.txt
 	    cd ..
 	else
-	    url="http://cdo.ncdc.noaa.gov/qclcd_ascii/$archive_new"
+	    url="http://www.ncdc.noaa.gov/orders/qclcd/$archive_new"
+	    echo "Downloading $url" 1>&2
 	    wget $url -c -q -P Data
 	    echo "Data/$archive_new downloaded" 1>&2
 	    # We then extract the files from the archive
