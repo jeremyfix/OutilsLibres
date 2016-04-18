@@ -90,6 +90,9 @@
 \usepackage[compact]{titlesec} 
 \allsectionsfont{\color{bl}\scshape\selectfont}
 
+\let\LaTeXtemp\LaTeX
+\newcommand{\latex}{{\Large {\LaTeXtemp\xspace} }}
+
 %%%%% Definitions
 % Define a new command that prints the title only
 \makeatletter							% Begin definition
@@ -821,6 +824,16 @@ appliquer un filtre à une image\footnote{On peut même imaginer que ce ne soit
 qu'un élément d'une chaîne qui capture des images, les traitent et les
 assemble pour former une vidéo, le tout à l'aide d'un Makefile.}.
 
+
+\section{Ecrire un rapport et préparer des slides avec Latex}
+
+\label{sec:latex}
+
+\latex est un langage de programmation qui permet d'écrire des rapports et préparer des présentations sans se soucier de la mise en page. On dit alors qu'on écrit à la ligne. La structure du document se définit par un ensemble de balise qu'on place dans le document; pour écrire un rapport, on sépare les chapitres, sections, sous-sections en invoquant des baliques \verb \chapter , \verb \section , \verb \subsection , .... Le document que vous êtes entrain de lire est écrit en Latex. Je ne vous cache pas qu'il y a une petite période d'apprentissage du langage mais le jeu en vaut la chandelle vu la qualité des rapports qu'on arrive à produire. Pour "teaser" Latex, sachez qu'il est capable de gérer automatiquement des références croisées, des sections de bibliographie, des tables des matières et tables des figures, l'édition de formules mathématiques se fait également facilement. Vous devriez pouvoir trouver un certain nombre de tutoriels en ligne pour prendre en main Latex (e.g. \url{https://openclassrooms.com/courses/redigez-des-documents-de-qualite-avec-latex}) et des documents de base qu'il vous reste à compléter sont disponibles ici \url{http://www.latextemplates.com/}. Une dernière chose : Latex est un langage compilé et il faut donc invoquer un compilateur (e.g. pdflatex fourni avec la TexLive) pour produire le fichier PDF à partir du fichier source ".tex".\\
+
+Avec Latex, on peut également produire des transparents pour une présentation. Pour que ce soit facile, des balises spécifiques sont proposées par Beamer. Vous trouverez également des présentations de base sur le site \url{http://www.latextemplates.com}.
+
+
 \section{Dessin vectoriel : xfig, inkscape, ipe}
 
 \label{sec:dessin_vectoriel}
@@ -1349,7 +1362,7 @@ disponible sur le site de matplotlib
 \end{itemize}
 \lettrine[lhang=1, nindent=0pt, lines=1]{T}{}\\
 \begin{itemize}
-\item Tikz (p. \pageref{sec:tikz}):
+\item Tikz (p. \pageref{sec:dessin_vectoriel}):
   \url{http://www.ctan.org/tex-archive/graphics/pgf/}
   exemples d'utilisation : \url{http://www.texample.net/}\\
   un tutoriel : \url{http://math.et.info.free.fr/TikZ/bdd/TikZ-Impatient.pdf}
