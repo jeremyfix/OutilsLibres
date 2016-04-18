@@ -24,6 +24,10 @@ if [ ! -d "./postproc_images" ]; then
     echo "postproc_images does not exist, I'm creating it"
     mkdir postproc_images
 fi
+if [ ! -d "./video" ]; then
+    echo "video does not exist, I'm creating it"
+    mkdir video
+fi
 
 
 
