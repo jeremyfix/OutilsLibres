@@ -7,9 +7,9 @@
 
 Cas pratique: Nous allons utiliser une base de données météo
 disponible en ligne
-\url{http://cdo.ncdc.noaa.gov/qclcd_ascii/}\footnote{Les informations
+\url{http://www.ncdc.noaa.gov/orders/qclcd/}\footnote{Les informations
   qui figurent dans les fichiers sont documentées ici
-  \url{http://cdo.ncdc.noaa.gov/qclcd/qclcddocumentation.pdf}}. Cette
+  \url{http://www.ncdc.noaa.gov/orders/qclcd/ExplanationOfCodes.htm}}. Cette
 base de données contient des archives de relevés météorologiques depuis
 1996. Attention, nous utiliserons pour le moment uniquement les
 données de 1996 à 2007 (le format des données a changé en 2007,
@@ -35,7 +35,7 @@ disponibles sous Unix~:
 \subsection{Présentation du projet}
 
 Les données météo que nous allons utiliser sont disponibles en ligne
-\url{http://cdo.ncdc.noaa.gov/qclcd_ascii/} et fournies par le
+\url{http://www.ncdc.noaa.gov/orders/qclcd/} et fournies par le
 National Climatic Center de la National Oceanic and Atmospheric
 Administration (NOAA). Les archives nommées AAAAMM.tar.gz
 contiennent les mesures pour le mois MM de l'année AAAA. Les archives de ces données (les .tar.gz)
@@ -254,7 +254,7 @@ bash:\$ ./get\_dates.sh | ./generate\_dates.py
 
 \subsection{Téléchargement, extraction et filtrage des données - \tar \wget \grep \awk \sed}
 
-Maintenant que nous disposons d'un générateur des dates (generate\_dates.py produit la séquence des dates dans la sortie standard), nous pouvons gérer la partie qui consiste à télécharger les données nécessaires au tracé. Nous allons écrire ce script en Bash. Vous vous rappelez que nous disposons de données journalières au sein d'une archive mensuelle. C'est à dire que pour tracer l'archive "http://cdo.ncdc.noaa.gov/qclcd\_ascii/200706.tar.gz" contient toutes les données pour tout les jours du mois de juin. Il faut donc que notre script de téléchargement/extraction fasse plusieurs choses, étant donnée une date d'entrée~:
+Maintenant que nous disposons d'un générateur des dates (generate\_dates.py produit la séquence des dates dans la sortie standard), nous pouvons gérer la partie qui consiste à télécharger les données nécessaires au tracé. Nous allons écrire ce script en Bash. Vous vous rappelez que nous disposons de données journalières au sein d'une archive mensuelle. C'est à dire que pour tracer l'archive "http://www.ncdc.noaa.gov/orders/qclcd/200706.tar.gz" contient toutes les données pour tout les jours du mois de juin. Il faut donc que notre script de téléchargement/extraction fasse plusieurs choses, étant donnée une date d'entrée~:
 \begin{enumerate}
 \item vérifie si l'archive du mois de la date n'est pas déjà téléchargée. Si elle ne l'est pas, on la télécharge, on l'extrait dans le répertoire data (et on renomme le fichier station pour lui ajouter le préfixe YYYYMM)
 \item filtre le fichier de données pour construire un fichier de données spécifique à la date qui nous intéresse.
@@ -310,10 +310,10 @@ Vous savez maintenant comment extraire les deux fichiers "station.txt" et "xxxda
 
 \paragraph{Filtrage des données pertinentes du fichier daily: \awk, \sed, \join}
 
-Pour pouvoir effectuer notre tracé des températures sur le territoire américain, il nous faut plusieurs choses: les températures et les positions géographiques des enregistrements. Les fichiers xxxxdaily.txt contiennent énormément d'informations, dont un grand nombre est inutile pour notre application. Les stations d'enregistrement dans les fichiers xxxxdaily.txt sont indexées par leur WBAN mais la position géographique d'une station est quand à elle disponible dans le fichier xxxxstation.txt que nous venons de créer. Il nous faut donc extraire uniquement les températures et les WBAN du fichier xxxxdaily.txt et combiner cela avec le fichier de station. Nous allons pour cela utiliser plusieurs outils en un pipeline. Si vous inspectez un fichier xxxxdaily.txt, vous pouvez remarquer que parfois, la température est égale à M correspondant à une entrée invalide, parfois elle est suffixée par une étoile; on aimerait d'une partie supprimer les entrées invalides et d'autre part supprimer les "*" suffixant certaines températures; définissions un pipeline avec~:
+Pour pouvoir effectuer notre tracé des températures sur le territoire américain, il nous faut plusieurs choses: les températures et les positions géographiques des enregistrements. Les fichiers xxxxdaily.txt contiennent énormément d'informations, dont un grand nombre est inutile pour notre application. Les stations d'enregistrement dans les fichiers xxxxdaily.txt sont indexées par leur WBAN mais la position géographique d'une station est quand à elle disponible dans le fichier xxxxstation.txt que nous venons de créer. Il nous faut donc extraire uniquement les températures et les WBAN du fichier xxxxdaily.txt et combiner cela avec le fichier de station. Nous allons pour cela utiliser plusieurs outils en un pipeline. Si vous inspectez un fichier xxxxdaily.txt, vous pouvez remarquer que parfois, la température est égale à 'M' ou '-' correspondant à une entrée invalide, parfois elle est suffixée par une étoile; on aimerait d'une partie supprimer les entrées invalides et d'autre part supprimer les "*" suffixant certaines températures; définissions un pipeline avec~:
 \begin{enumerate}
 \item \awk pour extraire uniquement les WBAN et températures moyennes de la date considérée
-\item \awk pour supprimer les entrées pour lesquelles la température est égale à "M", ce qui correspond à une entrée invalide
+\item \awk pour supprimer les entrées pour lesquelles la température est égale à "M" ou '-', ce qui correspond à une entrée invalide
 \item \sed pour substituer les "*" par un caractère vide ""
 \end{enumerate}
 Enfin, utilisez \join pour combiner les données ainsi générées avec le fichier xxxxstation.txt. \join peut prendre deux fichiers en argument pour les combiner mais il accepte également qu'on remplace un des fichiers par l'entrée standard en précisant "-" comme nom de fichier; voyons quelques exemples~:
