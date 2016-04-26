@@ -284,9 +284,9 @@ télécharge l'image. Vous remarquerez que l'image téléchargée est placée da
 
 La deuxième chose à faire est d'afficher dans la sortie standard le chemin vers l'image téléchargée. Pourquoi ? parce qu'on souhaite poursuivre les traitements en indiquant au futur script de traitement d'image sur quelle image travailler. Comment faire ? Votre script \bash{scripts/telecharge\_img.sh} attends une URL dans l'entrée standard. Ce que nous allons faire, c'est utiliser awk avec pour \emph{action} d'afficher le dernier champ (\$NF) lorsque la ligne est divisée selon le séparateur '/'. Regardons un exemple~:
 \begin{exempleResultat}
-bash:\$ echo "http://un.exemple/durl/monimage.jp2" | awk -F/ '{print \$NF}'
+bash:\$ echo "http://un.exemple/durl/monimage.jp2" | awk -F/ '\{print \$NF\}'
 monimage.jp2
-bash:\$ filename=`echo "http://un.exemple/durl/monimage.jp2" | awk -F/ '{print \$NF}'`
+bash:\$ filename=`echo "http://un.exemple/durl/monimage.jp2" | awk -F/ '\{print \$NF\}'`
 bash:\$ echo "./raw\_images/\$filename"
 ./raw\_images/monimage.jp2
 \end{exempleResultat}
