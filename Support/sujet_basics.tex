@@ -179,10 +179,19 @@ La philosophie des outils GNU consiste à écrire des outils très spécifiques 
 \begin{center}
 du * | sort -n
 \end{center}
+
 Si on ne veut afficher que les 10 plus gros fichiers/répertoires, il suffit d'afficher les 10 dernières éléments~:
 \begin{center}
 du * | sort -n | tail -10 
 \end{center}
+
+Si on veut compter le nombre de fichiers présents dans un répertoire~:
+
+\begin{center}
+ls -p | grep -v / | wc -l
+\end{center}
+
+Je vous laisse le soin de regarder les pages de manuel des commandes ``ls'', ``grep'' et ``wc'' pour comprendre ce qui se passe.
 
 
 \subsection{Ecrire un script lisant l'entrée standard}
