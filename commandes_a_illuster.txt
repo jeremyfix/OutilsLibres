@@ -1,0 +1,38 @@
+
+Problème: trouver les 10 fichiers les plus gros 
+========
+
+man du
+
+du * -sh       :    file space usage, taper man du
+
+man sort
+voir -k (anecdotique pour nous puisque k1 par défaut), -n et -h
+
+du * -sh | sort -h
+
+man tail
+
+du * -sh | sort -h | tail -10     : les 10 derniers
+
+
+Problème: Compter le nombre de fichiers:
+========
+
+ls -p | grep -v / | wc -l
+
+ls : liste les fichiers/répertoires ; option "-p" ajoute le "/" des rép
+grep : pattern matching , e.g.  " ls -p | grep / "
+grep -v : reverse
+grep -v /   : filtre uniquement les fichiers
+
+Autre solution :
+ls -l | grep "^[^d]"     : filtre les lignes qui commencent par quelque chose qui n'est pas "d"  ; on peut aussi mettre "^[^ds]" qui ne commence par d ou s
+
+Problème: Envoyer des requêtes sur plusieurs machines et filtrer les requêtes à sérialiser dans un fichier
+=========
+
+pdsh -w sh[01-12] nvidia-smi 2> /dev/null | grep GeForce | sort -k1 | gawk '{print $1 " " $4 " " $5 " " $6}' > info.log
+
+pdsh -w sh[01-12] nvidia-smi 2> /dev/null | grep MiB | sort -k1 | awk '{print $1,$10,$12}' > /opt/MonitorGPU/sh_gpu_usage.log
+
