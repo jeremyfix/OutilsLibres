@@ -29,6 +29,12 @@ grep -v /   : filtre uniquement les fichiers
 Autre solution :
 ls -l | grep "^[^d]"     : filtre les lignes qui commencent par quelque chose qui n'est pas "d"  ; on peut aussi mettre "^[^ds]" qui ne commence par d ou s
 
+Problème: Trouver tout les fichiers python dans lesquels j'ai bien pu utiliser numpy ...
+========
+
+find . -name "*.py" -exec grep numpy \{} \; -print
+
+
 Problème: Envoyer des requêtes sur plusieurs machines et filtrer les requêtes à sérialiser dans un fichier
 =========
 
