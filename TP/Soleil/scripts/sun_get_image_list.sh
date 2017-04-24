@@ -20,6 +20,7 @@ tmpfile=`mktemp file.XXXX`
 
 echoerr "[get_image_list.sh] Downloading index"
 
+#lynx -dump -listonly http://infomob.metz.supelec.fr/fix/data/aia/images/$YYYY/$MM/$DD/$lambda/ > $tmpfile
 lynx -dump -listonly http://jsoc.stanford.edu/data/aia/images/$YYYY/$MM/$DD/$lambda/ > $tmpfile
 
 echoerr "[get_image_list.sh] Reading index"
