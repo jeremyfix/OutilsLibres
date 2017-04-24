@@ -14,4 +14,4 @@ input_dir=$1
 output_dir=$2
 output_filename_we=$3
 
-avconv -y -f image2 -r 250 -i ${input_dir}/%05d.jpg ${output_dir}/${output_filename_we}.mp4
+avconv -y -r 100 -i ${input_dir}/%05d.jpg  ${output_dir}/${output_filename_we}.mp4

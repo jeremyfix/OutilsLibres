@@ -19,12 +19,13 @@ Durant ce TP, je vous propose d'utiliser les mesures à $211 \si{\AA}$. Les imag
 \begin{center}
 \colorbox{lblue}{\begin{minipage}{\linewidth}
 \includegraphics[width=0.05\columnwidth]{Figs/warning.png}\includegraphics[width=0.05\columnwidth]{Figs/warning.png}
-\textbf{Attention}: Lors de la mise en place du TP, il peut être intéressant d'utiliser un mimoir local en ne récupérant par example que les images de quelques éruptions solaires, à savoir~:
+\textbf{Attention}: Lors de la mise en place du TP, il peut être intéressant d'utiliser un miroir local en ne récupérant par example que les images de quelques éruptions solaires, à savoir~:
 \begin{itemize}
 \item le 07/06/2011 en $304\si{\AA}$ : grosse éruption entre 6h et 7h
 \item le 31/08/2012 en $211\si{\AA}$ et $171\si{\AA}$ : petite éruption autour de 19:00
 \end{itemize}
-Il y a plusieurs raisons à l'utilisation de ce miroir local: 1) les temps d'accès, 2) je crains que si tout le monde accède de manière répétée au site jsoc.stanford.edu, nous soyons banis de leur serveur web et donc qu'on ne puisse pas faire correctement le TP, 3) on ne surcharge pas inutilement leurs serveurs pour nos TPs.
+Il y a plusieurs raisons à l'utilisation de ce miroir local: 1) les temps d'accès, 2) je crains que si tout le monde accède de manière répétée au site jsoc.stanford.edu, nous soyons banis de leur serveur web et donc qu'on ne puisse pas faire correctement le TP, 3) on ne surcharge pas inutilement leurs serveurs pour nos TPs.\\
+Nous allons pour le coup utiliser le serveur infomob. Demandez moi l'URL ! Dans toute la suite du sujet, il faudra bien penser à remplacer jsoc.stanford.edu par l'adresse vers le serveur infomob.
 \end{minipage}}
 \end{center}
 
@@ -68,7 +69,7 @@ La figure \ref{fig:soleil_overview} donne une vision d'ensemble du programme que
       \& \node[command] {wget};\\
 
      \& \node[datastore] (convert) {convert\_img.sh}; 
-      \& \node[command] {convert, rm};\\
+      \& \node[command] {j2k\_to \_image, convert, rm};\\
 
      \& \node[datastore] (date) {ecrit\_date.sh}; 
       \& \node[command] {sed, convert};\\
@@ -306,11 +307,11 @@ bash:\$ ./all.sh 31 08 2012 211
 
 \subsection{Traitement des images}
 
-Nous avons récupéré une collection d'images au format JPEG2000 ``.jp2''. On souhaite 1) les convertir en jpg, 2) les redimensionner et y incruster la date/heure de la mesure. Pour cela, on va écrire un script Bash qui va essentiellement utiliser l'outil \convert sur toutes les images dont le chemin est transmis sur l'entrée standard, ainsi que quelques outils de réécriture pour transformer le nom du fichier d'image qui contient l'heure et la date de la mesure.\\
+Nous avons récupéré une collection d'images au format JPEG2000 ``.jp2''. On souhaite 1) décompresser l'image noir et blanc du fichier jp2, 2) la redimensionner et y incruster la date/heure de la mesure et éventuellement lui appliquer un gradient de couleur (on en parle à la fin du sujet, en bonus). Pour cela, on va écrire un script Bash qui va essentiellement utiliser les outils j2k\_to\_image et \convert sur toutes les images dont le chemin est transmis sur l'entrée standard, ainsi que quelques outils de réécriture pour transformer le nom du fichier d'image qui contient l'heure et la date de la mesure.\\
 
 Commençons par prendre en main \convert. Comme vous pourrez le lire p.~\pageref{sec:imagemagick}, \convert est un des outils fournis par ImageMagick, GraphicsMagick, .. et qui permet de manipuler des images: convertir d'un format à un autre en appliquant éventuellement un nombre arbitraire de filtres, redimensionner les images, y introduire du texte, y appliquer des effets \footnote{l'effet polaroid est très sympa}, combiner plusieurs images, etc... \\
 
-Commencez par vous assurer que vous disposez d'une image au format ``.jp2'' dans le répertoire raw\_images. Appelons la "img.jp2". Utilisez \convert et l'option resize pour redimensionner l'image "img.jp2" à 10\% de sa taille d'origine et la convertir en l'image "img.jpg".  Vous savez maintenant redimensionner une image, il nous reste à appliquer cette opération sur toutes les images dont le chemin est fourni sur l'entrée standard.\\
+Commencez par vous assurer que vous disposez d'une image au format ``.jp2'' dans le répertoire raw\_images. Appelons la "img.jp2". Utilisez j2k\_to\_image pour convertir l'image jp2 en pgm (cf. ``man j2k\_to\_image''). Utilisez \convert et l'option resize pour redimensionner l'image "img.jp2" à 10\% de sa taille d'origine et la convertir en l'image "img.jpg".  Vous savez alors décompresser l'image jp2 et la redimensionner, il ne nous reste plus qu'à appliquer cette opération sur toutes les images dont le chemin est fourni sur l'entrée standard.\\
 
 Nous \textbf{allons} (mais lisez la suite avant de commencer) écrire un script \bash{scripts/convert\_img.sh} qui va~:
 \begin{itemize}
@@ -395,11 +396,7 @@ J'ai ici supposé que les images étaient numérotées sur 5 chiffres, c'est ce 
 
 La vidéo ainsi générée peut paraître lente. C'est dû à ce qu'on appelle le \emph{frame rate}, i.e. combien d'images sont affichées par seconde. Sachant que nous disposons d'environ 2500 images pour une journée. Si on souhaite que le film ne dure que 10 secondes, il va falloir utiliser une vitesse de lecture des images de 250 images par secondes. On peut changer la vitesse de lecture de la séquence d'images en précédant l'option "-i" par une option "-r" comme suit~:
 \begin{center}
-\bash{ffmpeg -r 250 -i mesimages/\%05d.jpg mavideo.mp4}
-\end{center}
-Enfin, si on veut garantir que les images ne soient pas compressées avant d'être ajoutées au film, on peut préciser à ffmpeg l'option "-qscale 1", ce qui donne finalement~:
-\begin{center}
-\bash{ffmpeg -qscale 1 -r 250 -i mesimages/\%05d.jpg mavideo.mp4}
+\bash{ffmpeg -r 250 -i mesimages/\%05d.jpg -r 25 mavideo.mp4}
 \end{center}
 
 Pour visualiser la vidéo, vous pouvez faire appel à \mplayer~:
@@ -417,7 +414,7 @@ Pour visualiser la vidéo, vous pouvez faire appel à \mplayer~:
 
 \subsection{En bonus: appliquer des fausses couleurs}
 
-Jusqu'à maintenant, nous avons utilisé des images noir et blanc. Simplement, la vidéo est beaucoup plus sympa si nous lui appliquons des fausses couleurs. Pour appliquer des fausses couleurs, une façon de faire est de se construire un gradient de couleur qui sera indéxé par la luminance de l'image. On peut par exemple créer un gradient sous gimp, ci-dessous une image 600x30 avec un dégradé ``incandescent'' et un décalage de 35.
+Jusqu'à maintenant, nous avons utilisé des images noir et blanc. Simplement, la vidéo est beaucoup plus sympa si nous lui appliquons des fausses couleurs. Pour appliquer des fausses couleurs, une façon de faire est de se construire un gradient de couleur qui sera indéxé par la luminance de l'image. On peut par exemple créer un gradient sous gimp, ci-dessous une image 600x30 avec un dégradé ``incandescent''.
 \begin{center}
 \includegraphics[width=0.7\linewidth]{Figs/soleil_gradient.jpg}
 \end{center}
@@ -438,7 +435,7 @@ Ce qui nous donne~:
 
 \subsection{Notes d'installation pour refaire le TP chez vous}
 
-Si vous voulez refaire ce TP chez vous, vous devez installer certains paquets qui ne sont pas installés par défaut. Sous Fedora, vous devez exécuter "su -c 'yum install -y ffmpeg ImageMagick mplayer'" en ayant au préalable installé les dépots rpmfusion \url{http://rpmfusion.org/}. Sous Ubuntu, "sudo apt-get install ffmpeg imagemagick mplayer" devrait faire l'affaire.
+Si vous voulez refaire ce TP chez vous, vous devez installer certains paquets qui ne sont pas installés par défaut. Sous Fedora, vous devez exécuter "su -c 'yum install -y ffmpeg ImageMagick mplayer'" en ayant au préalable installé les dépots rpmfusion \url{http://rpmfusion.org/}. Sous Ubuntu, "sudo apt install avconv imagemagick mplayer openjpeg-tools lynx" devrait faire l'affaire.
 
 
 \vfill
