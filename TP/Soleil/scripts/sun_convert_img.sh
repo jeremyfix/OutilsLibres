@@ -23,12 +23,15 @@ do
 
     # Extract the basename
     filename=`basename $fullpath`
+    decoded_filename=`echo $filename | sed 's/\.jp2$/\.pgm/'`
+    decoded_fullpath="$output_dir/$decoded_filename"
     output_filename=`echo $filename | sed 's/\.jp2$/\.jpg/'`
     output_fullpath="$output_dir/$output_filename"
     if [ "$status" = "NEW" ]
     then
 	echoerr "[convert_img] Dealing with $fullpath"
-	convert $fullpath -resize 10% -colorspace gray ./scripts/soleil_gradient.jpg -clut $output_fullpath
+	j2k_to_image -i $fullpath  -o $decoded_fullpath > /dev/null
+	convert $decoded_fullpath -resize 10% ./scripts/soleil_gradient.jpg -clut $output_fullpath > /dev/null
 	if [ $? != 0 ]
 	then
 	    echoerr "[convert_img] convert issued an error"
