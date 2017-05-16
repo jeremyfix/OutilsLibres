@@ -10,4 +10,4 @@ meteo_plot_temperatures.py |
 meteo_write_date.sh
 
 # We now generate the movie from all the images
-avconv -y -qscale 1 -i Images/%05d.png Videos/out.mp4 
+avconv -y -r 100 -i Images/%05d.png Videos/out.mp4 
