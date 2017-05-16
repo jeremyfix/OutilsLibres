@@ -7,5 +7,6 @@ sudo apt install lynx gawk
 # In xenial, I did not find the way to install the JP2
 # delegate Therefore, I use openjpeg-tools with j2k_to_image 
 
-sudo apt-get install openjpeg-tools mplayer vlc mpv
+sudo apt-get install openjpeg-tools mplayer vlc mpv libgeos-3.5.0 libgeos-dev
+sudo pip install https://github.com/matplotlib/basemap/archive/master.zip
 
