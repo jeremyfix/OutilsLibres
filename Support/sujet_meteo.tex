@@ -204,7 +204,7 @@ Pour récupérer les arguments passés à un script python, qu'on appellerai \ba
 J'ai ici utilisé echo pour avoir un exemple sous la main pour tester mais en pratique c'est votre script get\_dates.sh qui nous fournirait dans la sortie standard les dates limites. En python, on peut lire directement de stdin\footnote{on peut même itérer sur le descripteur de fichier sys.stdin, mais cette approche bufferise la lecture...}. Même si la syntaxe ci-dessous a l'air un peu compliqué, c'est à ma connaissance la seule qui garantisse que python ne bufferise pas ses entrées et les traite bien dés qu'elles sont émises par le script qui écrit dans son entrée standard. Un exemple de script python, que nous appellerons test\_stdin.py, est donné ci-dessous~:\\
 
 \cprotect\encadreUtilisation{ Fichier  \textbf{test\_stdin.py}
-\begin{verbatim}
+  \begin{lstlisting}[language=python]
 #!/usr/bin/python
 
 import sys
@@ -214,8 +214,7 @@ while(True):
     if(l == ''):
         break
     sys.stdout.write("[test_stdin.py] a lu %s " % l)
-
-\end{verbatim}
+\end{lstlisting}
 }
 
 Prenez vous un fichier texte, appelons le monfichier et testez le script ci-dessus~:
@@ -369,7 +368,7 @@ Pour tracer la carte du territoire américain, nous utilisons le module \href{ht
 \subsubsection{Tracé des données brutes}
 La deuxième étape consiste à importer les données précédemment filtrées et à les tracer sur la carte. Pour charger des données d'un fichier texte, organisées en colonnes, le plus simple est d'utiliser la fonction loadtxt du module \href{http://www.numpy.org/}{numpy}. Le script ci-dessous vous montre un exemple d'utilisation~:\\
 \cprotect\encadreUtilisation{ Fichier  \textbf{load\_data.py}
-\begin{verbatim}
+  \begin{lstlisting}[language=python]
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
@@ -377,25 +376,25 @@ import sys
 import numpy as np
 import matplotlib.pyplot as plt
 
-print("Ce test le chargement de données")
+print("Je test le chargement de donnees")
 
 if(len(sys.argv) != 2):
     print("Usage : {} datefile".format(sys.argv[0]))
     sys.exit(-1)
 
-# On récupère le chemin vers les données
+# On recupere le chemin vers les donnees
 datafile=sys.argv[1]
 
 # On les charge
 data = np.loadtxt(datafile)
 
-# Et pour rigoler, on trace les températures
+# Et pour rigoler, on trace les temperatures
 plt.figure()
 plt.plot(data[:,3])
-plt.title("Températures moyennes (deg K)")
+plt.title("Temp\'eratures moyennes (deg K)")
 plt.show()
 
-\end{verbatim}
+\end{lstlisting}
 }
 
 Ces données forment un ensemble non structuré de points; pour les tracer, nous utilisons ce qui s'appelle un \emph{scatter plot}. Mais, pour correctement tracer les données, il faut d'abord projeter les longitudes et latitudes des points de mesure sur la carte. L'object Basemap que nous avons construit lors du tracé de la carte peut être appliqué à des vecteurs de longitudes et latitudes pour calculer leur projetés.\\

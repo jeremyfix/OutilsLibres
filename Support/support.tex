@@ -43,6 +43,44 @@
 
 % Setup the margins
 \usepackage{geometry}
+
+%%%%%% To get copy-pastable content of code
+%https://tex.stackexchange.com/questions/62221/ensure-verbatim-code-block-is-copy-paste-able
+% https://tex.stackexchange.com/questions/19949/how-to-make-listings-code-indentation-remain-unchanged-when-copied-from-pdf
+\usepackage{listings}
+\usepackage{textcomp}
+\lstset{columns=flexible}
+\lstset{keepspaces=true}
+\lstset{showspaces=false}
+%\makeatletter
+%\def\lst@outputspace{{\ifx\lst@bkgcolor\empty\color{white}\else\lst@bkgcolor\fi\lst@visiblespace}}
+%\makeatother
+\lstset{
+  inputencoding=utf8,
+  extendedchars=true,
+  literate={á}{{\'a}}1 {ã}{{\~a}}1 {é}{{\'e}}1 {è}{{\`e}}1
+}
+\makeatletter
+\def\lst@visiblespace{ }
+\makeatother
+%\usepackage{listings}
+
+\usepackage{textcomp}
+\usepackage[space=true]{accsupp}
+
+\newcommand{\pdfactualhex}[3]{\newcommand{#1}{%
+\BeginAccSupp{method=hex,ActualText=#2}#3\EndAccSupp{}}}
+
+\pdfactualhex{\pdfactualdspace}{2020}{\textperiodcentered\textperiodcentered}
+\pdfactualhex{\pdfactualsquote}{27}{'}
+\pdfactualhex{\pdfactualbtick}{60}{`}
+
+\lstset{tabsize=4,basicstyle=\ttfamily,columns=flexible,emptylines=10000}
+\lstset{literate={'}{\pdfactualsquote}1
+                 {`}{\pdfactualbtick}1
+                 {\ \ }{\pdfactualdspace}2
+}
+
 \newgeometry{margin=2cm}
 
 % Customize the hyperlinks
