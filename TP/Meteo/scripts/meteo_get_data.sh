@@ -20,7 +20,8 @@ do
     then
 	if [ $mode == "0" ]
 	then
-	    url="http://www.ncdc.noaa.gov/orders/qclcd/$archive"
+	    url="http://infomob.metz.supelec.fr/fix/qclcd_ascii/$archive"
+	    #url="http://www.ncdc.noaa.gov/orders/qclcd/$archive"
 	    echo "Downloading $url" 1>&2
 	    wget $url -c -q -P Data
 	    echo "Data/$archive downloaded" 1>&2
