@@ -31,12 +31,12 @@ fi
 
 
 
-#./scripts/sun_get_image_list.sh $DD $MM $YYYY $lambda         |      # on récupère tout le contenu
-#./scripts/sun_extract_www_img_params.sh                       |      # dont on extrait les URL
-#head -500 |         # Pour du débug, on ne retient que les 5 premières images
-#./scripts/sun_telecharge_img.sh ./raw_images                  |      # qu'on télécharge
-#./scripts/sun_convert_img.sh  ./images                        |      # Qu'on convertit
-#./scripts/sun_write_date.sh  ./postproc_images                       # Dans laquelle on incruste la date et l'heure
+./scripts/sun_get_image_list.sh $DD $MM $YYYY $lambda         |      # on récupère tout le contenu
+./scripts/sun_extract_www_img_params.sh                       |      # dont on extrait les URL
+head -500 |         # Pour du débug, on ne retient que les 5 premières images
+./scripts/sun_telecharge_img.sh ./raw_images                  |      # qu'on télécharge
+./scripts/sun_convert_img.sh  ./images                        |      # Qu'on convertit
+./scripts/sun_write_date.sh  ./postproc_images                       # Dans laquelle on incruste la date et l'heure
 
 # On génère finalement la vidéo
 ./scripts/sun_create_video.sh ./postproc_images ./video "${DD}_${MM}_${YYYY}"

@@ -10,6 +10,6 @@ sudo apt install lynx gawk
 sudo apt-get install mplayer vlc mpv libopenjp2-tools
 
 # For basemap,
-sudo apt install libgeos-3.6.2 libgeos-dev
+sudo apt install -y libgeos-3.6.2 libgeos-dev
 sudo python -m pip install https://github.com/matplotlib/basemap/archive/master.zip
 
