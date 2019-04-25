@@ -15,7 +15,7 @@ output_dir=$1
 
 while read line
 do
-    
+
     status=`echo $line | cut -d" " -f1`
     fullpath=`echo $line | cut -d" " -f2`
 
@@ -30,7 +30,7 @@ do
     if [ "$status" = "NEW" ]
     then
 	echoerr "[convert_img] Dealing with $fullpath"
-	j2k_to_image -i $fullpath  -o $decoded_fullpath > /dev/null
+	opj_decompress -i $fullpath  -o $decoded_fullpath > /dev/null
 	convert $decoded_fullpath -resize 10% ./scripts/soleil_gradient.jpg -clut $output_fullpath > /dev/null
 	if [ $? != 0 ]
 	then
