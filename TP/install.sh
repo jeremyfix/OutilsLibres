@@ -7,7 +7,7 @@ sudo apt install lynx gawk
 # In xenial, I did not find the way to install the JP2
 # delegate Therefore, I use openjpeg-tools with opj_decompress
 
-sudo apt-get install mplayer vlc mpv libopenjp2-tools
+sudo apt-get install mplayer vlc mpv libopenjp2-tools -y
 
 # For basemap,
 sudo apt install -y libgeos-3.6.2 libgeos-dev
