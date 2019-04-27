@@ -69,7 +69,7 @@ La figure \ref{fig:soleil_overview} donne une vision d'ensemble du programme que
       \& \node[command] {wget};\\
 
      \& \node[datastore] (convert) {convert\_img.sh}; 
-      \& \node[command] {j2k\_to \_image, convert, rm};\\
+      \& \node[command] {opj\_decompress, convert, rm};\\
 
      \& \node[datastore] (date) {ecrit\_date.sh}; 
       \& \node[command] {sed, convert};\\
@@ -307,11 +307,11 @@ bash:\$ ./all.sh 31 08 2012 211
 
 \subsection{Traitement des images}
 
-Nous avons récupéré une collection d'images au format JPEG2000 ``.jp2''. On souhaite 1) décompresser l'image noir et blanc du fichier jp2, 2) la redimensionner et y incruster la date/heure de la mesure et éventuellement lui appliquer un gradient de couleur (on en parle à la fin du sujet, en bonus). Pour cela, on va écrire un script Bash qui va essentiellement utiliser les outils j2k\_to\_image et \convert sur toutes les images dont le chemin est transmis sur l'entrée standard, ainsi que quelques outils de réécriture pour transformer le nom du fichier d'image qui contient l'heure et la date de la mesure.\\
+Nous avons récupéré une collection d'images au format JPEG2000 ``.jp2''. On souhaite 1) décompresser l'image noir et blanc du fichier jp2, 2) la redimensionner et y incruster la date/heure de la mesure et éventuellement lui appliquer un gradient de couleur (on en parle à la fin du sujet, en bonus). Pour cela, on va écrire un script Bash qui va essentiellement utiliser les outils opj\_decompress et \convert sur toutes les images dont le chemin est transmis sur l'entrée standard, ainsi que quelques outils de réécriture pour transformer le nom du fichier d'image qui contient l'heure et la date de la mesure.\\
 
 Commençons par prendre en main \convert. Comme vous pourrez le lire p.~\pageref{sec:imagemagick}, \convert est un des outils fournis par ImageMagick, GraphicsMagick, .. et qui permet de manipuler des images: convertir d'un format à un autre en appliquant éventuellement un nombre arbitraire de filtres, redimensionner les images, y introduire du texte, y appliquer des effets \footnote{l'effet polaroid est très sympa}, combiner plusieurs images, etc... \\
 
-Commencez par vous assurer que vous disposez d'une image au format ``.jp2'' dans le répertoire raw\_images. Appelons la "img.jp2". Utilisez j2k\_to\_image pour convertir l'image jp2 en pgm (cf. ``man j2k\_to\_image''). Utilisez \convert et l'option resize pour redimensionner l'image "img.jp2" à 10\% de sa taille d'origine et la convertir en l'image "img.jpg".  Vous savez alors décompresser l'image jp2 et la redimensionner, il ne nous reste plus qu'à appliquer cette opération sur toutes les images dont le chemin est fourni sur l'entrée standard.\\
+Commencez par vous assurer que vous disposez d'une image au format ``.jp2'' dans le répertoire raw\_images. Appelons la "img.jp2". Utilisez opj\_decompress pour convertir l'image jp2 en pgm (cf. ``man opj\_decompress''). Utilisez \convert et l'option resize pour redimensionner l'image "img.jp2" à 10\% de sa taille d'origine et la convertir en l'image "img.jpg".  Vous savez alors décompresser l'image jp2 et la redimensionner, il ne nous reste plus qu'à appliquer cette opération sur toutes les images dont le chemin est fourni sur l'entrée standard.\\
 
 Nous \textbf{allons} (mais lisez la suite avant de commencer) écrire un script \bash{scripts/convert\_img.sh} qui va~:
 \begin{itemize}
