@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Outilslibres by jeremyfix</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Outilslibres</h1>
+        <p class="header">Les outils du logiciel libre pour l&#39;ingénieur</p>
+	<p class="header">
+	Examples de réalisation :
+	<ul>
+	  <li><a href="#examples_sun">Eruption solaire</a></li>
+	  <li><a href="#examples_meteo">Météo</a></li>
+	</ul>
+	</p>
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/jeremyfix">jeremyfix</a></p>
+	<ul>
+	<li><a class="buttons github" href="https://github.com/jeremyfix/OutilsLibres">View On GitHub</a></li>
+	</ul>
+
+
+      </header>
+      <section>
+
+<h3><a id="presentation" class="anchor" href="#presentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Présentation (Forenotes)</h3>
+
+<p>
+This is a french repository on the topic of the use of open source softwares. These are elements provided to the students following the lectures "Les outils du logiciel libre pour l'ingénieur".
+</p>
+
+<p>
+Vous trouverez sur ce dépôt les éléments fournis aux étudiants suivants le cours "Les outils du logiciel libre pour l'ingénieur", qui se déroule essentiellement sous la forme de TP. On y propose de découvrir l'environnement linux ainsi que la construction à l'aide du pipe "|" de plusieurs chaînes de traitement sur les thèmes:
+<ul>
+<li> découvrir un peu Bash, essentiellement quelques bases pour réaliser les TPs</li>
+<li>réaliser une vidéo d'une éruption solaire à partir d'images disponibles sur le site de la Nasa</li>
+<li>automatiser la compilation d'un document LaTeX avec Makefile</li>
+<li> réaliser une vidéo des températures sur le territoire Américain à l'aide de données brutes archivées</li>
+</ul>
+</p>
+
+<h3>
+<a id="setup" class="anchor" href="#setup" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mise en place</h3>
+
+Ce cours est construit autour de TPs, pour les réaliser, il suffit de suivre les sujets de TP disponibles dans le <a href="https://github.com/jeremyfix/OutilsLibres/blob/master/Support/support.pdf?raw=true">support PDF</a>. Vous pouvez consulter les solutions sur le <a href="https://github.com/jeremyfix/OutilsLibres">dépôt git</a>.
+
+<h3>
+<a id="examples" class="anchor" href="#examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Examples</h3>
+
+<h4><a id="examples_sun" class="anchor" href="#examples_sun" aria-hidden="true"><span class="octicon octicon-link"></span></a>Eruption solaire</h4>
+<p>
+Une éruption solaire ayant eu lieu le 7 juin 2011, aux alentours de 6:30.<br/>
+<center>
+<video poster="https://github.com/jeremyfix/OutilsLibres/tree/gh-pages/examples/sun_poster.jpg" width="410" height="410" controls preload>
+  <source src="https://github.com/jeremyfix/OutilsLibres/blob/gh-pages/examples/07_06_2011.mp4?raw=true"></source>
+  <source src="https://github.com/jeremyfix/OutilsLibres/blob/gh-pages/examples/07_06_2011.ogv?raw=true"></source>
+  <source src="https://github.com/jeremyfix/OutilsLibres/blob/gh-pages/examples/07_06_2011.webm?raw=true"></source>
+</video>
+</center>
+
+Les scripts utilisés pour générer cette vidéo sont disponibles sur le dépôt github:<br/>
+<pre><code>$ git clone https://github.com/jeremyfix/OutilsLibres.git
+$ cd OutilsLibres/TP/Soleil
+$ export PATH=$PATH:./scripts
+$ ./all.sh 07 06 2011 304
+</code></pre>
+Vous pouvez avoir besoin d'installer quelques paquets pour pouvoir réaliser ce TP. Sous Fedora, il faudra penser à installer les dépôts RPMFusion (cf. <a href="http://rpmfusion.org/Configuration">page de rpmfusion</a>) et exécuter :
+<pre><code>su -c 'yum install ffmpeg ImageMagick mplayer lynx emacs'
+</code></pre>
+</p>
+
+
+<h4><a id="examples_meteo" class="anchor" href="#examples_sun" aria-hidden="true"><span class="octicon octicon-link"></span></a>Températures sur le territoire Américain</h4>
+<p>
+Une vidéo de l'évolution des températures sur le territoire Américain en 2007.<br/>
+<center>
+<video poster="https://github.com/jeremyfix/OutilsLibres/tree/gh-pages/examples/meteo_poster.jpg" width="640" height="300" controls preload>
+  <source src="https://github.com/jeremyfix/OutilsLibres/blob/gh-pages/examples/meteo_2007.mp4?raw=true"></source>
+  <source src="https://github.com/jeremyfix/OutilsLibres/blob/gh-pages/examples/meteo_2007.webm?raw=true"></source>
+</video>
+</center>
+
+Les scripts utilisés pour générer cette vidéo sont disponibles sur le dépôt github:<br/>
+<pre><code>$ git clone https://github.com/jeremyfix/OutilsLibres.git
+$ cd OutilsLibres/TP/Meteo
+$ export PATH=$PATH:./scripts
+$ ./all.sh
+</code></pre>
+Pour ce deuxième sujet, il faut installer quelques paquets python :
+<pre><code>su -c 'yum install python-matplotlib scipy python-basemap'
+</code></pre>
+</p>
+
+
+
+
+
+
+<h3>
+<a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+
+<p>Originally created by Jérémy Fix (<a href="https://github.com/jeremyfix" class="user-mention">@jeremyfix</a>).</p>
+
+      </section>
+
+
+      <footer>
+        <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
+  </body>
+</html>
