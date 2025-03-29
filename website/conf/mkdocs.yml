@@ -1,7 +1,7 @@
 site_name: Les outils du logiciel libre pour l'ingénieur
 docs_dir: ../md
-repo_url: https://github.com/jeremyfix/architecture
-site_url: https://jeremyfix.github.io/Architecture/
+repo_url: https://github.com/jeremyfix/OutilsLibres
+site_url: https://jeremyfix.github.io/OutilsLibres
 theme: 
   name: material
   language: fr
@@ -43,7 +43,7 @@ extra_javascript:
 extra_css:
   - css/extra.css
 
-site_url: https://jeremyfix.github.io/Architecture/
+site_url: https://jeremyfix.github.io/OutilsLibres
 
 plugins:
     - mkdocs-video
