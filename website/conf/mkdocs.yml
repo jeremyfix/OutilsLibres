@@ -46,8 +46,34 @@ plugins:
     - mkdocs-video
     - search
     - glightbox
-    - awesome-nav 
 
 copyright: >
   Copyright &copy; 2025 - Jérémy Fix –
+
+
+nav:
+  - Index: index.md
+  - TP:
+    - tps/bash.md
+    - tps/makefile.md
+    - eruption.md
+    - meteo.md
+  - Familiarisation avec le système Unix: familiarisation.md
+  - Outils:
+    - gnu.md
+    - code.md
+    - correction.md
+    - autotask.md
+    - images.md
+    - rapport.md
+    - vectoriel.md
+    - capture.md
+    - video.md
+    - pdf.md
+    - recherche.md
+    - filtrage.md
+    - compare.md
+    - archive.md
+    - interface.md
+
 
