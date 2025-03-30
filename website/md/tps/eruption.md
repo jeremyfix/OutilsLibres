@@ -6,7 +6,7 @@
 
 
 <center>
-![L'observation du soleil dans différentes longueurs d'ondes offrent différentes perspectives](assets/solar_wavelength2.jpg){width=50%}
+![L'observation du soleil dans différentes longueurs d'ondes offrent différentes perspectives](../assets/solar_wavelength2.jpg){width=50%}
 </center>
 
 ## Introduction
@@ -52,7 +52,7 @@ Je vous propose de créer quelques répertoires pour structurer votre projet. Po
 
 La figure ci-dessous donne une vision d'ensemble du programme que nous allons écrire.
 
-![Vue d'ensemble du pipeline de traitement des données](assets/soleil_schema.png)
+![Vue d'ensemble du pipeline de traitement des données](../assets/soleil_schema.png)
 
 ## Récupération des données d'une journée
 
@@ -126,26 +126,31 @@ Le contenu affiché par le script précédent contient beaucoup d'informations. 
 
 > si la ligne est filtrée par le patron *pattern* alors on réalise l'action *action*"
 
-Par ailleurs, \awk divise la ligne selon un séparateur (modifiable par l'option '-FS ``sep'''), qui est l'espace ' ' par défaut.\\
+Par ailleurs, `awk` divise la ligne selon un séparateur (modifiable par l'option `-FS sep`), qui est l'espace par défaut.
 
-Prenons un exemple concret. Exécutez votre script get\_index.sh et redirigez la sortie standard dans un fichier~:
-\begin{exempleResultat}
-bash:\$ ./scripts/get\_index.sh 31 08 2012 211 > 31\_08\_2012\_211
-bash:\$ less 31\_08\_2012\_211
-\end{exempleResultat}
+Prenons un exemple concret. Exécutez votre script `get_index.sh` et redirigez la sortie standard dans un fichier :
+
+
+```.bash
+bash:$ ./scripts/get_index.sh 31 08 2012 211 > 31_08_2012_211
+bash:$ less 31_08_2012_211
+```
  
-On y retrouve bien la liste des liens vers les images du \datesoleil. On va maintenant lire le fichier avec \cat et le faire passer par \awk.
-\begin{exempleResultat}
-bash:\$ cat 31\_08\_2012\_211 | awk '\{ print \$0 \}'
-bash:\$ cat 31\_08\_2012\_211 | awk '\{ print \$1 \}'
-bash:\$ cat 31\_08\_2012\_211 | awk '\{ print \$2 \}'
-\end{exempleResultat}
+On y retrouve bien la liste des liens vers les images. On va maintenant lire le fichier avec `cat` et le faire passer par `awk`.
 
-Si vous voulez voir plus en détails la sortie de awk, n'hésitez pas à rediriger sa sortie dans less en ajoutant '| less'. Les \emph{pattern} et \emph{action} de programme \awk peuvent prendre plusieurs formes (voir \url{http://www.gnu.org/software/gawk/manual/gawk.html#Patterns-and-Actions}), on ne va en voir ici que certaines d'entre elles.  Dans l'exemple ci-dessus, nous n'avons pas précisé de \emph{pattern}, toutes les lignes sont ainsi retenues et vous avez dû constaté que la première commande affiche toute la ligne, la deuxième seulement le numéro du lien et la dernière l'adresse. Quand \awk parcours une ligne, il crée plusieurs variables utilisables dans les \emph{pattern} et \emph{action}, en particulier les variables \$0, \$1, ... \$NF qui permettent d'accéder aux champs extraits par \awk (\url{http://www.gnu.org/software/gawk/manual/gawk.html#Fields}). \$0 est une variable particulière qui contient toute la ligne lue par \awk. Les champs sont accessibles par les variables \$1, \$2, ... ; Il y a également d'autres variables, comme NF égal au nombre de champs dans la ligne, de telle sorte que \$NF sera toujours le dernier champ extrait. La variable NR contient le numéro de ligne lu, ... \\
+```bash
+bash:$ cat 31_08_2012_211 | awk '{ print $0 }'
+bash:$ cat 31_08_2012_211 | awk '{ print $1 }'
+bash:$ cat 31_08_2012_211 | awk '{ print $2 }'
+```
 
-A titre d'exemple, on peut facilement décoder la lettre envoyée par George Sand à Alfred de Musset ci-dessous~:
-\begin{center}
-\begin{verbatim}
+Si vous voulez voir plus en détails la sortie de awk, n'hésitez pas à rediriger sa sortie dans less en ajoutant `| less`. 
+
+Les *pattern* et *action* du programme `awk` peuvent prendre plusieurs formes (voir [http://www.gnu.org/software/gawk/manual/gawk.html#Patterns-and-Actions](http://www.gnu.org/software/gawk/manual/gawk.html#Patterns-and-Actions)), on ne va en voir ici que certaines d'entre elles. Dans l'exemple ci-dessus, nous n'avons pas précisé de *pattern*, toutes les lignes sont ainsi retenues et vous avez dû constater que la première commande affiche toute la ligne, la deuxième seulement le numéro du lien et la dernière l'adresse. Quand `awk` parcours une ligne, il crée plusieurs variables utilisables dans les *pattern* et *action*, en particulier les variables $0, $1, ... $NF qui permettent d'accéder aux champs extraits par `awk` ([http://www.gnu.org/software/gawk/manual/gawk.html#Fields](http://www.gnu.org/software/gawk/manual/gawk.html#Fields}). $0 est une variable particulière qui contient toute la ligne lue par `awk`. Les champs sont accessibles par les variables $1, $2, ... ; Il y a également d'autres variables, comme NF égal au nombre de champs dans la ligne, de telle sorte que $NF sera toujours le dernier champ extrait. La variable NR contient le numéro de ligne lu, ... \\
+
+A titre d'exemple, on peut facilement décoder la lettre envoyée par George Sand à Alfred de Musset ci-dessous:
+
+```
 Cher ami,
 Je suis toute émue de vous dire que j'ai
 bien compris l'autre jour que vous aviez
@@ -173,11 +178,18 @@ mettre entièrement.
 Votre poupée 
 \end{verbatim}
 \end{center}
+```
 
-en utilisant la commande awk : \bash{awk 'NR \% 2 == 1 \{ print \$0 \}'} qui permet d'afficher toutes les lignes d'indice impair. La réponse de Musset ci-dessous~:
+en utilisant la commande awk : 
 
-\begin{center}
-\begin{verbatim}
+
+```bash
+awk 'NR % 2 == 1 { print $0 }'
+```
+
+qui permet d'afficher toutes les lignes d'indice impair. La réponse de Musset ci-dessous:
+
+```
 Quand je mets à vos pieds un éternel hommage,
 Voulez-vous qu'un instant je change de visage ?
 Vous avez capturé les sentiments d'un coeur
@@ -186,61 +198,93 @@ Je vous chéris, amour, et ma plume en délire
 Couche sur le papier ce que je n'ose dire.
 Avec soin de mes vers lisez les premiers mots,
 Vous saurez quel remède apporter à mes maux. 
-\end{verbatim}
-\end{center}
+```
 
-se décrypte facilement en utilisant awk. Le programme decode\_musset.awk ci-dessous permet en effet de le décrypter \bash{awk -f decode\_musset.awk musset\_sand.txt}. Dans le programme AWK, ORS signifie ``Output Record Separator'' c'est à dire le caractère utilisé entre chaque résultat filtré.
+se décrypte facilement en utilisant awk. Le programme `decode_musset.awk` ci-dessous permet en effet de le décrypter :
 
-\begin{verbatim}
+```bash
+awk -f decode_musset.awk musset_sand.txt
+```
+
+Dans le programme AWK, ORS signifie **Output Record Separator** c'est à dire le caractère utilisé entre chaque résultat filtré.
+
+**decode_musset.awk**
+```bash
 BEGIN { ORS = " " } 
 { print $1 }
 END { print "? \n" }
-\end{verbatim}
 
-Le premier exemple utilise une expression arithmétique (\bash{NR \% 2 == 1}) comme \emph{pattern}. On peut également utiliser des expressions régulières. Par exemple, pour vérifier si une ligne contient une URL vers une image au format jp2, on peut utiliser la commande awk~: \bash{awk '/http:\textbackslash{}/\textbackslash{}/.*\textbackslash{}.jp2/ \{ print \$2 \}'}. Cette commande un peu étrange recherche, dans la ligne courante, une chaîne de caractère de la forme http:// (\bash{http:\textbackslash{}/\textbackslash{}/}), suivi d'un nombre arbitraire de caractères (\bash{.*}), suivi de .jp2 (\bash{\textbackslash{}.jp2}). Si cette expression régulière est vérifiée, alors le deuxième champs \$2 est affiché. \textbf{Ecrivez un script} bash \bash{scripts/extract\_url.sh} qui, étant donné la liste des références obtenues avec Lynx, produise un flux dans la sortie standard des URL des images.\\
+```
 
-\textbf{Testez le script} que vous venez d'écrire en lui donnant en entrée un contenu récupéré par Lynx. Je vous propose d'utiliser le fichier 2012\_08\_31\_211 que avez créé précédemment. Pour lire ce fichier et le rediriger vers l'entrée standard, nous utilisons la commande \bash{cat}. Vous pouvez donc vérifier le fonctionnement de votre script par la commande ci-dessous~:
-\begin{center}
-\bash{cat 31\_08\_2012\_211 | ./scripts/extract\_url.sh}
-\end{center}
-Cela devrait vous afficher les URLs de toutes les images. Pour n'en afficher qu'une partie, par exemple les 10 premières ou 10 dernières, vous pouvez utiliser les commandes \bash{head} et \bash{tail}~:
-\begin{center}
-\bash{cat 31\_08\_2012\_211 | ./scripts/extract\_url.sh | head -10}
-\end{center}
-Ce qui devrait produire~:
-\begin{exempleResultat}
-http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_00_11_63__SDO_AIA_AIA_211.jp2
-http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_00_47_62__SDO_AIA_AIA_211.jp2
-http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_01_23_62__SDO_AIA_AIA_211.jp2
-http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_01_59_62__SDO_AIA_AIA_211.jp2
-http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_02_35_62__SDO_AIA_AIA_211.jp2
-http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_03_11_62__SDO_AIA_AIA_211.jp2
-http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_03_47_62__SDO_AIA_AIA_211.jp2
-http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_04_23_63__SDO_AIA_AIA_211.jp2
-http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_04_59_62__SDO_AIA_AIA_211.jp2
-http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_05_35_62__SDO_AIA_AIA_211.jp2
-\end{exempleResultat}
+Le premier exemple utilise une expression arithmétique `NR % 2 == 1` comme *pattern*. On peut également utiliser des expressions régulières. Par exemple, pour vérifier si une ligne contient une URL vers une image au format jp2, on peut utiliser la commande awk: 
 
-\begin{center}
-\bash{cat 31\_08\_2012\_211 | ./scripts/extract\_url.sh | tail -10}
-\end{center}
-ce qui devrait produire~:
-\begin{exempleResultat}
-http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__23_54_11_62__SDO_AIA_AIA_211.jp2
-http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__23_54_47_62__SDO_AIA_AIA_211.jp2
-http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__23_55_23_62__SDO_AIA_AIA_211.jp2
-http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__23_55_59_62__SDO_AIA_AIA_211.jp2
-http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__23_56_35_63__SDO_AIA_AIA_211.jp2
-http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__23_57_11_62__SDO_AIA_AIA_211.jp2
-http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__23_57_47_62__SDO_AIA_AIA_211.jp2
-http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__23_58_23_62__SDO_AIA_AIA_211.jp2
-http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__23_58_59_62__SDO_AIA_AIA_211.jp2
-http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__23_59_35_62__SDO_AIA_AIA_211.jp2
-\end{exempleResultat}
+```bash
+awk '/http:\/\\/.*\.jp2/ { print $2 }
+```
 
-Si vous voulez savoir combien d'images sont ainsi disponibles, on peut utiliser un compteur, incrémenté chaque fois que l'expression régulière est vérifiée~:
-\begin{center}
-\bash{awk \textquotesingle BEGIN \{ sum = 0 \} /http:\textbackslash{}/\textbackslash{}/.*\textbackslash{}.jp2/ \{ sum = sum + 1 \} END \{ print sum \}\textquotesingle}
-\end{center}
-Sur le fichier de dump utilisé précédemment, cela nous donne 2426 images.
+
+Cette commande un peu étrange recherche, dans la ligne courante, une chaîne de caractère de la forme http:// (`http:\/\/`), suivi d'un nombre arbitraire de caractères (`.*`), suivi de .jp2 (`\.jp2`). Si cette expression régulière est vérifiée, alors le deuxième champs $2 est affiché. 
+
+!!! question
+
+	Ecrivez un script bash `scripts/extract_url.sh` qui, étant donné la liste des références obtenues avec Lynx, produise un flux dans la sortie standard des URL des images.
+
+!!! question
+	
+	Testez le script que vous venez d'écrire en lui donnant en entrée un contenu récupéré par Lynx. Je vous propose d'utiliser le fichier 2012_08_31_211 que avez créé précédemment. Pour lire ce fichier et le rediriger vers l'entrée standard, nous utilisons la commande `cat`. Vous pouvez donc vérifier le fonctionnement de votre script par la commande ci-dessous~:
+	
+	```bash
+	cat 31_08_2012_211 | ./scripts/extract_url.sh
+	```
+
+
+Cela devrait vous afficher les URLs de toutes les images. 
+
+!!! note
+
+	Pour n'en afficher qu'une partie, par exemple les 10 premières ou 10 dernières, vous pouvez utiliser les commandes `head` et `tail`:
+	```bash
+	cat 31_08_2012_211 | ./scripts/extract_url.sh | head -10
+	```
+
+	Ce qui devrait produire:
+	```
+	http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_00_11_63__SDO_AIA_AIA_211.jp2
+	http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_00_47_62__SDO_AIA_AIA_211.jp2
+	http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_01_23_62__SDO_AIA_AIA_211.jp2
+	http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_01_59_62__SDO_AIA_AIA_211.jp2
+	http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_02_35_62__SDO_AIA_AIA_211.jp2
+	http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_03_11_62__SDO_AIA_AIA_211.jp2
+	http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_03_47_62__SDO_AIA_AIA_211.jp2
+	http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_04_23_63__SDO_AIA_AIA_211.jp2
+	http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_04_59_62__SDO_AIA_AIA_211.jp2
+	http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_05_35_62__SDO_AIA_AIA_211.jp2
+	```
+
+	```bash
+	cat 31_08_2012_211 | ./scripts/extract_url.sh | tail -10
+	```
+
+	ce qui devrait produire:
+
+	```
+	http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__23_54_11_62__SDO_AIA_AIA_211.jp2
+	http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__23_54_47_62__SDO_AIA_AIA_211.jp2
+	http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__23_55_23_62__SDO_AIA_AIA_211.jp2
+	http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__23_55_59_62__SDO_AIA_AIA_211.jp2
+	http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__23_56_35_63__SDO_AIA_AIA_211.jp2
+	http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__23_57_11_62__SDO_AIA_AIA_211.jp2
+	http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__23_57_47_62__SDO_AIA_AIA_211.jp2
+	http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__23_58_23_62__SDO_AIA_AIA_211.jp2
+	http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__23_58_59_62__SDO_AIA_AIA_211.jp2
+	http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__23_59_35_62__SDO_AIA_AIA_211.jp2
+	```
+
+Si vous voulez savoir combien d'images sont ainsi disponibles, on peut utiliser un compteur, incrémenté chaque fois que l'expression régulière est vérifiée:
+
+```bash
+awk 'BEGIN { sum = 0 } /http:\/\/.*\.jp2/ { sum = sum + 1 } END { print sum }'
+```
+
+Sur le fichier de dump utilisé précédemment, cela nous donne $2426$ images.
 
