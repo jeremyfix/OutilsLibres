@@ -56,24 +56,25 @@ nav:
   - TP:
     - tps/bash.md
     - tps/makefile.md
-    - eruption.md
-    - meteo.md
-  - Familiarisation avec le système Unix: familiarisation.md
+    - tps/eruption.md
+    - tps/meteo.md
+  - Familiarisation avec le système Unix: outils/familiarisation.md
   - Outils:
-    - gnu.md
-    - code.md
-    - correction.md
-    - autotask.md
-    - images.md
-    - rapport.md
-    - vectoriel.md
-    - capture.md
-    - video.md
-    - pdf.md
-    - recherche.md
-    - filtrage.md
-    - compare.md
-    - archive.md
-    - interface.md
+    - outils/gnu.md
+    - outils/code.md
+    - outils/correction.md
+    - outils/autotask.md
+    - outils/images.md
+    - outils/rapport.md
+    - outils/vectoriel.md
+    - outils/capture.md
+    - outils/video.md
+    - outils/pdf.md
+    - outils/recherche.md
+    - outils/filtrage.md
+    - outils/compare.md
+    - outils/archive.md
+    - outils/interface.md
+    - outils/web.md
 
 
