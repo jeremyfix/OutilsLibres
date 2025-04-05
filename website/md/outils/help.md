@@ -4,8 +4,9 @@ Pour obtenir de l'aide sur une commande, vous pouvez bien sûr utiliser un moteu
 de recherche, explorer des forums comme [https://stackoverflow.com](https://stackoverflow.com) mais il existe également quelques commandes :
 
 - `man` vous donne accès au manuel sur une commande, 
-- `info` a vocation à succéder à `man` et est une documentation plus complète du
-  projet GNU
+- `info` a vocation à succéder à `man` et est [une documentation plus complète du
+  projet GNU](https://www.gnu.org/software/texinfo/). Une petite formation
+  rapide aux commandes utiles pour naviguer dans ces pages est disponible sur [https://zwischenzugs.com/2019/09/04/the-lazy-persons-guide-to-the-info-command/](https://zwischenzugs.com/2019/09/04/the-lazy-persons-guide-to-the-info-command/)
 - `tldr` (Too Long Don't Read) documente une commande en montrant comment l'utiliser
 
 Par exemple:
