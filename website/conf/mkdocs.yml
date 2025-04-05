@@ -60,7 +60,9 @@ nav:
     - tps/meteo.md
   - Familiarisation avec le système Unix: outils/familiarisation.md
   - Outils:
+    - outils/help.md
     - outils/gnu.md
+    - outils/remote.md
     - outils/code.md
     - outils/correction.md
     - outils/autotask.md
