@@ -1,5 +1,7 @@
 # OutilsLibres
 
+Outils du logiciel libre pour l'ingénieur © 2025 by Jeremy Fix is licensed under CC BY-SA 4.0.
+
 Web page (in french) : http://jeremyfix.github.io/OutilsLibres/
 
 Page du projet : http://jeremyfix.github.io/OutilsLibres/
