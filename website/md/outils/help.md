@@ -1,4 +1,4 @@
-# Obtenir de l'aide sur les outils
+# Obtenir de l'aide sur les outils (stackoverflow, nixcraft, man, info, tldr)
 
 Pour obtenir de l'aide sur une commande, vous pouvez bien sûr utiliser un moteur
 de recherche, explorer des forums comme [https://stackoverflow.com](https://stackoverflow.com), explorer des sites commes celui de [nixcraft](https://www.cyberciti.biz/faq/category/linux/), mais il existe également quelques commandes :
