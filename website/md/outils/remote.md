@@ -95,7 +95,7 @@ Voir aussi [How to copy and transfer files remotely on Linux using scp and rsync
 
 ## Monter un volume distant (mount, sshfs)
 
-Si vous voulez interragir avec un répertoire sur une machine distant, il est
+Si vous voulez interagir avec un répertoire sur une machine distant, il est
 possible de le "monter" localement et de voir ce répertoire comme si c'était
 un espace disque sur votre machine locale.
 
@@ -132,7 +132,7 @@ Et certainement d'autres. Maintenant, également complété par des mécanismes 
 preuve complémentaire de son identité par un code partagé par exemple.
 
 En ce qui concerne l'authentification par clé ssh, le principe est de générer
-une paire de clé, dites "clé publique", "clé privée". Ces clés sont symmétriques
+une paire de clé, dites "clé publique", "clé privée". Ces clés sont symétriques
 et, en théorie, interchangeables. On les appelle "public", "privé" et elles
 possèdent des extensions et contenus différents pour éviter que l'utilisateur ne
 partage par erreur parfois la clé publique, parfois la clé privée; Si quelqu'un
@@ -168,9 +168,9 @@ $ ssh monlogin@monhote
 ```
 
 Lors de l'utilisation de votre clé SSH, un "agent ssh", un programme qui tourne
-en local sur votre machine, va dévérouiller votre clé en vous demandant son mot
+en local sur votre machine, va déverrouiller votre clé en vous demandant son mot
 de passe avant de l'utiliser; Pour les connexions ultérieures, cet agent ssh se
-souviendra des identités dévérouillées.
+souviendra des identités déverrouillées.
 
 En pratique, la commande `ssh-copy-id` va simplement copier le contenu de votre clé
 publique dans le fichier `~/.ssh/authorized_keys` du serveur. N'hésitez pas à
@@ -200,7 +200,7 @@ Voir aussi [How To Set up SSH Keys on a Linux / Unix System](https://www.cyberci
 Un multiplexeur de terminal vous permet de :
 
 - virtuellement disposer de plusieurs fenêtres de terminal dans une même fenêtre. Cela s'avère extrêmement pratique en
-particulier lorsque vous interragissez avec une machine à distance,
+particulier lorsque vous interagissez avec une machine à distance,
 - laisser un processus vivant, même si on est déconnecté d'une machine distante
 
 Il existe plusieurs programmes pour ça, comme `screen`, `tmux` ou encore
