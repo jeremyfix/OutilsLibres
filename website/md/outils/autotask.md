@@ -2,7 +2,7 @@
 
 L'utilitaire GNU Make permet de construire des cibles en utilisant des règles à
 partir de dépendances elles-mêmes construites à partir de règles dépendantes
-d'autres dépendances, etc... et tout ceci en s'assuranr de n'appeler que les
+d'autres dépendances, etc. et tout ceci en s'assurant de n'appeler que les
 règles strictement nécessaires pour finalement produire la cible qui vous
 intéresse. De manière générale[^1], GNU make appelle une recette si jamais la cible
 a une date de modification plus ancienne que ses dépendances.

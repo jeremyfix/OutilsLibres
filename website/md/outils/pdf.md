@@ -1,6 +1,6 @@
 # Manipulation de documents PDF (pdftk)
 
-Si vous devez fusionner ou séparer des PDFs, tourner des pages, etc.. 
+Si vous devez fusionner ou séparer des PDFs, tourner des pages, etc. 
 `pdftk` est l'outil qu'il vous faut :
 
 **Extraire les $3$ premières pages d'un pdf**

@@ -39,7 +39,7 @@ Host raspi
 Il vous permet de lancer la commande `ssh raspi` qui correspond à `ssh
 monlogin@82.99.234.239 -p 2222`.
 
-Parfois, on a besoin de passer par une machine rebond (e.g. firewall) avant
+De temps en temps, on a besoin de passer par une machine rebond (e.g. firewall) avant
 d'arriver sur la machine cible. On peut facilement le définir en ligne de
 commande bien sûr mais c'est plus confortable de le définir dans son
 `~/.ssh/config`. Par exemple si on veut atteindre `host1` en rebondissant sur la
@@ -99,9 +99,9 @@ Si vous voulez interagir avec un répertoire sur une machine distant, il est
 possible de le "monter" localement et de voir ce répertoire comme si c'était
 un espace disque sur votre machine locale.
 
-De manière générale, il existe plusieurs manière de monter des volumes, qui
+De manière générale, il existe plusieurs manières de monter des volumes, qui
 dépendent des protocoles d'échange avec le serveur qui contient les données. La
-commande `mount` par exemple, gère les protocoles nfs, cifs, etc..
+commande `mount` par exemple, gère les protocoles nfs, cifs, etc.
 
 ```
 $ mkdir /point/de/montage/local
@@ -135,7 +135,7 @@ En ce qui concerne l'authentification par clé ssh, le principe est de générer
 une paire de clé, dites "clé publique", "clé privée". Ces clés sont symétriques
 et, en théorie, interchangeables. On les appelle "public", "privé" et elles
 possèdent des extensions et contenus différents pour éviter que l'utilisateur ne
-partage par erreur parfois la clé publique, parfois la clé privée; Si quelqu'un
+partage par erreur parfois la clé publique, parfois la clé privée ; Si quelqu'un
 possède les deux morceaux de la clé (plus éventuellement un mot de passe), il
 peut se faire passer pour vous. 
 
@@ -146,13 +146,13 @@ $ ssh-keygen
 ```
 
 Plusieurs options peuvent être changées comme le type de clé, la longueur de la
-clé, etc..  Cette commande va produire $2$ fichiers, l'un pour la clé publique,
+clé, etc.  Cette commande va produire $2$ fichiers, l'un pour la clé publique,
 l'autre pour la clé privée. Pour une clé de type RSA, ces fichiers seront
 `~/.ssh/id_rsa` pour la clé privée et `~/.ssh/id_rsa.pub` pour la clé publique.
 
 La clé privée doit rester ... privée. La clé publique peut être partagée sans
-soucis avec tout les serveurs sur lesquels vous avez besoin de vous
-authentifier : serveur ssh distant, instances gitlab, github.com, etc...
+souci avec tous les serveurs sur lesquels vous avez besoin de vous
+authentifier : serveur ssh distant, instances gitlab, github.com, etc.
 
 Pour copier une clé sur un serveur distant, il existe la commande `ssh-copy-id`
 
@@ -169,19 +169,19 @@ $ ssh monlogin@monhote
 
 Lors de l'utilisation de votre clé SSH, un "agent ssh", un programme qui tourne
 en local sur votre machine, va déverrouiller votre clé en vous demandant son mot
-de passe avant de l'utiliser; Pour les connexions ultérieures, cet agent ssh se
+de passe avant de l'utiliser ; Pour les connexions ultérieures, cet agent ssh se
 souviendra des identités déverrouillées.
 
 En pratique, la commande `ssh-copy-id` va simplement copier le contenu de votre clé
 publique dans le fichier `~/.ssh/authorized_keys` du serveur. N'hésitez pas à
-aller inspecter le contenu de ce fichier pour voir les clé qui y sont déjà
+aller inspecter le contenu de ce fichier pour voir les clés qui y sont déjà
 renseignées :
 
 ```bash
 $ ssh monlogin@monhote "cat ~/.ssh/authorized_keys"
 ```
 
-Si vous utilisez des clé ssh pour vous connecter sur des machines distantes,
+Si vous utilisez des clés ssh pour vous connecter sur des machines distantes,
 éventuellement en utilisant des rebonds, il peut être pratique de partager
 "l'agent ssh". On peut alors l'indiquer dans son fichier `~/.ssh/config` avec
 l'option `ForwardAgent` :
@@ -201,7 +201,7 @@ Un multiplexeur de terminal vous permet de :
 
 - virtuellement disposer de plusieurs fenêtres de terminal dans une même fenêtre. Cela s'avère extrêmement pratique en
 particulier lorsque vous interagissez avec une machine à distance,
-- laisser un processus vivant, même si on est déconnecté d'une machine distante
+- laisser un processus vivant, même si on est déconnecté d'une machine distante.
 
 Il existe plusieurs programmes pour ça, comme `screen`, `tmux` ou encore
 `byobu`.
@@ -239,7 +239,7 @@ $ screen -r <nom-de-session>
 
 Une autre commande très utile est `byobu`. Vous pouvez détacher/ré-attacher des
 sessions comme pour screen. Comme pour screen, vous pouvez créer plusieurs
-fenêtres mais l'interface est peut être un peu plus ergonome. Vous créez et
+fenêtres, mais l'interface est peut-être un peu plus ergonome. Vous créez et
 naviguez parmi les onglets avec les touches <F2>, <F3>, <F4>.
 
 [![Byobu](../assets/byobu.png)](https://www.byobu.org/home)

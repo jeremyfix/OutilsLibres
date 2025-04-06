@@ -11,7 +11,7 @@
 
 ## Introduction
 
-Le but de ce TP est de construire une vidéo à partir de données collectées sur le soleil par le [Solar Dynamics Observatory](http://aia.lmsal.com/index.htm). On utilisera uniquement les images du soleil capturées à intervalle régulier. Les images sont disponibles à l'adresse [http://jsoc.stanford.edu/data/aia/images/](http://jsoc.stanford.edu/data/aia/images/). Elles sont classées par date de mesure, la structure du répertoire distant étant :
+Le but de ce TP est de construire une vidéo à partir de données collectées sur le soleil par le [Solar Dynamics Observatory](http://aia.lmsal.com/index.htm). On utilisera uniquement les images du soleil capturées à intervalles réguliers. Les images sont disponibles à l'adresse [http://jsoc.stanford.edu/data/aia/images/](http://jsoc.stanford.edu/data/aia/images/). Elles sont classées par date de mesure, la structure du répertoire distant étant :
 
 > http://jsoc.stanford.edu/data/aia/images/YYYY/MM/DD/$\lambda$/fichier.jp2
 
@@ -42,7 +42,7 @@ On va voir dans ce TP l'utilisation d'un certain nombre de programmes tels que `
 
 ## Structure du projet
 
-Je vous propose de créer quelques répertoires pour structurer votre projet. Pour les créer, forcez vous à utiliser les commandes `mkdir`, `ls`, etc.. depuis un terminal.
+Je vous propose de créer quelques répertoires pour structurer votre projet. Pour les créer, forcez-vous à utiliser les commandes `mkdir`, `ls`, etc. depuis un terminal.
 
 - scripts : contiendra la plupart des scripts que vous écrirez,
 - raw_images : contiendra de manière temporaire les images brutes au format .jp2,
@@ -65,9 +65,9 @@ Le but de cette partie est d'écrire un script Bash qui se charge de récupérer
 
 Il devra produire en sortie le flux des URLs des images de cette journée particulière à la longueur d'onde $\lambda$.
 
-Si vous allez sur le site [http://jsoc.stanford.edu/data/aia/images](http://jsoc.stanford.edu/data/aia/images), et regardez les images du 31 août 2012, vous constaterez qu'il y a énormément d'images, prises à des heures régulières mais dont on ne peut pas facilement prédire le nom de fichier. 
+Si vous allez sur le site [http://jsoc.stanford.edu/data/aia/images](http://jsoc.stanford.edu/data/aia/images), et regardez les images du 31 août 2012, vous constaterez qu'il y a énormément d'images, prises à des heures régulières, mais dont on ne peut pas facilement prédire le nom de fichier. 
 
-On va donc procéder différemment: on va lister l'ensemble des images disponibles dans le répertoire du 31 août 2012 à $211$Å. Pour cela, on va utiliser l'explorateur `lynx` (n'hésitez pas à appeler man lynx pour en savoir plus). `lynx` est un explorateur internet textuel, sans fenêtre graphique, qui s'affiche dans la console 😱.
+On va donc procéder différemment : on va lister l'ensemble des images disponibles dans le répertoire du 31 août 2012 à $211$Å. Pour cela, on va utiliser l'explorateur `lynx` (n'hésitez pas à appeler man lynx pour en savoir plus). `lynx` est un explorateur internet textuel, sans fenêtre graphique, qui s'affiche dans la console 😱.
 
 !!! question
 
@@ -80,7 +80,7 @@ Je suis d’accord avec vous, cette manière d’explorer internet n’est pas t
 lynx -dump -listonly http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/ | less
 ```
 
-Il apparaît le contenu de la page, converti en texte, dans lequel vous pouvez naviguer avec les flèches directionnelles. Le contenu affiché devrait ressembler à ça:
+Il apparaît le contenu de la page, converti en texte, dans lequel vous pouvez naviguer avec les flèches directionnelles. Le contenu affiché devrait ressembler à ça :
 
 ```
 References
@@ -103,7 +103,7 @@ References
   16. https://jsoc1.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_08_35_62__SDO_AIA_AIA_211.jp2
 ```
 
-Notez qu'on a redirigé la sortie standard de lynx dans l'entrée standard de `less`. `less` est un programme qui permet de parcourir du contenu texte (e.g. un fichier mais il peut également lire depuis l'entrée standard).
+Notez qu'on a redirigé la sortie standard de lynx dans l'entrée standard de `less`. `less` est un programme qui permet de parcourir du contenu texte (e.g. un fichier, mais il peut également lire depuis l'entrée standard).
 
 !!! question
 
@@ -115,7 +115,7 @@ Notez qu'on a redirigé la sortie standard de lynx dans l'entrée standard de `l
 
 ## Extraire les URLs des images
 
-Le contenu affiché par le script précédent contient beaucoup d'informations. On souhaite en extraire les URLs vers les images listées sur la page. Les URLs que nous cherchons à extraire ont un format très particulier; elles commencent par "http://"  et finissent par ".jp2". Pour filtrer les lignes qui ne contiennent que ce motif, on va utiliser `gawk` et ce qu'on appelle des expressions régulières.
+Le contenu affiché par le script précédent contient beaucoup d'informations. On souhaite en extraire les URLs vers les images listées sur la page. Les URLs que nous cherchons à extraire ont un format très particulier ; elles commencent par "http://"  et finissent par ".jp2". Pour filtrer les lignes qui ne contiennent que ce motif, on va utiliser `gawk` et ce qu'on appelle des expressions régulières.
 
 
 `awk` est un programme qui applique un programme sur un fichier (ou l'entrée standard) ligne par ligne. Un programme awk est de la forme 
@@ -124,7 +124,7 @@ Le contenu affiché par le script précédent contient beaucoup d'informations. 
 
 `awk` comprends ce mini-programme comme :
 
-> si la ligne est filtrée par le patron *pattern* alors on réalise l'action *action*"
+> si la ligne est filtrée par le patron *pattern* alors, on réalise l'action *action*"
 
 Par ailleurs, `awk` divise la ligne selon un séparateur (modifiable par l'option `-FS sep`), qui est l'espace par défaut.
 
@@ -146,9 +146,9 @@ bash:$ cat 31_08_2012_211 | awk '{ print $2 }'
 
 Si vous voulez voir plus en détails la sortie de awk, n'hésitez pas à rediriger sa sortie dans less en ajoutant `| less`. 
 
-Les *pattern* et *action* du programme `awk` peuvent prendre plusieurs formes (voir [http://www.gnu.org/software/gawk/manual/gawk.html#Patterns-and-Actions](http://www.gnu.org/software/gawk/manual/gawk.html#Patterns-and-Actions)), on ne va en voir ici que certaines d'entre elles. Dans l'exemple ci-dessus, nous n'avons pas précisé de *pattern*, toutes les lignes sont ainsi retenues et vous avez dû constater que la première commande affiche toute la ligne, la deuxième seulement le numéro du lien et la dernière l'adresse. Quand `awk` parcours une ligne, il crée plusieurs variables utilisables dans les *pattern* et *action*, en particulier les variables $0, $1, ... $NF qui permettent d'accéder aux champs extraits par `awk` ([http://www.gnu.org/software/gawk/manual/gawk.html#Fields](http://www.gnu.org/software/gawk/manual/gawk.html#Fields}). $0 est une variable particulière qui contient toute la ligne lue par `awk`. Les champs sont accessibles par les variables $1, $2, ... ; Il y a également d'autres variables, comme NF égal au nombre de champs dans la ligne, de telle sorte que $NF sera toujours le dernier champ extrait. La variable NR contient le numéro de ligne lu, ... \\
+Les *pattern* et *action* du programme `awk` peuvent prendre plusieurs formes (voir [http://www.gnu.org/software/gawk/manual/gawk.html#Patterns-and-Actions](http://www.gnu.org/software/gawk/manual/gawk.html#Patterns-and-Actions)), on ne va en voir ici que certaines d'entre elles. Dans l'exemple ci-dessus, nous n'avons pas précisé de *pattern*, toutes les lignes sont ainsi retenues et vous avez dû constater que la première commande affiche toute la ligne, la deuxième seulement le numéro du lien et la dernière l'adresse. Quand `awk` parcours une ligne, il crée plusieurs variables utilisables dans les *pattern* et *action*, en particulier les variables $0, $1, ... $NF qui permettent d'accéder aux champs extraits par `awk` ([http://www.gnu.org/software/gawk/manual/gawk.html#Fields](http://www.gnu.org/software/gawk/manual/gawk.html#Fields}). $0 est une variable particulière qui contient toute la ligne lue par `awk`. Les champs sont accessibles par les variables $1, $2, ... ; Il y a également d'autres variables, comme NF égal au nombre de champs dans la ligne, de telle sorte que $NF sera toujours le dernier champ extrait. La variable NR contient le numéro de ligne lu, etc.
 
-A titre d'exemple, on peut facilement décoder la lettre envoyée par George Sand à Alfred de Musset ci-dessous:
+À titre d'exemple, on peut facilement décoder la lettre envoyée par George Sand à Alfred de Musset ci-dessous :
 
 ```
 Cher ami,
@@ -187,7 +187,7 @@ en utilisant la commande awk :
 awk 'NR % 2 == 1 { print $0 }'
 ```
 
-qui permet d'afficher toutes les lignes d'indice impair. La réponse de Musset ci-dessous:
+qui permet d'afficher toutes les lignes d'indice impair. La réponse de Musset ci-dessous :
 
 ```
 Quand je mets à vos pieds un éternel hommage,
@@ -206,7 +206,7 @@ se décrypte facilement en utilisant awk. Le programme `decode_musset.awk` ci-de
 awk -f decode_musset.awk musset_sand.txt
 ```
 
-Dans le programme AWK, ORS signifie **Output Record Separator** c'est à dire le caractère utilisé entre chaque résultat filtré.
+Dans le programme AWK, ORS signifie **Output Record Separator** c'est-à-dire le caractère utilisé entre chaque résultat filtré.
 
 **decode_musset.awk**
 ```bash
@@ -216,14 +216,14 @@ END { print "? \n" }
 
 ```
 
-Le premier exemple utilise une expression arithmétique `NR % 2 == 1` comme *pattern*. On peut également utiliser des expressions régulières. Par exemple, pour vérifier si une ligne contient une URL vers une image au format jp2, on peut utiliser la commande awk: 
+Le premier exemple utilise une expression arithmétique `NR % 2 == 1` comme *pattern*. On peut aussi utiliser des expressions régulières. Par exemple, pour vérifier si une ligne contient une URL vers une image au format jp2, on peut utiliser la commande awk : 
 
 ```bash
 awk '/http:\/\\/.*\.jp2/ { print $2 }
 ```
 
 
-Cette commande un peu étrange recherche, dans la ligne courante, une chaîne de caractère de la forme http:// (`http:\/\/`), suivi d'un nombre arbitraire de caractères (`.*`), suivi de .jp2 (`\.jp2`). Si cette expression régulière est vérifiée, alors le deuxième champs $2 est affiché. 
+Cette commande un peu étrange recherche, dans la ligne courante, une chaîne de caractère de la forme http:// (`http:\/\/`), suivi d'un nombre arbitraire de caractères (`.*`), suivi de .jp2 (`\.jp2`). Si cette expression régulière est vérifiée, alors le deuxième champ $2 est affiché. 
 
 !!! question
 
@@ -280,7 +280,7 @@ Cela devrait vous afficher les URLs de toutes les images.
 	http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__23_59_35_62__SDO_AIA_AIA_211.jp2
 	```
 
-Si vous voulez savoir combien d'images sont ainsi disponibles, on peut utiliser un compteur, incrémenté chaque fois que l'expression régulière est vérifiée:
+Si vous voulez savoir combien d'images sont ainsi disponibles, on peut utiliser un compteur, incrémenté chaque fois que l'expression régulière est vérifiée :
 
 ```bash
 awk 'BEGIN { sum = 0 } /http:\/\/.*\.jp2/ { sum = sum + 1 } END { print sum }'

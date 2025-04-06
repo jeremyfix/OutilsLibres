@@ -26,7 +26,7 @@ droits particuliers. Par exemple :
 - un membre du groupe `docker` va pouvoir lancer des images docker
 - un membre du groupe `lpadmin` va pouvoir administrer le serveur d'impression
   CUPS, 
-- etc...
+- …
 
 Sur les machines de l'école, vous êtes en général membre d'un groupe regroupant
 l'ensemble des collègues de votre promotion. 
@@ -53,7 +53,7 @@ octal avec $3$ chiffres entre $0$ et $7$ pour chaque groupe d'utilisateurs. On
 parlera par exemple de permissions :
 
 - $777$ pour rwx pour les $3$ groupes d'utilisateurs
-- $755$ quand on veut $rwx$ pour le propriétaire mais supprimer $x$ pour tout
+- $755$ quand on veut $rwx$ pour le propriétaire, mais supprimer $x$ pour tous
   les autres
 - $600$ pour `rw` pour l'utilisateur, mais sans droit de lecture/modification
   pour les autres, ce qui est requis pour une clé ssh privée
@@ -94,8 +94,8 @@ dr-xr-xr-x   6 root root 0 avril  1 06:01 tty
 
 On voit ici plusieurs permissions, chaque fois pour l'utilisateur `root` et le
 groupe `root`. Si vous avez besoin de modifier les permissions, par exemple pour
-rendre un fichier (non-)modifiable, ou exécutable, vous utiliserez la commande
-`chmod`. Cette commande prends en entrée les nouvelles permissions en octal.
+rendre un fichier (non-)modifiable ou exécutable, vous utiliserez la commande
+`chmod`. Cette commande prend en entrée les nouvelles permissions en octal.
 
 ```
 info "File permissions"
@@ -134,7 +134,7 @@ home". On peut le localiser avec la variable d'environnement `$HOME` :
 echo $HOME
 ```
 
-Vous avez en général toute les permissions pour faire ce que vous voulez dans
+Vous avez en général toutes les permissions pour faire ce que vous voulez dans
 cet espace. On trouvera ensuite des ré
 
 !!! danger
@@ -143,7 +143,7 @@ cet espace. On trouvera ensuite des ré
 
 ## Installations logicielles
 
-Pour installer des logiciels, il existe plein de façon mais disons que la
+Pour installer des logiciels, il existe plein de façon, mais disons que la
 première à privilégier est de passer par le **gestionnaire de paquets** de votre
 distribution. En fonction des familles de distribution, ce ne sera pas le même
 gestionnaire :
@@ -155,7 +155,7 @@ gestionnaire :
 
 Il existe des serveurs officiels, centralisés, sécurisés, qui hébergent les
 logiciels. Bien sûr, tout un chacun peut également offrir un serveur de logiciel
-et à ce moment là, à vous de choisir de prendre ou non le risque d'ajouter ce
+et à ce moment-là, à vous de choisir de prendre ou non le risque d'ajouter ce
 dépôt logiciel. 
 
 

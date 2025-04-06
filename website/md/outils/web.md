@@ -18,7 +18,7 @@ Plusieurs possibilités s'offrent à vous, parmi les plus populaires en ce momen
 Les pages que vous êtes entrain de regarder sont générées avec Mkdocs :
 
 - les pages sont hébergées sur github sur le dépôt [https://github.com/jeremyfix/OutilsLibres](https://github.com/jeremyfix/OutilsLibres)
-- le site est composé du fichier de configure [mkdocs.yml](https://github.com/jeremyfix/OutilsLibres/blob/master/website/conf/mkdocs.yml) et le contenu du site comprends des fichiers markdown, par exemple [web.md](https://github.com/jeremyfix/OutilsLibres/blob/master/website/md/outils/web.md), d'images, de scripts javascripts, etc...
+- le site est composé du fichier de configure [mkdocs.yml](https://github.com/jeremyfix/OutilsLibres/blob/master/website/conf/mkdocs.yml) et le contenu du site comprend des fichiers markdown, par exemple [web.md](https://github.com/jeremyfix/OutilsLibres/blob/master/website/md/outils/web.md), d'images, de scripts javascripts, etc.
 - la construction du site statique et la mise en ligne est réalisée par les
   actions github définies dans le fichier [.github/workflows/mkdocs.yml](https://github.com/jeremyfix/OutilsLibres/blob/master/.github/workflows/mkdocs.yml)
 
@@ -27,9 +27,7 @@ l'intégration s'occupe de construire le site et de le mettre en ligne.
 
 ## Configuration
 
-Il est très facile de construire rapidement un site avec mkdocs. Regardez le
-[getting started](https://www.mkdocs.org/getting-started/). Une fois la mise en
-place réalisée, vous pouvez construire localement le site avec
+Il est très facile de construire rapidement un site avec mkdocs. Regardez le [getting started](https://www.mkdocs.org/getting-started/). Une fois la mise en place réalisée, vous pouvez construire localement le site avec
 
 ```bash
 $ mkdocs serve
@@ -38,13 +36,13 @@ $ mkdocs serve
 Si vous voulez ajouter des choses particulières, il y a un peu de configuration initiale à mettre en place que l'on retrouve dans
 le fichier [mkdocs.yml](https://github.com/jeremyfix/OutilsLibres/blob/master/website/conf/mkdocs.yml). En particulier :
 
-- repo_url et site_url permettent de faire apparaître l'icone et le lien vers le dépôt
+- repo_url et site_url permettent de faire apparaître l'icône et le lien vers le dépôt
   github en haut de page
 - theme permet de configurer le thème de vos pages. Ici, on a choisi [Material
   for MkDocs](https://squidfunk.github.io/mkdocs-material/reference/)
 - markdown_extensions liste les extensions utilisées, plusieurs étant issues de
   la documentation de Material for MkDocs pour ajouter la coloration syntaxique
-  du code, transformer les équations Mathématiques avec Mathjax, etc..
+  du code, transformer les équations Mathématiques avec Mathjax, etc.
 
 ```yaml
 site_name: Les outils du logiciel libre pour l'ingénieur

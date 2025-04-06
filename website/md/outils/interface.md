@@ -2,19 +2,19 @@
 
 On a parfois besoin d'agrémenter un script shell avec quelques interactions avec
 l'utilisateur, par exemple pour lui afficher une boîte de dialogue, lui poser
-des questions, etc... 
+des questions, etc. 
 
 Si vous voulez créer des interfaces utilisateur, vous avez plusieurs
-possibilités qui vont dépendre du language dans lequel vous codez :
+possibilités qui vont dépendre du langage dans lequel vous codez :
 
 - [zenity](https://help.gnome.org/users/zenity/stable/), [whiptail]() sont disponibles en python mais également en shell
   script !
 - [ncurse]() , [imgui]()
-- [gtk](), [wx](), [tk]() et [Qt]() sont également disponibles dans pleins de
+- [gtk](), [wx](), [tk]() et [Qt]() sont également disponibles dans plein de
   langages
 
 Ici, on ne va offrir qu'un aperçu concernant zenity/whiptail pour se focaliser
-exlusivement sur des outils permettant d'interagir avec l'utilisateur depuis
+exclusivement sur des outils permettant d'interagir avec l'utilisateur depuis
 un script shell (bash, zsh, ...).
 
 
@@ -22,7 +22,7 @@ un script shell (bash, zsh, ...).
 Zenity est un utilitaire en ligne de commande qui permet de créer des boites de dialogue. Ces boites de dialogue peuvent contenir des calendriers, sélecteur de fichier, listes,
 formulaires, messages, zones de texte, mot de passe, etc... Le principal intérêt de Zenity est qu'il est alors très facile de générer de petites interfaces graphiques, par exemple pour demander une information ou informer de l'avancement d'une tâche, sans avoir à passer par toute une moulinette de programme C++, Java, ou autre. Un exemple d'utilisation de Zenity est présenté dans la section sur les [outils de capture](capture.md) pour saisir un nom de fichier dans lequel sauvegarder une capture d'écran. 
 
-Ci-dessous, quelques exemples que vous trouverez sur le [site web de Zenity](https://help.gnome.org/users/zenity/stable/). Zenity produit deux sorties: un code de sortie stocké dans la variable `$?` dont la valeur est $0$ si tout va bien et $1, -1$ ou $5$ dans des cas d'erreur[^1]. Ce qui est intéressant c'est que la commande elle-même retourne un résultat, par exemple le texte saisi dans une boite de dialogue, le lien vers le fichier sélectionné dans un sélecteur de fichier, etc...\\
+Ci-dessous, quelques exemples que vous trouverez sur le [site web de Zenity](https://help.gnome.org/users/zenity/stable/). Zenity produit deux sorties : un code de sortie stocké dans la variable `$?` dont la valeur est $0$ si tout va bien et $1, -1$ ou $5$ dans des cas d'erreur[^1]. Ce qui est intéressant, c'est que la commande elle-même retourne un résultat, par exemple le texte saisi dans une boite de dialogue, le lien vers le fichier sélectionné dans un sélecteur de fichier, etc.\\
 
 **Pour afficher une simple zone de saisie:**
 
@@ -76,4 +76,4 @@ Ce dernier exemple est tiré de la page wikibooks sur whiptail sur laquelle vous
 trouverez plein d'autres exemples. Allez voir [https://en.wikibooks.org/wiki/Bash_Shell_Scripting/Whiptail](https://en.wikibooks.org/wiki/Bash_Shell_Scripting/Whiptail).
 
 [^1]: 
-	Regardez la page de Zenity pour la signification de ces codes d'erreur.  [https://help.gnome.org/users/zenity/stable/usage.html.en](https://help.gnome.org/users/zenity/stable/usage.html.en)
+	Regardez la page de Zenity pour la signification de ces codes d'erreur. [https://help.gnome.org/users/zenity/stable/usage.html.en](https://help.gnome.org/users/zenity/stable/usage.html.en)

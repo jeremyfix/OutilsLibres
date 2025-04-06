@@ -2,10 +2,10 @@
 
 Il existe un certain nombre de logiciels libres pour la correction orthographique et/ou grammaticale, notamment `ispell`, [aspell](https://github.com/GNUAspell/aspell), myspell, [hunspell](https://hunspell.github.io/), [LanguageTool](https://github.com/languagetool-org/languagetool), ... . 
 
-L'historique des différentes versions xxxspell n'est pas très clair. ispell semble être le plus ancien, sur lequel est basé myspell; aspell semble avoir été développé pour prendre le relais d'ispell. hunspell quand à lui est le correcteur orthographique qui semble prendre la main[^1]; Il est utilisé dans un grand nombre d'applications comme Firefox, Thunderbird, Chrome, Eclipse, ... 
+L'historique des différentes versions xxxspell n'est pas très clair. ispell semble être le plus ancien, sur lequel est basé myspell; aspell semble avoir été développé pour prendre le relais d'ispell. hunspell quant à lui est le correcteur orthographique qui semble prendre la main[^1]; il est utilisé dans un grand nombre d'applications comme Firefox, Thunderbird, Chrome, Eclipse…, 
 
-LanguageTool semble avoir été développé plus récemment et indépendemment. Contrairement
-aux xxx-spell, LanguageTool corrige les formes de style évitant ainsi, par exemple, l'utilisation de pléonasmes (au jour d'aujourd'hui), l'utilisation de deux virgules consécutives, etc. .
+LanguageTool semble avoir été développé plus récemment et indépendamment. Contrairement
+aux xxx-spell, LanguageTool corrige les formes de style évitant ainsi, par exemple, l'utilisation de pléonasmes (au jour d'aujourd'hui), l'utilisation de deux virgules consécutives, etc.
 
 Pour installer ces logiciels (on préférera aspell, hunspell ou LanguageTool) sous Fedora :
 
@@ -21,7 +21,7 @@ yum install hunspell hunspell-fr hunspell-en
 # Aller voir sur la page du projet
 ```
 
-Tout ces outils sont utilisables en ligne de commande (i.e. dans un terminal, depuis un Makefile, ...). Pour tester les possibilités des différents correcteurs, on partira du texte ci-dessous, les fautes étant indiquées en rouge~:
+Tous ces outils sont utilisables en ligne de commande (i.e. dans un terminal, depuis un Makefile, ...). Pour tester les possibilités des différents correcteurs, on partira du texte ci-dessous, les fautes étant indiquées en rouge :
 
 Maître Corbeau, sur un arbre {==perchai==},<br/>
 {==Tenais==} en son {==beck==} un fromage.<br/>
@@ -74,7 +74,7 @@ Pur corriger les fautes d'orthographes d'un fichier LaTeX, on utilisera:
 $ aspell check -lfr --mode=tex text.tex
 ```
 
-Ces deux commandes lancent aspell en mode intéractif, permettant de corriger les fautes à la volée (le fichier original est modifié). On peut aussi lister les fautes, sans les corriger. Sur le texte de Jean de la Fontaine, aspell retourne :
+Ces deux commandes lancent aspell en mode interactif, permettant de corriger les fautes à la volée (le fichier original est modifié). On peut aussi lister les fautes, sans les corriger. Sur le texte de Jean de la Fontaine, aspell retourne :
 
 ```bash
 $ cat original.txt | aspell -lfr list
@@ -89,7 +89,7 @@ hunspell fonctionne de manière similaire à aspell, les options étant spécifi
 $ hunspell --help
 ```
 
-Pour vérifier l'orthographe d'un texte en Français, on utilisera la commande :
+Pour vérifier l'orthographe d'un texte en français, on utilisera la commande :
 
 ```bash
 $ hunspell -d fr_FR text.txt
@@ -112,7 +112,7 @@ Apprené
 ## LanguageTool
 
 Il y a plusieurs façons d'utiliser language tool. Parfois, il est directement
-disponible dans votre outil, par exemple il existe une [extension pour
+disponible dans votre outil, par exemple, il existe une [extension pour
 LibreOffice](https://languagetool.org/insights/fr/poste/languagetool-et-libreoffice/). Vous pouvez également
 solliciter l'[API http](https://dev.languagetool.org/public-http-api) :
 
@@ -184,7 +184,7 @@ Time: 1551ms for 7 sentences (4.5 sentences/sec)
 
 ## Intégrer un correcteur dans son IDE emacs, vim, vscode
 
-aspell et hunspell peuvent être intégrés à [emacs](code.md) pour avoir une correction orthographique à la volée. On peut personnalier emacs en ajoutant des commandes Lisp au fichier `~/.emacs`. Pour indiquer qu'on souhaite utiliser aspell pour vérifier l'orthographe, on ajoutera la commande:
+aspell et hunspell peuvent être intégrés à [emacs](code.md) pour avoir une correction orthographique à la volée. On peut personnaliser emacs en ajoutant des commandes Lisp au fichier `~/.emacs`. Pour indiquer qu'on souhaite utiliser aspell pour vérifier l'orthographe, on ajoutera la commande:
 
 ```
 (setq-default ispell-program-name "aspell")
@@ -221,7 +221,7 @@ changer la langue avec F8. Ensuite, on passe d'une erreur à l'autre avec les
 touches "[s", on obtient des suggestions de modification avec "z=". On peut
 aussi intégrer LanguageTool en utilisant le plugin [ALE](https://github.com/dense-analysis/ale) ou [vim-LanguageTool](https://github.com/dpelle/vim-LanguageTool).
 
-Sous VSCode, il semble également exister des extensions, par exemple [LTex+](https://marketplace.visualstudio.com/items?itemName=ltex-plus.vscode-ltex-plus) pour utiliser LanguageTool.
+Sous VSCode, il semble aussi exister des extensions, par exemple [LTex+](https://marketplace.visualstudio.com/items?itemName=ltex-plus.vscode-ltex-plus) pour utiliser LanguageTool.
 
 
 [^1]:

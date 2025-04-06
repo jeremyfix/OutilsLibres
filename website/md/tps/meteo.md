@@ -1,1 +1,1 @@
-# TP : Evolution des températures aux états-unis à partir des données NOAA
+# TP : Évolution des températures aux États-Unis à partir des données NOAA
