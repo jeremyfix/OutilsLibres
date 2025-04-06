@@ -75,9 +75,5 @@ whiptail --title "Menu example" --menu "Choose an option" 25 78 16 \
 Ce dernier exemple est tiré de la page wikibooks sur whiptail sur laquelle vous
 trouverez plein d'autres exemples. Allez voir [https://en.wikibooks.org/wiki/Bash_Shell_Scripting/Whiptail](https://en.wikibooks.org/wiki/Bash_Shell_Scripting/Whiptail).
 
-Voir aussi :
-
-- [Bash Shell Scripting / Whiptail sur Wikibooks](https://en.wikibooks.org/wiki/Bash_Shell_Scripting/Whiptail)
-
 [^1]: 
 	Regardez la page de Zenity pour la signification de ces codes d'erreur.  [https://help.gnome.org/users/zenity/stable/usage.html.en](https://help.gnome.org/users/zenity/stable/usage.html.en)
