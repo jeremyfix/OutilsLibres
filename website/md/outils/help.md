@@ -1,7 +1,7 @@
 # Obtenir de l'aide sur les outils
 
 Pour obtenir de l'aide sur une commande, vous pouvez bien sûr utiliser un moteur
-de recherche, explorer des forums comme [https://stackoverflow.com](https://stackoverflow.com) mais il existe également quelques commandes :
+de recherche, explorer des forums comme [https://stackoverflow.com](https://stackoverflow.com), explorer des sites commes celui de [nixcraft](https://www.cyberciti.biz/faq/category/linux/), mais il existe également quelques commandes :
 
 - `man` vous donne accès au manuel sur une commande, 
 - `info` a vocation à succéder à `man` et est [une documentation plus complète du
