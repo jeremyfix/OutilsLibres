@@ -58,10 +58,11 @@ nav:
     - tps/makefile.md
     - tps/eruption.md
     - tps/meteo.md
-  - Familiarisation avec le système Unix: outils/familiarisation.md
+  - Familiarisation avec le système Unix: 
+    - outils/familiarisation.md
+    - outils/gnu.md
   - Outils:
     - outils/help.md
-    - outils/gnu.md
     - outils/remote.md
     - outils/code.md
     - outils/correction.md

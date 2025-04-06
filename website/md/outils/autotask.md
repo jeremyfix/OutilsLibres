@@ -1,1 +1,1 @@
-# Automatisation de tâches avec Makefile
+# Automatisation de tâches avec Makefile (make)

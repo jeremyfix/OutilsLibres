@@ -1,4 +1,4 @@
-# Archiver/désarchive
+# Archiver/désarchiver (tar, gzip, zip)
 
 - tar
 - gzip

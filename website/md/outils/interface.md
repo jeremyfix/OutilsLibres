@@ -1,4 +1,4 @@
-# Interface utilisateur
+# Interface utilisateur (zenity, whiptail)
 
 - zenity
 - ncurse

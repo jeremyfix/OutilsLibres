@@ -1,4 +1,4 @@
-# Dessin vectoriel
+# Dessin vectoriel (xfig, inkscape, ipe)
 
 - xfig
 - inkspace

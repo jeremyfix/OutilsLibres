@@ -1,5 +1,9 @@
 # Familiarisation avec l'environnement Unix
 
+!!! danger
+
+	wip
+
 ## Permissions
 
 Les permissions sont extrêmement importantes sous Linux. Chaque utilisateur
@@ -132,6 +136,10 @@ echo $HOME
 
 Vous avez en général toute les permissions pour faire ce que vous voulez dans
 cet espace. On trouvera ensuite des ré
+
+!!! danger
+
+	ici
 
 ## Installations logicielles
 

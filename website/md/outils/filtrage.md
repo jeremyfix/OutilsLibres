@@ -1,4 +1,4 @@
-# Filtrage de documents
+# Filtrage de documents (grep, awk, sed)
 
 - grep
 - awk

@@ -1,3 +1,3 @@
-# Comparer deux fichiers ou deux arborescences
+# Comparer deux fichiers ou deux arborescences (diff)
 
 - diff

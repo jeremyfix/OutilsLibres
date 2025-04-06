@@ -1,3 +1,3 @@
-# Ecrire un rapport, des slides, un poster avec LaTeX
+# Ecrire un rapport, des slides, un poster avec LaTeX (latexmk)
 
 

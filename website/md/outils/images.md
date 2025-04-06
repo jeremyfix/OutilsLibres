@@ -1,4 +1,4 @@
-# Manipulation d'images
+# Manipulation d'images (convert, mogrify, gimp)
 
 - imagemagick
 - gimp

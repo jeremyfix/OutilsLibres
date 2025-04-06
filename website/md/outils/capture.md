@@ -1,4 +1,4 @@
-# Capture d'écran photo et vidéo
+# Capture d'écran photo et vidéo (openbroadcast, shutter, recordmydesktop)
 
 - capture de Ubuntu
 - shutter 

@@ -1,3 +1,3 @@
-# Correction orthographique/grammaticale
+# Correction orthographique/grammaticale (aspell)
 
 
