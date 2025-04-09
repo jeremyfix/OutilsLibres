@@ -34,9 +34,13 @@ On va voir dans ce TP l'utilisation d'un certain nombre de programmes tels que `
 
 	- le 07/06/2011 en $304$Å : grosse éruption entre 6h et 7h
 	- le 31/08/2012 en $211$Å et $171$Å : petite éruption autour de 19h
-	- le 09/05/2016, Mercure transite devant entre le soleil et la terre vers 11h30
+	- le 09/05/2016, Mercure transite entre le soleil et la terre vers 11h30
 
-	Il y a plusieurs raisons à l'utilisation de ce miroir local: 1) les temps d'accès, 2) je crains que si tout le monde accède de manière répétée au site jsoc.stanford.edu, nous soyons banis de leur serveur web et donc qu'on ne puisse pas faire correctement le TP, 3) on ne surcharge pas inutilement leurs serveurs pour nos TPs.
+	Il y a plusieurs raisons à l'utilisation de ce miroir local: 
+	
+	1. les temps d'accès, 
+	1. je crains que si tout le monde accède de manière répétée au site jsoc.stanford.edu, nous soyons banis de leur serveur web et donc qu'on ne puisse pas faire correctement le TP, 
+	1. on ne surcharge pas inutilement leurs serveurs pour nos TPs.
 
 	Nous allons pour le coup utiliser un miroir local. Demandez moi l'URL ! Dans toute la suite du sujet, il faudra bien penser à remplacer jsoc.stanford.edu par l'adresse vers le serveur infomob.
 
@@ -414,3 +418,148 @@ On voit ici un premier exemple d'utilisation de sed pour faire de la substitutio
 !!! question
 
 	A vous de jouer en écrivant et testant le script `scripts/convert_img.sh`
+
+
+## Incrustation de la date et de l'heure de la mesure
+
+On souhaite maintenant incruster la date et l'heure de la mesure dans chacune des images comme on le montre sur la figure ci-dessous :
+
+![Image sans date](../assets/soleil_date_0.jpg){width=30%}
+![Image avec date](../assets/soleil_date_1.jpg){width=30%}
+
+Ce qui est pratique, c'est que la date et l'heure de la mesure se trouvent dans le nom de chaque image. Il suffit donc de transformer le nom de fichier d'une image pour obtenir la chaîne de caractères à incruster dans l'image, par exemple :
+
+2012_08_31__00_00_23_34__SDO_AIA_AIA_211.jpg $\mapsto$ 01/05/2013 00:00
+
+
+Ce travail de réécriture peut être fait à l'aide de `sed` en plusieurs étapes en passant par les réécritures suivantes :
+
+1. 2012_08_31__00_00_23_34__SDO_AIA_AIA_211.jpg
+1. $\mapsto$ 2012_08_31__00_00 
+1. $\mapsto$ 2012_08_31 00_00
+1. $\mapsto$ 01/05/2013 00:00 
+
+Le passage de (1) à (2) peut se faire en supprimant (i.e. remplacer par une chaîne vide) un motif de la forme "\_dd...d\_dd...d\_\_SDO\_AIA\_dd...d" ou "dd...d" indique une séquence de longueur arbitraire de chiffre entre 0 et 9. Le motif pour caractériser un nombre arbitraire de chiffres entre 0 et 9 est "[0-9]*". 
+
+Le passage de l'étape (2) à l'étape (3) se fait en remplaçant le motif "__" par " ". 
+
+Le passage de (3) à (4) peut se faire facilement en utilisant la capture de groupe. Prenons un exemple :
+
+```bash
+$ echo 2012_08_31 | sed -r 's/([0-9]*)_([0-9]*)_([0-9]*)/\3:\2:\1/'
+31:08:2012
+$ echo 2012_08_31 | sed -r 's/([0-9]*)_([0-9]*)_([0-9]*)/\3\/\2\/\1/'
+31/08/2012
+```
+
+On remarquera l'utilisation de l'option "-r" qui permet d'utiliser des expressions régulières étendues (par opposition aux expressions régulières de base) et facilite l'écriture de l'expression régulière pour des groupes, c'est à dire les parties de l'expression de la forme "([0-9]\*)". Si nous voulions utiliser les expressions régulières de base, nous aurions dû l'écrire "\\([0-9]*\\)".
+
+Nous sommes maintenant capables de construire la chaîne de caractères à insérer sur l'image. Il reste ... à l'insérer. Pour cela, on peut utiliser `convert` et son "-draw". 
+
+Vous pouvez tester les commandes ci-dessous sur une image redimensionnée qu'on appellera img.jpg~:
+```bash
+$ convert img.jpg -fill white -draw "text 0,20 'Un super texte'" res.jpg 
+$ convert img.jpg -pointsize 20 -fill white -draw "text 0,20 'Un super texte'" res.jpg 
+```
+
+!!! question
+
+	Vous pouvez maintenant intégrer les deux éléments précédents dans un script `scripts/ecrit_date.sh` qui prend des chemins d'image dans l'entrée standard, et utilise convert et sed pour incruster la date et l'heure dans l'image et sauvegarder les résultats dans le répertoire `postproc_images`
+
+
+Il reste une dernière chose à faire dans votre script `scripts/ecrit_date.sh`. Quand nous allons regrouper les images pour en former une vidéo, il faut que les images portent des noms de fichier qui soient des nombres consécutifs, ie 00000.jpg, 00001.jpg, etc. ; On peut facilement l'ajouter dans le script Bash, en utilisant un compteur incrémenté à chaque fois qu'une image est traitée et utiliser la valeur de ce compteur pour construire le nom du fichier cible. Par exemple :
+
+```bash
+$ count=0
+$ echo $count
+0
+$ count=$(expr $count + 1)
+$ echo $count
+1
+```
+
+!!! question
+
+	Vous pouvez terminer votre script en affichant dans la sortie standard le nom du fichier généré. 
+
+Sachez néanmoins que notre pipeline s'arrête là. La dernière étape qui consiste à créer une vidéo à partir des images se fait une fois que tout le pipeline précédent est terminé.
+
+!!! question
+
+	Ajoutez l'appel à votre script `scripts/ecrit_date.sh` dans le script `all.sh`.
+
+
+## Et finalement, la vidéo
+
+Il nous reste à voir une dernière chose: comment fabriquer une vidéo à partir d'une collection d'images? En arrivant à cette partie, vous devez déjà disposer d'un script `all.sh` qui, lorsqu'il est exécuté, produit une séquence d'images numérotées successivement dans le répertoire `postproc_images`, à la bonne taille, au format jpg, et dans lesquelles la date et l'heure sont incrustées.
+
+De manière générale, pour produire une vidéo à partir d'une séquence d'images numérotées successivement, il [existe plusieurs outils](../outils/video.md), notamment mencoder, ffmpeg, avconv. Nous allons ici utiliser `ffmpeg` 
+
+La façon la plus simple de générer une vidéo à partir d'une collection d'images JPEG est d'appeler la commande ci-dessous :
+
+
+```bash
+$ ffmpeg -i mesimages/%05d.jpg mavideo.mp4
+```
+
+J'ai ici supposé que les images étaient numérotées sur $5$ chiffres, c'est ce qu'indique le format "%05d", i.e. un nombre sur $5$ chiffres éventuellement précédés de $0$.\\
+
+La vidéo ainsi générée peut paraître lente. C'est dû à ce qu'on appelle le *frame rate*, i.e. combien d'images sont affichées par seconde. Sachant que nous disposons d'environ $2500$ images pour une journée, si on souhaite que le film ne dure que $10$ secondes, il va falloir utiliser une vitesse de lecture des images de $250$ images par secondes. 
+
+On peut changer la vitesse de lecture de la séquence d'images en précédant l'option "-i" par une option "-r" comme suit :
+
+```bash
+$ ffmpeg -r 250 -i mesimages/%05d.jpg -r 25 mavideo.mp4
+```
+
+Pour visualiser la vidéo, vous pouvez faire appel à mplayer, vlc, etc. :
+
+```bash
+vlc mavideo.mp4
+```
+
+!!! warning
+
+	**Super important** N'oubliez pas de faire le ménage sur votre compte en enlevant notamment les images dans les répertoires `raw_images`, `images` et `postproc_images`, soyons numériquement responsables !
+
+## En bonus: appliquer des fausses couleurs
+
+Jusqu'à maintenant, nous avons utilisé des images noir et blanc. Simplement, la vidéo est beaucoup plus sympa si nous lui appliquons des fausses couleurs. 
+
+Pour appliquer des fausses couleurs, une façon de faire est de se construire un gradient de couleur qui sera indéxé par la luminance de l'image. On peut par exemple créer un gradient sous gimp, ci-dessous une image $600\times 30$ avec un dégradé "incandescent".
+
+![Gradient de couleur](../assets/soleil_gradient.jpg){width=100%}
+
+
+L'application du gradient sur l'image noir et blanc peut alors se faire grâce à imagemagick. Imagemagick sait en effet utiliser des tables de conversion de couleur, voir [http://www.imagemagick.org/Usage/color_mods/#color_lut](http://www.imagemagick.org/Usage/color_mods/#color_lut)  (LUT = Look-Up Table):
+
+```bash
+$ convert src.jpg -colorspace gray gradient.jpg -clut out.jpg
+```
+
+Ce qui nous donne :
+
+![Image du soeil en niveau de gris](../assets/soleil_greyscale.jpg){width=45%}
+![Image du soeil en fausses couleurs](../assets/soleil_false_color.jpg){width=45%}
+
+
+## Notes d'installation pour refaire le TP chez vous
+
+Si vous voulez refaire ce TP chez vous, vous devez installer certains paquets qui ne sont pas installés par défaut. 
+
+Sous Fedora, vous devez exécuter :
+
+
+```bash
+su -c 'yum install -y ffmpeg ImageMagick mplayer'
+```
+
+en ayant au préalable installé les dépots [rpmfusion](http://rpmfusion.org/). 
+
+Sous Ubuntu, 
+
+```bash
+sudo apt install avconv imagemagick mplayer openjpeg-tools lynx
+```
+
+devrait faire l'affaire.
