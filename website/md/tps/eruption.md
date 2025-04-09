@@ -288,3 +288,129 @@ awk 'BEGIN { sum = 0 } /http:\/\/.*\.jp2/ { sum = sum + 1 } END { print sum }'
 
 Sur le fichier de dump utilisé précédemment, cela nous donne $2426$ images.
 
+
+## Affichage partiel du flux d’URL des images
+
+On peut maintenant tester nos deux premiers scripts en les mettant "bout à bout". 
+
+
+!!! question
+
+	Ecrivez un script `all.sh` qui :
+
+	- prend en paramètres quatre arguments : `DD`, `MM`, `YYYY` et `lambda`
+	- utilise `scripts/get_index.sh` pour extraire les références de la page d'images à la date et longueur d’onde données
+	- passe ces références à `scripts/extract_url.sh` pour obtenir les URL des images
+	- affiche ces URL
+
+Pour l'affichage, vous pourrez vérifier que vous capturez bien les premières et dernières images en n'affichant qu'une
+partie du flux des URLs à l'aide des commandes head et tail.
+
+!!! note
+
+	Utilisez `head` ou `tail` pour n’en afficher qu’une partie et vérifier que ça fonctionne.
+
+## Téléchargement des images
+
+
+
+Nous avons généré, grâce à la commande précédente, un flux dans la sortie standard d'URL des images jp2 qui nous intéressent. Nous souhaitons maintenant télécharger ces images. Pour ce faire, nous allons utiliser la commande `wget`. L'utilisation la plus simple de `wget` est de l'appeler par `wget url`, par exemple :
+
+```bash
+wget http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_00_23_34__SDO_AIA_AIA_211.jp2
+```
+
+télécharge l'image. Vous remarquerez que l'image téléchargée est placée dans le répertoire d'appel de la commande, le répertoire courant. 
+
+On souhaite que les images téléchargées soient placées dans le répertoire raw_images. 
+
+!!! question
+
+	A l'aide de la page du manuel de wget (accessible par `man wget`), et en regardant en particulier les options -nd et -P, **écrivez un script** `scripts/telecharge_img.sh` qui télécharge les images dont les URLs sont fournies sur l'entrée standard et les place dans le répertoire `raw_images`
+
+!!! note
+	
+	Notez qu'on pourrait aussi changer de répertoire dans le script `telecharge_img.sh`, pour se placer dans `raw_images`, avant de télécharger l'image
+
+La deuxième chose à faire est d'afficher dans la sortie standard le chemin vers l'image téléchargée. Pourquoi ? parce qu'on souhaite poursuivre les traitements en indiquant au futur script de traitement d'image sur quelle image travailler. Comment faire ? Votre script `scripts/telecharge_img.sh` attends une URL dans l'entrée standard. Ce que nous allons faire, c'est utiliser awk avec pour *action* d'afficher le dernier champ ($NF) lorsque la ligne est divisée selon le séparateur '/'. Regardons un exemple :
+
+```bash
+$ echo "http://un.exemple/durl/monimage.jp2" | awk -F/ '{print $NF}'
+monimage.jp2
+$ filename=`echo "http://un.exemple/durl/monimage.jp2" | awk -F/ '{print $NF}'`
+$ echo "./raw_images/$filename" 
+./raw_images/monimage.jp2
+```
+
+On retrouve ici plusieurs choses. La première est l'exécution d'une commande (entre les *backquotes* \`...\`) et l'affectation du résultat dans la variable filename. La deuxième est la construction à la volée de la chaîne de caractères correspondant au chemin vers l'image.
+
+!!! question
+
+	**Ajoutez l'appel** à votre script `scripts/telecharge_img.sh` dans le script `all.sh`. 
+
+En exécutant votre script, vous devriez voir la sortie ci-dessous :
+
+```bash
+$ ./all.sh 31 08 2012 211
+./raw_images/2012_08_31__00_00_11_63__SDO_AIA_AIA_211.jp2
+./raw_images/2012_08_31__00_00_47_62__SDO_AIA_AIA_211.jp2
+./raw_images/2012_08_31__00_01_23_62__SDO_AIA_AIA_211.jp2
+./raw_images/2012_08_31__00_01_59_62__SDO_AIA_AIA_211.jp2
+./raw_images/2012_08_31__00_02_35_62__SDO_AIA_AIA_211.jp2
+./raw_images/2012_08_31__00_03_11_62__SDO_AIA_AIA_211.jp2
+```
+
+
+## Traitement des images
+
+Nous avons récupéré une collection d'images au format JPEG2000 ".jp2". On souhaite :
+
+1. décompresser l'image noir et blanc du fichier jp2, 
+1. la redimensionner et y incruster la date/heure de la mesure et éventuellement lui appliquer un gradient de couleur (on en parle à la fin du sujet, en bonus). 
+
+Pour cela, on va écrire un script Bash qui va essentiellement utiliser les outils opj_decompress et [convert](../outils/images.md) sur toutes les images dont le chemin est transmis sur l'entrée standard, ainsi que quelques outils de réécriture pour transformer le nom du fichier d'image qui contient l'heure et la date de la mesure.
+
+Commençons par prendre en main `convert`. Comme vous pourrez le lire sur [la page dédiée à cet outil](../outils/images.md), `convert` est un des outils fournis par ImageMagick, GraphicsMagick, .. et qui permet de manipuler des images: 
+
+- convertir d'un format à un autre en appliquant éventuellement un nombre arbitraire de filtres, 
+- redimensionner les images, 
+- y introduire du texte, 
+- y appliquer des effets (l'effet polaroid est très sympa)
+- combiner plusieurs images, 
+- etc.
+
+!!! question
+
+	Commencez par vous assurer que vous disposez d'une image au format ".jp2" dans le répertoire `raw_images`. Appelons la "img.jp2". 
+
+	Utilisez opj_decompress pour convertir l'image jp2 en pgm (cf. `man opj_decompress`). 
+
+	Utilisez `convert` et l'option resize pour redimensionner l'image "img.jp2" à 10% de sa taille d'origine et la convertir en l'image "img.jpg".  
+
+Vous savez alors décompresser l'image jp2 et la redimensionner, il ne nous reste plus qu'à appliquer cette opération sur toutes les images dont le chemin est fourni sur l'entrée standard.
+
+Nous **allons** (mais lisez la suite avant de commencer) écrire un script `scripts/convert_img.sh` qui va :
+
+- lire des chemins vers des images au format jp2 depuis l'entrée standard (voir p.\pageref{p:entrees_sorties_standards})
+- construire la chaîne de caractères du chemin vers l'image au format jpg (utilisez sed), sachant que l'image cible doit être sauvegardée dans le répertoire `image`
+- convertisse et redimensionne l'image source en l'image cible à 10% de sa taille (utilisez `convert`)
+- affiche dans la sortie standard le chemin vers l'image cible 
+
+!!! note
+
+	**Indications** Pour construire le chemin vers l'image cible, il faut plusieurs choses: extraire le nom du fichier passé dans l'entrée standard (commande \basename), remplacer l'extension jp2 par jpg (utiliser \sed), concaténer le répertoire cible avec le nom du fichier image cible. Quelques exemples de ces outils sont donnés ci-dessous~:
+
+	```bash
+	$ basename moncheminversune/image.jp2
+	image.jp2
+	$ echo image.jp2 | sed 's/.jp2/.jpg/'
+	image.jpg
+	$ filename=image.jpg; output_path=output/$filename; echo $output_path
+	output/image.jpg
+	```
+
+On voit ici un premier exemple d'utilisation de sed pour faire de la substitution; c'est la signification du prefixe 's' lors de l'appel à sed. L'argument passé à sed se lit 's/chaine de caractère source/chaine de caratère destination/'; Ainsi 's/.jp2/.jpg/' remplace la **première** occurrence de ".jp2" par ".jpg"; Si jamais vous voulez remplacer toutes les occurrences d'une chaine par une autre, il vous suffit d'ajouter le suffixe g, par exemple 's/.jp2/.jpg/g'.
+
+!!! question
+
+	A vous de jouer en écrivant et testant le script `scripts/convert_img.sh`
