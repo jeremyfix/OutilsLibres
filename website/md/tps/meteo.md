@@ -2,6 +2,8 @@
 
 ![Meteo](../assets/logo_meteo.png)
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/57YIRuRHne0?si=rJrl3U-9tF3JFX2q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 **Cas pratique:** Nous allons utiliser une base de données météo disponible en ligne [http://www.ncdc.noaa.gov/orders/qclcd/](http://www.ncdc.noaa.gov/orders/qclcd/).
 
 Cette base de données contient des archives de relevés météorologiques depuis 1996. Attention, nous utiliserons pour le moment uniquement les
@@ -543,6 +545,9 @@ done
 $ echo "titi toto" | ./stdread_multi.sh 
 titi ; toto
 ```
+
+
+
 
 [^1]:
 	On peut faire des tracés très sympa avec basemap!!
