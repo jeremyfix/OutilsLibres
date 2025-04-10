@@ -20,7 +20,7 @@ do
     then
 	if [ $mode == "0" ]
 	then
-	    url="http://infomob.metz.supelec.fr/fix/qclcd_ascii/$archive"
+	    url="https://s3.ca-central-1.amazonaws.com/climate-mirror/www.ncdc.noaa.gov/orders/qclcd/$archive"
 	    #url="http://www.ncdc.noaa.gov/orders/qclcd/$archive"
 	    echo "Downloading $url" 1>&2
 	    wget $url -c -q -P Data
@@ -33,7 +33,7 @@ do
 	    rm -f station.txt
 	    cd ..
 	else
-	    url="http://www.ncdc.noaa.gov/orders/qclcd/$archive_new"
+	    url="https://s3.ca-central-1.amazonaws.com/climate-mirror/www.ncdc.noaa.gov/orders/qclcd/$archive_new"
 	    echo "Downloading $url" 1>&2
 	    wget $url -c -q -P Data
 	    echo "Data/$archive_new downloaded" 1>&2
