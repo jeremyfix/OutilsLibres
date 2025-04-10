@@ -135,11 +135,26 @@ echo $HOME
 ```
 
 Vous avez en général toutes les permissions pour faire ce que vous voulez dans
-cet espace. On trouvera ensuite des ré
+cet espace. On trouvera ensuite des répertoires qui hébergent des fichiers pour
+une certaine fonction :
 
-!!! danger
-
-	ici
+- `/etc` va contenir des fichiers de configuration. Par exemple un serveur nginx mettre ses fichiers de configuration dans `/etc/nginx`. Le gestionnaire de paquet sous Ubuntu met ses fichiers de configuration dans `/etc/apt/`, ...
+- `/var/log` va contenir les logs de différents processus qui tournent sur votre
+  système. Par exemple `/var/log/Xorg.0.log` contiendra les logs du serveur
+  d'affichage Xorg, `/var/log/apacha`
+- `/usr/bin` contient les exécutables
+- `/usr/include` les fichiers d'entête des librairies C/C++ installées
+- `/usr/lib` les librairies installées
+- `/run/user/` des fichiers temporaires des processus en cours d'exécution pour un
+  utilisateur
+- `/tmp` un répertoire nettoyé au démarage qui n'a vocation qu'à héberger des
+  fichiers temporaires
+- `/dev/` un répertoire contenant des fichiers pour interagir avec des
+  périphériques. Par exemple `/dev/js0` pour un joystick, `/dev/video0` pour une
+  webcam, ...
+- `/mnt` contient en général les points de montage par exemple de clés/disques
+  USB branchés, de périphériques réseaux, etc..
+- ...
 
 ## Installations logicielles
 
@@ -153,10 +168,43 @@ gestionnaire :
 - arch : pacman
 - MacOS : brew
 
+Le gestionnaire de paquet est construit pour gérer lui même les éventuelles
+dépendances d'un logiciel. Pas besoin de le faire vous même. Il garde également
+une trace des paquets installés par dépendance, de telle que si vous supprimez
+un paquet, il peut vous suggérer de supprimer les paquets installés par
+dépendance. Pratique pour faire le ménage !
+
 Il existe des serveurs officiels, centralisés, sécurisés, qui hébergent les
 logiciels. Bien sûr, tout un chacun peut également offrir un serveur de logiciel
 et à ce moment-là, à vous de choisir de prendre ou non le risque d'ajouter ce
 dépôt logiciel. 
 
+Par exemple, pour installer VS Code sous Ubuntu 
+
+```bash
+$ sude apt info code
+Package: code
+Version: 1.99.1-1743784529
+Priority: optional
+Section: devel
+Maintainer: Microsoft Corporation <vscode-linux@microsoft.com>
+Installed-Size: 423 MB
+Provides: visual-studio-code
+Depends: ca-certificates, libasound2 (>= 1.0.17), libatk-bridge2.0-0 (>= 2.5.3), libatk1.0-0 (>= 2.11.90), libatspi2.0-0 (>= 2.9.90), libc6 (>= 2.14), libc6 (>= 2.16), libc6 (>= 2.17), libc6 (>= 2.2.5), libc6 (>= 2.25), libc6 (>= 2.28), libcairo2 (>= 1.6.0), libcurl3-gnutls | libcurl3-nss | libcurl4 | libcurl3, libdbus-1-3 (>= 1.9.14), libexpat1 (>= 2.1~beta3), libgbm1 (>= 17.1.0~rc2), libglib2.0-0 (>= 2.37.3), libgtk-3-0 (>= 3.9.10), libgtk-3-0 (>= 3.9.10) | libgtk-4-1, libnspr4 (>= 2:4.9-2~), libnss3 (>= 2:3.30), libnss3 (>= 3.26), libpango-1.0-0 (>= 1.14.0), libudev1 (>= 183), libx11-6, libx11-6 (>= 2:1.4.99.1), libxcb1 (>= 1.9.2), libxcomposite1 (>= 1:0.4.4-1), libxdamage1 (>= 1:1.1), libxext6, libxfixes3, libxkbcommon0 (>= 0.5.0), libxkbfile1 (>= 1:1.1.0), libxrandr2, xdg-utils (>= 1.0.2)
+Recommends: libvulkan1
+Conflicts: visual-studio-code
+Replaces: visual-studio-code
+Homepage: https://code.visualstudio.com/
+Download-Size: 104 MB
+APT-Sources: https://packages.microsoft.com/repos/code stable/main amd64 Packages
+Description: Code editing. Redefined.
+ Visual Studio Code is a new choice of tool that combines the simplicity of
+ a code editor with what developers need for the core edit-build-debug cycle.
+ See https://code.visualstudio.com/docs/setup/linux for installation
+ instructions and FAQ.
+
+$ sudo apt install code
+...
+```
 
 
