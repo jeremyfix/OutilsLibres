@@ -55,7 +55,6 @@ nav:
   - Index: index.md
   - TP:
     - tps/bash.md
-    - tps/makefile.md
     - tps/eruption.md
     - tps/meteo.md
   - Familiarisation avec le système Unix: 
