@@ -31,7 +31,7 @@ do
     then
 	echoerr "[convert_img] Dealing with $fullpath"
 	opj_decompress -i $fullpath  -o $decoded_fullpath > /dev/null
-	convert $decoded_fullpath -resize 20% ./scripts/soleil_gradient.jpg -clut $output_fullpath > /dev/null
+	convert $decoded_fullpath -resize 50% ./scripts/soleil_gradient.jpg -clut $output_fullpath > /dev/null
 	if [ $? != 0 ]
 	then
 	    echoerr "[convert_img] convert issued an error"

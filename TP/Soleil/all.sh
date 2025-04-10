@@ -36,6 +36,7 @@ fi
 head -500 |         # Pour du débug, on ne retient que les 5 premières images
 ./scripts/sun_telecharge_img.sh ./raw_images                  |      # qu'on télécharge
 ./scripts/sun_convert_img.sh  ./images                        |      # Qu'on convertit
+./scripts/sun_slice.sh ./sliced                               |
 ./scripts/sun_write_date.sh  ./postproc_images                       # Dans laquelle on incruste la date et l'heure
 
 # On génère finalement la vidéo
