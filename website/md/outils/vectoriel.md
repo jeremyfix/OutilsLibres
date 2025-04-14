@@ -1,4 +1,4 @@
-# Dessin vectoriel (xfig, inkscape, ipe, dot)
+# Dessin vectoriel (xfig, inkscape, ipe, graphviz)
 
 !!! warning
 
@@ -56,5 +56,23 @@ et complet que xfig.
 Pour le coup, forcément, il y a un peu plus d'apprentissage et vous trouverez
 des [didacticiels en ligne](https://inkscape.org/fr/apprendre/).
 
-## Diagrammes avec dot
+## Diagrammes avec graphviz
+
+Les [outils de graphviz](https://www.graphviz.org/) sont constitués du langage dot et des outils en ligne de
+commande `dot`, `neato`, `circo`, ...
+
+Le langage dot est un langage de description de diagramme dans lequel vous
+définissez les noeuds, les arêtes, etc.. mais vous soucier du placement. Les outils `dot`,
+`netao`, etc... permettent de générer un dessin vectoriel à partir de cette
+description. La raison d'avoir plusieurs outils de génération d'images vient du
+fait qu'il n'y a pas une solution unique pour placer automatiquement les
+éléments d'un diagramme à partir de sa description et ces outils vont faire
+différentes hypothèses.
+
+Notez au passage que, comme pour xfig, le format de `graphviz` est un format texte
+relativement simple qu'il est possible de générer depuis du code !
+
+Plusieurs exemples sont fournis sur la page [https://www.graphviz.org/gallery/](https://www.graphviz.org/gallery/) et vous pouvez même tester en ligne depuis [https://magjac.com/graphviz-visual-editor/](https://magjac.com/graphviz-visual-editor/). L'exemple de diagramme UML, proposé par Costa Shukyupin est représenté ci-dessous à côté de sa version dot.
+
+![Exemple de diagrame UML avec dot](../assets/dot.png)
 
