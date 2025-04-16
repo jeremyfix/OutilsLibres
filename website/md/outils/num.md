@@ -18,7 +18,7 @@ Dans l'écosystème python, plusieurs librairies pour le calcul scientifique son
 
 La librairie numpy est un incontournable pour le calcul numérique en python.
 Avec un coeur écrit en C++ et un wrapper python, elle est à la foi efficace et
-confortable d'utilisation. Vous trouverez des guides sur la page [https://numpy.org/learn/](https://numpy.org/learn/) pour prendre en main numpy.
+confortable d'utilisation. Vous trouverez des guides sur la page [https://numpy.org/learn/](https://numpy.org/learn/) pour prendre en main numpy. Il existe également des livres en accès libre comme [From python to numpy](https://github.com/rougier/scientific-visualization-book).
 
 Pour l'utiliser :
 
@@ -80,7 +80,36 @@ horizontal_res = Quaternion(res.a, res.b, res.c, 0.0).normalize().simplify()
 print(f"Vecteur projeté normalisé : {horizontal_res}")
 ```
 
-
 ### Tracé (matplotlib, seaborn)
 
-### Machine learning (scikit-learn, pandas)
+Pour tracé des données avec un programme python, vous pouvez utiliser les
+librairies [matplotlib](https://matplotlib.org/) et [seaborn](https://seaborn.pydata.org/).
+
+![Galerie d'exemples de matplotlib](../assets/matplotlib.png){width=40%}
+![Galerie d'exemples de seaborn](../assets/seaborn.png){width=40%}
+
+Pour apprendre à prendre en main ces libraiires, il existe des [tutoriels pour
+matplotlib](https://matplotlib.org/stable/tutorials/index.html) et des
+[tutoriels pour seaborn](https://seaborn.pydata.org/tutorial.html).
+
+### Machine learning (scikit-learn, pandas, pytorch, tensorflow)
+
+Les librairies pour l'apprentissage automatique sont nombreuses. On atteint
+probablement les limites de l'objectif de ce site web en ne pouvant pas lister
+toutes les librairies pertinentes pour ce sujet. Mais disons qu'on peut donner
+quelques pointeurs :
+
+- [scikit-learn](https://scikit-learn.org) : proposent des implémentations de
+  beaucoup d'algorithmes d'apprentissage automatique (arbres, svm, réseaux de
+  neurones, k-means, ...), de datasets, etc..
+- [pandas](https://pandas.pydata.org) : librairie particulièrement efficace pour
+  traiter de grandes masses de données (en "local", vs hadoop/spark pour des traitements distribués)
+- [pytorch](https://pytorch.org) et  [tensorflow](https://tensorflow.org) : pour
+  le deep learning
+- [jax](https://docs.jax.dev/en/latest/) qui est apparu dans le sillage des
+  librairies de deeplearning, que l'on pourrait définir comme un numpy qui peut
+  exécuter ses calculs sur CPU/GPU/TPU, et avec la différentiabilité des opérations
+
+![Galerie d'exemples de scikit learn](../assets/scikit.png){width=40%}
+![Tutoriel pytorch](../assets/pytorch.png){width=50%}
+
