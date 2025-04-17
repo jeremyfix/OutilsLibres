@@ -1,10 +1,24 @@
-# Calculs numériques et symboliques (octave, numpy, pandas, scipy, sympy, matplotlib, seaborn)
+# Calculs numériques et symboliques (octave, scilab, numpy, pandas, scipy, sympy, matplotlib, seaborn)
 
-## Octave
+## Alternatives à Matlab (Octave, scilab, SageMath) 
 
-!!! danger
+Plusieurs logiciels libres existent en alternatives à Matlab. Quelques-uns sont
+listés ci-dessous :
 
-	tbd
+- [GNU Octave](https://octave.org), projet GNU 
+- [scilab](https://gitlab.com/scilab/scilab), porté par Dassault Systèmes
+- [SageMath](https://www.sagemath.org/index.html)
+
+Octave [utilise le même langage que Matlab](https://en.wikipedia.org/wiki/GNU_Octave#MATLAB_compatibility) de telle manière qu'un programme écrit
+en Matlab devrait être exécutable avec Octave. Il est extensible avec des
+[packages](https://packages.octave.org/).
+
+Scilab est un outil de calcul porté par Dassault Systèmes. Il peut également
+être étendu avec [des boîtes à outils installables avec atoms](https://atoms.scilab.org/), par exemple pour [la mécanisque spatiale par le CNES](https://atoms.scilab.org/toolboxes/celestlab/).
+
+SageMath est un outil pour les mathématiques, pour le calcul numérique, le
+calcul symbolique, le tracé, etc... On trouvera plus d'informations dans le
+livre en Français [Calcul mathématique avec Sage](https://www.sagemath.org/sagebook/french.html).
 
 ## Outils python du calcul scientifique
 
