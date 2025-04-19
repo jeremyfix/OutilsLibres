@@ -18,11 +18,31 @@ Pour le cas d'usage très particulier d'enregistrer une session de terminal, vou
 pouvez utiliser [asciinema](https://github.com/asciinema/asciinema). Il est très
 simple d'utilisation, allez voir la documentation.
 
-<div class="player" id="demo"></div>
-<script>
-AsciinemaPlayer.create('../assets/count_files.cast', document.getElementById("demo"));
-</script>
+Par exemple, l'illustration ci-dessous de quelques commandes cascadées pour
+compter le nombre de fichier dans un répertoire.
 
+
+<div class="player" id="commande-0"></div>
+<script>
+    window.addEventListener("load", function(event) {
+        AsciinemaPlayer.create("/OutilsLibres/assets/count_files.cast", document.getElementById("commande-0"), {
+            cols: 80,
+            rows: 24,
+            autoPlay: false,
+            preload: false,
+            loop: false,
+            startAt: "0:00",
+            speed: 1.0,
+            theme: "asciinema",
+            fit: "width",
+            controls: "auto",
+            pauseOnMarkers: false,
+            terminalFontSize: "small",
+            terminalFontFamily: "",
+            terminalLineHeight: 1.33333333,
+        });
+    });
+</script>
 
 ## Streaming (OpenBroadcast Studio OBS)
 
