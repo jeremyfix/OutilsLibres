@@ -18,7 +18,7 @@ Plusieurs possibilités s'offrent à vous, parmi les plus populaires en ce momen
 Les pages que vous êtes entrain de regarder sont générées avec Mkdocs :
 
 - les pages sont hébergées sur github sur le dépôt [https://github.com/jeremyfix/OutilsLibres](https://github.com/jeremyfix/OutilsLibres)
-- le site est composé du fichier de configure [mkdocs.yml](https://github.com/jeremyfix/OutilsLibres/blob/master/website/conf/mkdocs.yml) et le contenu du site comprend des fichiers markdown, par exemple [web.md](https://github.com/jeremyfix/OutilsLibres/blob/master/website/md/outils/web.md), d'images, de scripts javascripts, etc.
+- le site est composé du fichier de configuration [mkdocs.yml](https://github.com/jeremyfix/OutilsLibres/blob/master/website/conf/mkdocs.yml) et le contenu du site comprend des fichiers markdown, par exemple [web.md](https://github.com/jeremyfix/OutilsLibres/blob/master/website/md/outils/web.md), d'images, de scripts javascripts, etc.
 - la construction du site statique et la mise en ligne est réalisée par les
   actions github définies dans le fichier [.github/workflows/mkdocs.yml](https://github.com/jeremyfix/OutilsLibres/blob/master/.github/workflows/mkdocs.yml)
 
