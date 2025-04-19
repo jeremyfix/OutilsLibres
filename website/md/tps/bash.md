@@ -25,6 +25,8 @@ vous pouvez combiner des commandes simples pour construire un programme plus
 compliqué. Pour l'instant, cela reste abstrait, mais plusieurs exemples ci-après
 vont l'illustrer. Faites-moi confiance.
 
+Si vous vous posez des questions sur une commande, peut-être que le site [https://explainshell.com](https://explainshell.com) pourrait vous être utile. Regardez par exemple ce qu'il propose sur la commande [`ls -p | grep -v / | wc -l`](https://explainshell.com/explain?cmd=ls+-p+%7C+grep++-v+%2F+%7C+wc+-l)
+
 ## Navigation dans le système de fichiers
 
 Quelques commandes de base à connaître :
