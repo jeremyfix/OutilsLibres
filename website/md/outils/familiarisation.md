@@ -182,7 +182,7 @@ dépôt logiciel.
 Par exemple, pour installer VS Code sous Ubuntu 
 
 ```bash
-$ sude apt info code
+$ sudo apt info code
 Package: code
 Version: 1.99.1-1743784529
 Priority: optional
