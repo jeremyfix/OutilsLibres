@@ -122,6 +122,14 @@ fichiers listés, avec l'option `-exec`. Par exemple :
 $  find ~ -name '*.pdf' -size +4M -exec du -sh \{} \;
 ```
 
+
+**Trouver des makefiles dans lesquels on a utilisé wildcard**
+
+```bash
+$ find ~ -regex '.*/[Mm]akefile' -exec grep '$(wildcard' \{} \;
+```
+
+
 Une autre manière de procéder pour appliquer une commande sur tous les fichiers trouvés par `find` est d'envoyer la sortie de standard `find` dans l'entrée
 standard de `xargs`. Par exemple, pour copier tout les fichiers avec l'extension `.tex` d'une arborescence vers une autre :
 
