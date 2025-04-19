@@ -36,9 +36,11 @@ markdown_extensions:
 extra_javascript:
   - https://code.jquery.com/jquery-3.7.1.min.js
   - ./js/mathjax.js
+  - ./js/asciinema-player.min.js
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
 
 extra_css:
+  - ./css/asciinema-player.css
 
 site_url: https://jeremyfix.github.io/OutilsLibres
 

@@ -12,6 +12,17 @@ Si vous voulez l'invoquer depuis la ligne de commande, il faudra l'installer :
 $ sudo apt install gnome-screenshot
 ```
 
+## Capture d'une session de terminal (asciinema)
+
+Pour le cas d'usage très particulier d'enregistrer une session de terminal, vous
+pouvez utiliser [asciinema](https://github.com/asciinema/asciinema). Il est très
+simple d'utilisation, allez voir la documentation.
+
+<div class="player" id="demo"></div>
+<script>
+AsciinemaPlayer.create('../assets/count_files.cast', document.getElementById("demo"));
+</script>
+
 
 ## Streaming (OpenBroadcast Studio OBS)
 
