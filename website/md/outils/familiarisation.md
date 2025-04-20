@@ -1,9 +1,5 @@
 # Familiarisation avec l'environnement Unix
 
-!!! danger
-
-	wip
-
 ## Permissions
 
 Les permissions sont extrêmement importantes sous Linux. Chaque utilisateur
