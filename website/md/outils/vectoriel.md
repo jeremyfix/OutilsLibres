@@ -1,9 +1,5 @@
 # Dessin vectoriel (xfig, inkscape, ipe, graphviz)
 
-!!! warning
-
-	wip
-
 Le dessin vectoriel présente l'avantage d'être, justement, vectoriel, c'est à dire décrit par un ensemble de directives du type : tracer une ligne entre les points A et B, remplir la zone de la couleur c, .... Cela conduit à des dessins qui ne souffre pas d'un passage à l'échelle contrairement à des images qui sont définies par une collection de pixel d'une certaine couleur, ce qu'on appelle des images matricielles (*raster graphics*). 
 
 Il existe plusieurs logiciels qui permettent de réaliser des dessins vectoriels et je vous en cite trois que je trouve assez pratique :
