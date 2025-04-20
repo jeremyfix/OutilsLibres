@@ -55,13 +55,7 @@ copyright: >
 
 nav:
   - Index: index.md
-  - TP:
-    - tps/bash.md
-    - tps/eruption.md
-    - tps/meteo.md
-  - Familiarisation avec le système Unix: 
-    - outils/familiarisation.md
-    - outils/gnu.md
+  - Familiarisation avec le système Unix: outils/familiarisation.md
   - Outils:
     - outils/help.md
     - outils/remote.md
@@ -81,5 +75,7 @@ nav:
     - outils/archive.md
     - outils/interface.md
     - outils/web.md
-
-
+  - TP:
+    - tps/bash.md
+    - tps/eruption.md
+    - tps/meteo.md

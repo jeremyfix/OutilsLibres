@@ -207,4 +207,39 @@ $ sudo apt install code
 ...
 ```
 
+## Philosophie Unix : Do One Thing and Do It Well
 
+Comme vous le verrez dans la suite du site et pendant les TPs, on va combiner
+pleins de "petites" commandes. La philosophie Unix est d'écrire des "petits"
+programmes qui s'attaquent à un problème en particulier avec l'idée de pouvoir
+combiner tout ces programmes entre eux. 
+
+La manière de combiner des programmes entre eux se fait grâce au "pipe", le
+symbole `|`. Dans le TP [Bash à sable](../tps/bash.md), on discutera justement
+de l'"entrée standard", la "sortie standard" et la "sortie d'erreur". Ce sont
+des entrées/sorties qui sont connectées par des "pipe" (tuyaux).
+
+Par exemple, pour **trouver les $10$ plus gros fichiers dans un répertoire**, on
+peut combiner :
+
+- `du` qui retourne la taille occupée par un fichier/répertoire
+- `sort` qui trie ce qu'il reçoit en entrée avec la possibilité que les nombres
+  à trier soient suffixés d'une unité **M**ega, **G**iga
+- `tail` qui ne retient que les $x$ dernières lignes de ce qu'il reçoit en
+  entrée
+
+Combinez ensemble, on obtient la commande `du * -sh | sort -h | tail -10` qui va
+vous retourner les $10$ plus gros fichiers/répertoires dans le répertoire
+courant.
+
+Autre exemple, pour calculer **combien de fichiers sont présents dans un
+répertoire**, on peut combiner :
+
+- `ls` qui liste tous les éléments présents dans un répertoire et, avec l'option
+  `-p` lui demander de suffixer les répertoires du symbole `/`
+- `grep` qui permet de rechercher un motif. On lui demande de recherche le motif
+  `/` et de retourner ce qui ne contient pas ce motif `-v`
+- `wc` qui permet de compter le nombre de lignes `-l` (mais peut aussi compter
+  le nombre de mots `-w`, de caractères `-c`, ...)
+
+Ce qui donne la commande `ls -p | grep -v / | wc -l`
