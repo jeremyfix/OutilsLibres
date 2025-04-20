@@ -1,5 +1,9 @@
 # Ecrire un rapport, des slides, un poster avec LaTeX (latexmk)
 
+!!! danger
+
+	wip
+
 - overleaf
 - texlive
 - latexmk
