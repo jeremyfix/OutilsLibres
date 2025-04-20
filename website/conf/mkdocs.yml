@@ -58,6 +58,7 @@ nav:
   - Familiarisation avec le système Unix: outils/familiarisation.md
   - Outils:
     - outils/help.md
+    - outils/historique.md
     - outils/remote.md
     - outils/code.md
     - outils/correction.md
