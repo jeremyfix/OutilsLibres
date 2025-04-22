@@ -6,7 +6,9 @@
 
 
 <center>
+
 ![L'observation du soleil dans différentes longueurs d'ondes offrent différentes perspectives](../assets/solar_wavelength2.jpg){width=50%}
+
 </center>
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/tagmYHJ5Wxk?si=9LR8yAYgU-gOm_GH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
