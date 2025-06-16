@@ -1,0 +1,1541 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://jeremyfix.github.io/OutilsLibres/tps/eruption/">
+      
+      
+        <link rel="prev" href="../bash/">
+      
+      
+        <link rel="next" href="../meteo/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>TP : Eruption solaire et transit de Mercure, à partir des données AIA SDO - Les outils du logiciel libre pour l'ingénieur</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/asciinema-player.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#tp-eruption-solaire-et-transit-de-mercure-a-partir-des-donnees-aia-sdo" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
+    <a href="../.." title="Les outils du logiciel libre pour l&#39;ingénieur" class="md-header__button md-logo" aria-label="Les outils du logiciel libre pour l'ingénieur" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Les outils du logiciel libre pour l'ingénieur
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              TP : Eruption solaire et transit de Mercure, à partir des données AIA SDO
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Rechercher" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Recherche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Effacer" aria-label="Effacer" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initialisation de la recherche
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/jeremyfix/OutilsLibres" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Les outils du logiciel libre pour l&#39;ingénieur" class="md-nav__button md-logo" aria-label="Les outils du logiciel libre pour l'ingénieur" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Les outils du logiciel libre pour l'ingénieur
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/jeremyfix/OutilsLibres" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/familiarisation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Familiarisation avec le système Unix
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Outils
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Outils
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/help/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Obtenir de l'aide sur les outils (stackoverflow, nixcraft, man, info, tldr)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/historique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Utiliser l'historique des commandes dans le shell (history, Ctrl+r)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/remote/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interaction avec une machine distante (ssh, scp, rsync, sshfs, screen, byobu)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/code/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Editeur de texte, IDE (vim, emacs, code)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/correction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Correction orthographique/grammaticale (aspell, hunspell, LanguageTool)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/autotask/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Automatisation de tâches avec Makefile (make)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/num/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Calculs numériques et symboliques (octave, scilab, numpy, pandas, scipy, sympy, matplotlib, seaborn)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/images/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Manipulation d'images (convert, mogrify, animate, compose, gimp)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/rapport/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ecrire un rapport, des slides, un poster avec LaTeX (latexmk)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/vectoriel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dessin vectoriel (xfig, inkscape, ipe, graphviz)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/capture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capture d'écran photo et vidéo (OpenBroadcast Studio, gnome-screenshot)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/video/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Assembler des images en vidéo (ffmpeg, avconv)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/pdf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Manipulation de documents PDF (pdftk, xournalpp)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/recherche/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Recherche de fichier ou de contenu (grep, rg, find, locate)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/filtrage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Filtrage et manipulation de documents (awk, sed)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/compare/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Comparer deux fichiers ou deux arborescences (diff)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/archive/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Archiver/désarchiver (tar, gzip, zip)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/interface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interface utilisateur (zenity, whiptail)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Produire un site web, par exemple de documentation (mkdocs, jekyll, hugo)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    TP
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            TP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bash à sable
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    TP : Eruption solaire et transit de Mercure, à partir des données AIA SDO
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    TP : Eruption solaire et transit de Mercure, à partir des données AIA SDO
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#structure-du-projet" class="md-nav__link">
+    <span class="md-ellipsis">
+      Structure du projet
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recuperation-des-donnees-dune-journee" class="md-nav__link">
+    <span class="md-ellipsis">
+      Récupération des données d'une journée
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extraire-les-urls-des-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      Extraire les URLs des images
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#affichage-partiel-du-flux-durl-des-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      Affichage partiel du flux d’URL des images
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#telechargement-des-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      Téléchargement des images
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traitement-des-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      Traitement des images
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#incrustation-de-la-date-et-de-lheure-de-la-mesure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Incrustation de la date et de l'heure de la mesure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#et-finalement-la-video" class="md-nav__link">
+    <span class="md-ellipsis">
+      Et finalement, la vidéo
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#en-bonus-appliquer-des-fausses-couleurs" class="md-nav__link">
+    <span class="md-ellipsis">
+      En bonus: appliquer des fausses couleurs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes-dinstallation-pour-refaire-le-tp-chez-vous" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notes d'installation pour refaire le TP chez vous
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../meteo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    TP : Évolution des températures aux États-Unis à partir des données NOAA
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<div><h1 id="tp-eruption-solaire-et-transit-de-mercure-a-partir-des-donnees-aia-sdo">TP : Eruption solaire et transit de Mercure, à partir des données AIA SDO</h1>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>miroir local</p>
+</div>
+<p><a class="glightbox" href="../../assets/solar_wavelength2.jpg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="L'observation du soleil dans différentes longueurs d'ondes offrent différentes perspectives" src="../../assets/solar_wavelength2.jpg" width="50%"></a></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/tagmYHJ5Wxk?si=9LR8yAYgU-gOm_GH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<h2 id="introduction">Introduction</h2>
+<p>Le but de ce TP est de construire une vidéo à partir de données collectées sur le soleil par le <a href="http://aia.lmsal.com/index.htm">Solar Dynamics Observatory</a>. On utilisera uniquement les images du soleil capturées à intervalles réguliers. Les images sont disponibles à l'adresse <a href="http://jsoc.stanford.edu/data/aia/images/">http://jsoc.stanford.edu/data/aia/images/</a>. Elles sont classées par date de mesure, la structure du répertoire distant étant :</p>
+<blockquote>
+<p>http://jsoc.stanford.edu/data/aia/images/YYYY/MM/DD/<span class="arithmatex">\(\lambda\)</span>/fichier.jp2</p>
+</blockquote>
+<p>Le SDO observe le soleil dans différentes longueurs d’onde <span class="arithmatex">\(\lambda \in [94, 131, 171 , 193, 211, 304, 335, 1600, 1700, 4500]\)</span>Å (angstroms). Pour avoir une idée des mesures à ces différentes longueurs d’onde, vous pouvez vous rendre à l’adresse <a href="http://sdo.gsfc.nasa.gov/data/">http://sdo.gsfc.nasa.gov/data/</a>, ou bien regarder l’image en haut de la page.</p>
+<p>Durant ce TP, je vous propose d'utiliser les mesures à <span class="arithmatex">\(211\)</span>Å. Les images sont au format JPEG2000 avec l'extension <span class="arithmatex">\(jp2\)</span> et une résolution de <span class="arithmatex">\(4096 \times 4096\)</span>. Dans ce TP, on cherche à illustrer la construction de programmes du type ``puits | commande1 | commande2 ....''. On va :</p>
+<ul>
+<li>récupérer les images, </li>
+<li>les convertir en JPEG, </li>
+<li>les redimensionner, </li>
+<li>y incruster la date et l'heure de la mesure et </li>
+<li>les combiner pour construire une vidéo. </li>
+</ul>
+<p>On va voir dans ce TP l'utilisation d'un certain nombre de programmes tels que <code>bash</code>, <code>lynx</code>, <code>wget</code>, <code>convert</code> (imagemagick), <code>gawk</code>, <code>sed</code> et <code>ffmpeg</code>. On cherche ainsi à ne pas réinventer la roue, votre problème est de produire une vidéo à partir des images brutes et on va voir qu'en assemblant plusieurs briques déjà existantes, on peut facilement résoudre ce problème.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>Attention</strong>: Lors de la mise en place du TP, il peut être intéressant d'utiliser un miroir local en ne récupérant par example que les images de quelques éruptions solaires, à savoir:</p>
+<ul>
+<li>le 07/06/2011 en <span class="arithmatex">\(304\)</span>Å : grosse éruption entre 6h et 7h</li>
+<li>le 31/08/2012 en <span class="arithmatex">\(211\)</span>Å et <span class="arithmatex">\(171\)</span>Å : petite éruption autour de 19h</li>
+<li>le 09/05/2016, Mercure transite entre le soleil et la terre vers 11h30</li>
+</ul>
+<p>Il y a plusieurs raisons à l'utilisation de ce miroir local: </p>
+<ol>
+<li>les temps d'accès, </li>
+<li>je crains que si tout le monde accède de manière répétée au site jsoc.stanford.edu, nous soyons banis de leur serveur web et donc qu'on ne puisse pas faire correctement le TP, </li>
+<li>on ne surcharge pas inutilement leurs serveurs pour nos TPs.</li>
+</ol>
+<p>Nous allons pour le coup utiliser un miroir local. Demandez moi l'URL ! Dans toute la suite du sujet, il faudra bien penser à remplacer jsoc.stanford.edu par l'adresse vers le serveur infomob.</p>
+</div>
+<h2 id="structure-du-projet">Structure du projet</h2>
+<p>Je vous propose de créer quelques répertoires pour structurer votre projet. Pour les créer, forcez-vous à utiliser les commandes <code>mkdir</code>, <code>ls</code>, etc. depuis un terminal.</p>
+<ul>
+<li>scripts : contiendra la plupart des scripts que vous écrirez,</li>
+<li>raw_images : contiendra de manière temporaire les images brutes au format .jp2,</li>
+<li>images: contiendra les images converties au format jpeg et redimensionnées,</li>
+<li>postproc_images: contiendra les images jpeg dans lesquelles la date et l'heure auront été incrustées</li>
+<li>video : contiendra les vidéos générées</li>
+</ul>
+<p>La figure ci-dessous donne une vision d'ensemble du programme que nous allons écrire.</p>
+<p><a class="glightbox" href="../../assets/soleil_schema.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Vue d'ensemble du pipeline de traitement des données" src="../../assets/soleil_schema.png"></a></p>
+<h2 id="recuperation-des-donnees-dune-journee">Récupération des données d'une journée</h2>
+<p>Le but de cette partie est d'écrire un script Bash qui se charge de récupérer les images d'une journée. Ce script prendra 4 arguments, à savoir :</p>
+<ul>
+<li>l'année YYYY, </li>
+<li>le mois MM, </li>
+<li>le jour DD et </li>
+<li>la longueur d'onde <span class="arithmatex">\(\lambda\)</span> des mesures. </li>
+</ul>
+<p>Il devra produire en sortie le flux des URLs des images de cette journée particulière à la longueur d'onde <span class="arithmatex">\(\lambda\)</span>.</p>
+<p>Si vous allez sur le site <a href="http://jsoc.stanford.edu/data/aia/images">http://jsoc.stanford.edu/data/aia/images</a>, et regardez les images du 31 août 2012, vous constaterez qu'il y a énormément d'images, prises à des heures régulières, mais dont on ne peut pas facilement prédire le nom de fichier. </p>
+<p>On va donc procéder différemment : on va lister l'ensemble des images disponibles dans le répertoire du 31 août 2012 à <span class="arithmatex">\(211\)</span>Å. Pour cela, on va utiliser l'explorateur <code>lynx</code> (n'hésitez pas à appeler man lynx pour en savoir plus). <code>lynx</code> est un explorateur internet textuel, sans fenêtre graphique, qui s'affiche dans la console 😱.</p>
+<div class="admonition question">
+<p class="admonition-title">Question</p>
+<p>Lancez lynx, décortiquez l'interface pour effectuer une recherche sur un
+moteur de recherche </p>
+</div>
+<p>Je suis d’accord avec vous, cette manière d’explorer internet n’est pas très confortable. Mais, on peut utiliser lynx pour récupérer le contenu d’une page grâce à l’option dump <code>lynx -dump URL</code>. En ajoutant l’option <code>-listonly</code>, on ne récupère que la liste des références (les liens vers les images dans notre cas). Essayez la commande ci-dessous :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>lynx<span class="w"> </span>-dump<span class="w"> </span>-listonly<span class="w"> </span>http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/<span class="w"> </span><span class="p">|</span><span class="w"> </span>less
+</span></code></pre></div>
+<p>Il apparaît le contenu de la page, converti en texte, dans lequel vous pouvez naviguer avec les flèches directionnelles. Le contenu affiché devrait ressembler à ça :</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>References
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>   1. https://jsoc1.stanford.edu/data/aia/images/2012/08/31/
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>   2. https://jsoc1.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_00_11_63__SDO_AIA_AIA_211.jp2
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>   3. https://jsoc1.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_00_47_62__SDO_AIA_AIA_211.jp2
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>   4. https://jsoc1.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_01_23_62__SDO_AIA_AIA_211.jp2
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>   5. https://jsoc1.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_01_59_62__SDO_AIA_AIA_211.jp2
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>   6. https://jsoc1.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_02_35_62__SDO_AIA_AIA_211.jp2
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>   7. https://jsoc1.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_03_11_62__SDO_AIA_AIA_211.jp2
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>   8. https://jsoc1.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_03_47_62__SDO_AIA_AIA_211.jp2
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>   9. https://jsoc1.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_04_23_63__SDO_AIA_AIA_211.jp2
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>  10. https://jsoc1.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_04_59_62__SDO_AIA_AIA_211.jp2
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>  11. https://jsoc1.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_05_35_62__SDO_AIA_AIA_211.jp2
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>  12. https://jsoc1.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_06_11_63__SDO_AIA_AIA_211.jp2
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>  13. https://jsoc1.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_06_47_62__SDO_AIA_AIA_211.jp2
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>  14. https://jsoc1.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_07_23_62__SDO_AIA_AIA_211.jp2
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>  15. https://jsoc1.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_07_59_62__SDO_AIA_AIA_211.jp2
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>  16. https://jsoc1.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_08_35_62__SDO_AIA_AIA_211.jp2
+</span></code></pre></div>
+<p>Notez qu'on a redirigé la sortie standard de lynx dans l'entrée standard de <code>less</code>. <code>less</code> est un programme qui permet de parcourir du contenu texte (e.g. un fichier, mais il peut également lire depuis l'entrée standard).</p>
+<div class="admonition question">
+<p class="admonition-title">Question</p>
+<p><strong>Écrivez</strong> un script bash <code>scripts/get_index.sh</code> qui :</p>
+<ul>
+<li>prenne le jour, le mois, l'année et la longueur d'onde des mesures à récupérer</li>
+<li>récupère le contenu de la page grâce à <code>lynx -dump -listonly</code></li>
+<li>redirige dans la sortie standard le contenu téléchargé (on pourra utiliser le programme <code>cat</code> pour afficher dans la sortie standard le contenu d'un fichier)</li>
+</ul>
+</div>
+<h2 id="extraire-les-urls-des-images">Extraire les URLs des images</h2>
+<p>Le contenu affiché par le script précédent contient beaucoup d'informations. On souhaite en extraire les URLs vers les images listées sur la page. Les URLs que nous cherchons à extraire ont un format très particulier ; elles commencent par "http://"  et finissent par ".jp2". Pour filtrer les lignes qui ne contiennent que ce motif, on va utiliser <code>gawk</code> et ce qu'on appelle des expressions régulières.</p>
+<p><code>awk</code> est un programme qui applique un programme sur un fichier (ou l'entrée standard) ligne par ligne. Un programme awk est de la forme </p>
+<blockquote>
+<p>awk 'pattern { action }'</p>
+</blockquote>
+<p><code>awk</code> comprends ce mini-programme comme :</p>
+<blockquote>
+<p>si la ligne est filtrée par le patron <em>pattern</em> alors, on réalise l'action <em>action</em>"</p>
+</blockquote>
+<p>Par ailleurs, <code>awk</code> divise la ligne selon un séparateur (modifiable par l'option <code>-FS sep</code>), qui est l'espace par défaut.</p>
+<p>Prenons un exemple concret. Exécutez votre script <code>get_index.sh</code> et redirigez la sortie standard dans un fichier :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>bash:$<span class="w"> </span>./scripts/get_index.sh<span class="w"> </span><span class="m">31</span><span class="w"> </span><span class="m">08</span><span class="w"> </span><span class="m">2012</span><span class="w"> </span><span class="m">211</span><span class="w"> </span>&gt;<span class="w"> </span>31_08_2012_211
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>bash:$<span class="w"> </span>less<span class="w"> </span>31_08_2012_211
+</span></code></pre></div>
+<p>On y retrouve bien la liste des liens vers les images. On va maintenant lire le fichier avec <code>cat</code> et le faire passer par <code>awk</code>.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>bash:$<span class="w"> </span>cat<span class="w"> </span>31_08_2012_211<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">'{ print $0 }'</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>bash:$<span class="w"> </span>cat<span class="w"> </span>31_08_2012_211<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">'{ print $1 }'</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>bash:$<span class="w"> </span>cat<span class="w"> </span>31_08_2012_211<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">'{ print $2 }'</span>
+</span></code></pre></div>
+<p>Si vous voulez voir plus en détails la sortie de awk, n'hésitez pas à rediriger sa sortie dans less en ajoutant <code>| less</code>. </p>
+<p>Les <em>pattern</em> et <em>action</em> du programme <code>awk</code> peuvent prendre plusieurs formes (voir <a href="http://www.gnu.org/software/gawk/manual/gawk.html#Patterns-and-Actions">http://www.gnu.org/software/gawk/manual/gawk.html#Patterns-and-Actions</a>), on ne va en voir ici que certaines d'entre elles. Dans l'exemple ci-dessus, nous n'avons pas précisé de <em>pattern</em>, toutes les lignes sont ainsi retenues et vous avez dû constater que la première commande affiche toute la ligne, la deuxième seulement le numéro du lien et la dernière l'adresse. Quand <code>awk</code> parcours une ligne, il crée plusieurs variables utilisables dans les <em>pattern</em> et <em>action</em>, en particulier les variables $0, $1, ... $NF qui permettent d'accéder aux champs extraits par <code>awk</code> (<a href="http://www.gnu.org/software/gawk/manual/gawk.html#Fields}">http://www.gnu.org/software/gawk/manual/gawk.html#Fields</a>. $0 est une variable particulière qui contient toute la ligne lue par <code>awk</code>. Les champs sont accessibles par les variables $1, $2, ... ; Il y a également d'autres variables, comme NF égal au nombre de champs dans la ligne, de telle sorte que $NF sera toujours le dernier champ extrait. La variable NR contient le numéro de ligne lu, etc.</p>
+<p>À titre d'exemple, on peut facilement décoder la lettre envoyée par George Sand à Alfred de Musset ci-dessous :</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Cher ami,
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>Je suis toute émue de vous dire que j'ai
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>bien compris l'autre jour que vous aviez
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>toujours une envie folle de me faire
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>danser. Je garde le souvenir de votre
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>baiser et je voudrais bien que ce soit
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>une preuve que je puisse être aimée
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>par vous. Je suis prête à montrer mon
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>affection toute désintéressée et sans cal-
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>cul, et si vous voulez me voir ainsi
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>vous dévoiler, sans artifice, mon âme
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>toute nue, daignez me faire visite,
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>nous causerons et en amis franchement
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>je vous prouverai que je suis la femme
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>sincère, capable de vous offrir l'affection
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>la plus profonde, comme la plus étroite
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>amitié, en un mot : la meilleure épouse
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>dont vous puissiez rêver. Puisque votre&gt;
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>âme est libre, pensez que l'abandon ou je
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>vis est bien long, bien dur et souvent bien&gt;
+</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>insupportable. Mon chagrin est trop
+</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>gros. Accourrez bien vite et venez me le
+</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>faire oublier. À vous je veux me sou-
+</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>mettre entièrement.
+</span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>Votre poupée 
+</span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>\end{verbatim}
+</span><span id="__span-4-27"><a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>\end{center}
+</span></code></pre></div>
+<p>en utilisant la commande awk : </p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>awk<span class="w"> </span><span class="s1">'NR % 2 == 1 { print $0 }'</span>
+</span></code></pre></div>
+<p>qui permet d'afficher toutes les lignes d'indice impair. La réponse de Musset ci-dessous :</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Quand je mets à vos pieds un éternel hommage,
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>Voulez-vous qu'un instant je change de visage ?
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>Vous avez capturé les sentiments d'un coeur
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>Que pour vous adorer forma le créateur.
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>Je vous chéris, amour, et ma plume en délire
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>Couche sur le papier ce que je n'ose dire.
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>Avec soin de mes vers lisez les premiers mots,
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>Vous saurez quel remède apporter à mes maux. 
+</span></code></pre></div>
+<p>se décrypte facilement en utilisant awk. Le programme <code>decode_musset.awk</code> ci-dessous permet en effet de le décrypter :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>awk<span class="w"> </span>-f<span class="w"> </span>decode_musset.awk<span class="w"> </span>musset_sand.txt
+</span></code></pre></div>
+<p>Dans le programme AWK, ORS signifie <strong>Output Record Separator</strong> c'est-à-dire le caractère utilisé entre chaque résultat filtré.</p>
+<p><strong>decode_musset.awk</strong>
+</p><div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>BEGIN<span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nv">ORS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">" "</span><span class="w"> </span><span class="o">}</span><span class="w"> </span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="o">{</span><span class="w"> </span>print<span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="o">}</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>END<span class="w"> </span><span class="o">{</span><span class="w"> </span>print<span class="w"> </span><span class="s2">"? \n"</span><span class="w"> </span><span class="o">}</span>
+</span></code></pre></div>
+<p>Le premier exemple utilise une expression arithmétique <code>NR % 2 == 1</code> comme <em>pattern</em>. On peut aussi utiliser des expressions régulières. Par exemple, pour vérifier si une ligne contient une URL vers une image au format jp2, on peut utiliser la commande awk : </p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>awk<span class="w"> </span><span class="err">'</span>/http:<span class="se">\/\\</span>/.*<span class="se">\.</span>jp2/<span class="w"> </span><span class="o">{</span><span class="w"> </span>print<span class="w"> </span><span class="nv">$2</span><span class="w"> </span><span class="o">}</span>
+</span></code></pre></div>
+<p>Cette commande un peu étrange recherche, dans la ligne courante, une chaîne de caractère de la forme http:// (<code>http:\/\/</code>), suivi d'un nombre arbitraire de caractères (<code>.*</code>), suivi de .jp2 (<code>\.jp2</code>). Si cette expression régulière est vérifiée, alors le deuxième champ $2 est affiché. </p>
+<div class="admonition question">
+<p class="admonition-title">Question</p>
+<p>Ecrivez un script bash <code>scripts/extract_url.sh</code> qui, étant donné la liste des références obtenues avec Lynx, produise un flux dans la sortie standard des URL des images.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Question</p>
+<p>Testez le script que vous venez d'écrire en lui donnant en entrée un contenu récupéré par Lynx. Je vous propose d'utiliser le fichier 2012_08_31_211 que avez créé précédemment. Pour lire ce fichier et le rediriger vers l'entrée standard, nous utilisons la commande <code>cat</code>. Vous pouvez donc vérifier le fonctionnement de votre script par la commande ci-dessous~:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>cat<span class="w"> </span>31_08_2012_211<span class="w"> </span><span class="p">|</span><span class="w"> </span>./scripts/extract_url.sh
+</span></code></pre></div>
+</div>
+<p>Cela devrait vous afficher les URLs de toutes les images. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Pour n'en afficher qu'une partie, par exemple les 10 premières ou 10 dernières, vous pouvez utiliser les commandes <code>head</code> et <code>tail</code>:
+</p><div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>cat<span class="w"> </span>31_08_2012_211<span class="w"> </span><span class="p">|</span><span class="w"> </span>./scripts/extract_url.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-10
+</span></code></pre></div>
+<p>Ce qui devrait produire:
+</p><div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_00_11_63__SDO_AIA_AIA_211.jp2
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_00_47_62__SDO_AIA_AIA_211.jp2
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_01_23_62__SDO_AIA_AIA_211.jp2
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_01_59_62__SDO_AIA_AIA_211.jp2
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_02_35_62__SDO_AIA_AIA_211.jp2
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_03_11_62__SDO_AIA_AIA_211.jp2
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_03_47_62__SDO_AIA_AIA_211.jp2
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_04_23_63__SDO_AIA_AIA_211.jp2
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_04_59_62__SDO_AIA_AIA_211.jp2
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_05_35_62__SDO_AIA_AIA_211.jp2
+</span></code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>cat<span class="w"> </span>31_08_2012_211<span class="w"> </span><span class="p">|</span><span class="w"> </span>./scripts/extract_url.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-10
+</span></code></pre></div>
+<p>ce qui devrait produire:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__23_54_11_62__SDO_AIA_AIA_211.jp2
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__23_54_47_62__SDO_AIA_AIA_211.jp2
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__23_55_23_62__SDO_AIA_AIA_211.jp2
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__23_55_59_62__SDO_AIA_AIA_211.jp2
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__23_56_35_63__SDO_AIA_AIA_211.jp2
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__23_57_11_62__SDO_AIA_AIA_211.jp2
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__23_57_47_62__SDO_AIA_AIA_211.jp2
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__23_58_23_62__SDO_AIA_AIA_211.jp2
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__23_58_59_62__SDO_AIA_AIA_211.jp2
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__23_59_35_62__SDO_AIA_AIA_211.jp2
+</span></code></pre></div>
+</div>
+<p>Si vous voulez savoir combien d'images sont ainsi disponibles, on peut utiliser un compteur, incrémenté chaque fois que l'expression régulière est vérifiée :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>awk<span class="w"> </span><span class="s1">'BEGIN { sum = 0 } /http:\/\/.*\.jp2/ { sum = sum + 1 } END { print sum }'</span>
+</span></code></pre></div>
+<p>Sur le fichier de dump utilisé précédemment, cela nous donne <span class="arithmatex">\(2426\)</span> images.</p>
+<h2 id="affichage-partiel-du-flux-durl-des-images">Affichage partiel du flux d’URL des images</h2>
+<p>On peut maintenant tester nos deux premiers scripts en les mettant "bout à bout". </p>
+<div class="admonition question">
+<p class="admonition-title">Question</p>
+<p>Ecrivez un script <code>all.sh</code> qui :</p>
+<ul>
+<li>prend en paramètres quatre arguments : <code>DD</code>, <code>MM</code>, <code>YYYY</code> et <code>lambda</code></li>
+<li>utilise <code>scripts/get_index.sh</code> pour extraire les références de la page d'images à la date et longueur d’onde données</li>
+<li>passe ces références à <code>scripts/extract_url.sh</code> pour obtenir les URL des images</li>
+<li>affiche ces URL</li>
+</ul>
+</div>
+<p>Pour l'affichage, vous pourrez vérifier que vous capturez bien les premières et dernières images en n'affichant qu'une
+partie du flux des URLs à l'aide des commandes head et tail.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Utilisez <code>head</code> ou <code>tail</code> pour n’en afficher qu’une partie et vérifier que ça fonctionne.</p>
+</div>
+<h2 id="telechargement-des-images">Téléchargement des images</h2>
+<p>Nous avons généré, grâce à la commande précédente, un flux dans la sortie standard d'URL des images jp2 qui nous intéressent. Nous souhaitons maintenant télécharger ces images. Pour ce faire, nous allons utiliser la commande <code>wget</code>. L'utilisation la plus simple de <code>wget</code> est de l'appeler par <code>wget url</code>, par exemple :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>wget<span class="w"> </span>http://jsoc.stanford.edu/data/aia/images/2012/08/31/211/2012_08_31__00_00_23_34__SDO_AIA_AIA_211.jp2
+</span></code></pre></div>
+<p>télécharge l'image. Vous remarquerez que l'image téléchargée est placée dans le répertoire d'appel de la commande, le répertoire courant. </p>
+<p>On souhaite que les images téléchargées soient placées dans le répertoire raw_images. </p>
+<div class="admonition question">
+<p class="admonition-title">Question</p>
+<p>A l'aide de la page du manuel de wget (accessible par <code>man wget</code>), et en regardant en particulier les options -nd et -P, <strong>écrivez un script</strong> <code>scripts/telecharge_img.sh</code> qui télécharge les images dont les URLs sont fournies sur l'entrée standard et les place dans le répertoire <code>raw_images</code></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Notez qu'on pourrait aussi changer de répertoire dans le script <code>telecharge_img.sh</code>, pour se placer dans <code>raw_images</code>, avant de télécharger l'image</p>
+</div>
+<p>La deuxième chose à faire est d'afficher dans la sortie standard le chemin vers l'image téléchargée. Pourquoi ? parce qu'on souhaite poursuivre les traitements en indiquant au futur script de traitement d'image sur quelle image travailler. Comment faire ? Votre script <code>scripts/telecharge_img.sh</code> attends une URL dans l'entrée standard. Ce que nous allons faire, c'est utiliser awk avec pour <em>action</em> d'afficher le dernier champ ($NF) lorsque la ligne est divisée selon le séparateur '/'. Regardons un exemple :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"http://un.exemple/durl/monimage.jp2"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span>-F/<span class="w"> </span><span class="s1">'{print $NF}'</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>monimage.jp2
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>$<span class="w"> </span><span class="nv">filename</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"http://un.exemple/durl/monimage.jp2"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span>-F/<span class="w"> </span><span class="s1">'{print $NF}'</span><span class="sb">`</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"./raw_images/</span><span class="nv">$filename</span><span class="s2">"</span><span class="w"> </span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>./raw_images/monimage.jp2
+</span></code></pre></div>
+<p>On retrouve ici plusieurs choses. La première est l'exécution d'une commande (entre les <em>backquotes</em> `...`) et l'affectation du résultat dans la variable filename. La deuxième est la construction à la volée de la chaîne de caractères correspondant au chemin vers l'image.</p>
+<div class="admonition question">
+<p class="admonition-title">Question</p>
+<p><strong>Ajoutez l'appel</strong> à votre script <code>scripts/telecharge_img.sh</code> dans le script <code>all.sh</code>. </p>
+</div>
+<p>En exécutant votre script, vous devriez voir la sortie ci-dessous :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>$<span class="w"> </span>./all.sh<span class="w"> </span><span class="m">31</span><span class="w"> </span><span class="m">08</span><span class="w"> </span><span class="m">2012</span><span class="w"> </span><span class="m">211</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>./raw_images/2012_08_31__00_00_11_63__SDO_AIA_AIA_211.jp2
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>./raw_images/2012_08_31__00_00_47_62__SDO_AIA_AIA_211.jp2
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>./raw_images/2012_08_31__00_01_23_62__SDO_AIA_AIA_211.jp2
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>./raw_images/2012_08_31__00_01_59_62__SDO_AIA_AIA_211.jp2
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>./raw_images/2012_08_31__00_02_35_62__SDO_AIA_AIA_211.jp2
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>./raw_images/2012_08_31__00_03_11_62__SDO_AIA_AIA_211.jp2
+</span></code></pre></div>
+<h2 id="traitement-des-images">Traitement des images</h2>
+<p>Nous avons récupéré une collection d'images au format JPEG2000 ".jp2". On souhaite :</p>
+<ol>
+<li>décompresser l'image noir et blanc du fichier jp2, </li>
+<li>la redimensionner et y incruster la date/heure de la mesure et éventuellement lui appliquer un gradient de couleur (on en parle à la fin du sujet, en bonus). </li>
+</ol>
+<p>Pour cela, on va écrire un script Bash qui va essentiellement utiliser les outils opj_decompress et <a href="../../outils/images/">convert</a> sur toutes les images dont le chemin est transmis sur l'entrée standard, ainsi que quelques outils de réécriture pour transformer le nom du fichier d'image qui contient l'heure et la date de la mesure.</p>
+<p>Commençons par prendre en main <code>convert</code>. Comme vous pourrez le lire sur <a href="../../outils/images/">la page dédiée à cet outil</a>, <code>convert</code> est un des outils fournis par ImageMagick, GraphicsMagick, .. et qui permet de manipuler des images: </p>
+<ul>
+<li>convertir d'un format à un autre en appliquant éventuellement un nombre arbitraire de filtres, </li>
+<li>redimensionner les images, </li>
+<li>y introduire du texte, </li>
+<li>y appliquer des effets (l'effet polaroid est très sympa)</li>
+<li>combiner plusieurs images, </li>
+<li>etc.</li>
+</ul>
+<div class="admonition question">
+<p class="admonition-title">Question</p>
+<p>Commencez par vous assurer que vous disposez d'une image au format ".jp2" dans le répertoire <code>raw_images</code>. Appelons la "img.jp2". </p>
+<p>Utilisez opj_decompress pour convertir l'image jp2 en pgm (cf. <code>man opj_decompress</code>). </p>
+<p>Utilisez <code>convert</code> et l'option resize pour redimensionner l'image "img.jp2" à 10% de sa taille d'origine et la convertir en l'image "img.jpg".  </p>
+</div>
+<p>Vous savez alors décompresser l'image jp2 et la redimensionner, il ne nous reste plus qu'à appliquer cette opération sur toutes les images dont le chemin est fourni sur l'entrée standard.</p>
+<p>Nous <strong>allons</strong> (mais lisez la suite avant de commencer) écrire un script <code>scripts/convert_img.sh</code> qui va :</p>
+<ul>
+<li>lire des chemins vers des images au format jp2 depuis l'entrée standard (voir p.\pageref{p:entrees_sorties_standards})</li>
+<li>construire la chaîne de caractères du chemin vers l'image au format jpg (utilisez sed), sachant que l'image cible doit être sauvegardée dans le répertoire <code>image</code></li>
+<li>convertisse et redimensionne l'image source en l'image cible à 10% de sa taille (utilisez <code>convert</code>)</li>
+<li>affiche dans la sortie standard le chemin vers l'image cible </li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Indications</strong> Pour construire le chemin vers l'image cible, il faut plusieurs choses: extraire le nom du fichier passé dans l'entrée standard (commande \basename), remplacer l'extension jp2 par jpg (utiliser \sed), concaténer le répertoire cible avec le nom du fichier image cible. Quelques exemples de ces outils sont donnés ci-dessous~:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>$<span class="w"> </span>basename<span class="w"> </span>moncheminversune/image.jp2
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>image.jp2
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>image.jp2<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">'s/.jp2/.jpg/'</span>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>image.jpg
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>$<span class="w"> </span><span class="nv">filename</span><span class="o">=</span>image.jpg<span class="p">;</span><span class="w"> </span><span class="nv">output_path</span><span class="o">=</span>output/<span class="nv">$filename</span><span class="p">;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$output_path</span>
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>output/image.jpg
+</span></code></pre></div>
+</div>
+<p>On voit ici un premier exemple d'utilisation de sed pour faire de la substitution; c'est la signification du prefixe 's' lors de l'appel à sed. L'argument passé à sed se lit 's/chaine de caractère source/chaine de caratère destination/'; Ainsi 's/.jp2/.jpg/' remplace la <strong>première</strong> occurrence de ".jp2" par ".jpg"; Si jamais vous voulez remplacer toutes les occurrences d'une chaine par une autre, il vous suffit d'ajouter le suffixe g, par exemple 's/.jp2/.jpg/g'.</p>
+<div class="admonition question">
+<p class="admonition-title">Question</p>
+<p>A vous de jouer en écrivant et testant le script <code>scripts/convert_img.sh</code></p>
+</div>
+<h2 id="incrustation-de-la-date-et-de-lheure-de-la-mesure">Incrustation de la date et de l'heure de la mesure</h2>
+<p>On souhaite maintenant incruster la date et l'heure de la mesure dans chacune des images comme on le montre sur la figure ci-dessous :</p>
+<p><a class="glightbox" href="../../assets/soleil_date_0.jpg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image sans date" src="../../assets/soleil_date_0.jpg" width="30%"></a>
+<a class="glightbox" href="../../assets/soleil_date_1.jpg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image avec date" src="../../assets/soleil_date_1.jpg" width="30%"></a></p>
+<p>Ce qui est pratique, c'est que la date et l'heure de la mesure se trouvent dans le nom de chaque image. Il suffit donc de transformer le nom de fichier d'une image pour obtenir la chaîne de caractères à incruster dans l'image, par exemple :</p>
+<p>2012_08_31__00_00_23_34__SDO_AIA_AIA_211.jpg <span class="arithmatex">\(\mapsto\)</span> 01/05/2013 00:00</p>
+<p>Ce travail de réécriture peut être fait à l'aide de <code>sed</code> en plusieurs étapes en passant par les réécritures suivantes :</p>
+<ol>
+<li>2012_08_31__00_00_23_34__SDO_AIA_AIA_211.jpg</li>
+<li><span class="arithmatex">\(\mapsto\)</span> 2012_08_31__00_00 </li>
+<li><span class="arithmatex">\(\mapsto\)</span> 2012_08_31 00_00</li>
+<li><span class="arithmatex">\(\mapsto\)</span> 01/05/2013 00:00 </li>
+</ol>
+<p>Le passage de (1) à (2) peut se faire en supprimant (i.e. remplacer par une chaîne vide) un motif de la forme "_dd...d_dd...d__SDO_AIA_dd...d" ou "dd...d" indique une séquence de longueur arbitraire de chiffre entre 0 et 9. Le motif pour caractériser un nombre arbitraire de chiffres entre 0 et 9 est "[0-9]*". </p>
+<p>Le passage de l'étape (2) à l'étape (3) se fait en remplaçant le motif "__" par " ". </p>
+<p>Le passage de (3) à (4) peut se faire facilement en utilisant la capture de groupe. Prenons un exemple :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>2012_08_31<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-r<span class="w"> </span><span class="s1">'s/([0-9]*)_([0-9]*)_([0-9]*)/\3:\2:\1/'</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="m">31</span>:08:2012
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>2012_08_31<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-r<span class="w"> </span><span class="s1">'s/([0-9]*)_([0-9]*)_([0-9]*)/\3\/\2\/\1/'</span>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="m">31</span>/08/2012
+</span></code></pre></div>
+<p>On remarquera l'utilisation de l'option "-r" qui permet d'utiliser des expressions régulières étendues (par opposition aux expressions régulières de base) et facilite l'écriture de l'expression régulière pour des groupes, c'est à dire les parties de l'expression de la forme "([0-9]*)". Si nous voulions utiliser les expressions régulières de base, nous aurions dû l'écrire "\([0-9]*\)".</p>
+<p>Nous sommes maintenant capables de construire la chaîne de caractères à insérer sur l'image. Il reste ... à l'insérer. Pour cela, on peut utiliser <code>convert</code> et son "-draw". </p>
+<p>Vous pouvez tester les commandes ci-dessous sur une image redimensionnée qu'on appellera img.jpg~:
+</p><div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>$<span class="w"> </span>convert<span class="w"> </span>img.jpg<span class="w"> </span>-fill<span class="w"> </span>white<span class="w"> </span>-draw<span class="w"> </span><span class="s2">"text 0,20 'Un super texte'"</span><span class="w"> </span>res.jpg<span class="w"> </span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>$<span class="w"> </span>convert<span class="w"> </span>img.jpg<span class="w"> </span>-pointsize<span class="w"> </span><span class="m">20</span><span class="w"> </span>-fill<span class="w"> </span>white<span class="w"> </span>-draw<span class="w"> </span><span class="s2">"text 0,20 'Un super texte'"</span><span class="w"> </span>res.jpg<span class="w"> </span>
+</span></code></pre></div>
+<div class="admonition question">
+<p class="admonition-title">Question</p>
+<p>Vous pouvez maintenant intégrer les deux éléments précédents dans un script <code>scripts/ecrit_date.sh</code> qui prend des chemins d'image dans l'entrée standard, et utilise convert et sed pour incruster la date et l'heure dans l'image et sauvegarder les résultats dans le répertoire <code>postproc_images</code></p>
+</div>
+<p>Il reste une dernière chose à faire dans votre script <code>scripts/ecrit_date.sh</code>. Quand nous allons regrouper les images pour en former une vidéo, il faut que les images portent des noms de fichier qui soient des nombres consécutifs, ie 00000.jpg, 00001.jpg, etc. ; On peut facilement l'ajouter dans le script Bash, en utilisant un compteur incrémenté à chaque fois qu'une image est traitée et utiliser la valeur de ce compteur pour construire le nom du fichier cible. Par exemple :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>$<span class="w"> </span><span class="nv">count</span><span class="o">=</span><span class="m">0</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$count</span>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="m">0</span>
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>$<span class="w"> </span><span class="nv">count</span><span class="o">=</span><span class="k">$(</span>expr<span class="w"> </span><span class="nv">$count</span><span class="w"> </span>+<span class="w"> </span><span class="m">1</span><span class="k">)</span>
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$count</span>
+</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="m">1</span>
+</span></code></pre></div>
+<div class="admonition question">
+<p class="admonition-title">Question</p>
+<p>Vous pouvez terminer votre script en affichant dans la sortie standard le nom du fichier généré. </p>
+</div>
+<p>Sachez néanmoins que notre pipeline s'arrête là. La dernière étape qui consiste à créer une vidéo à partir des images se fait une fois que tout le pipeline précédent est terminé.</p>
+<div class="admonition question">
+<p class="admonition-title">Question</p>
+<p>Ajoutez l'appel à votre script <code>scripts/ecrit_date.sh</code> dans le script <code>all.sh</code>.</p>
+</div>
+<h2 id="et-finalement-la-video">Et finalement, la vidéo</h2>
+<p>Il nous reste à voir une dernière chose: comment fabriquer une vidéo à partir d'une collection d'images? En arrivant à cette partie, vous devez déjà disposer d'un script <code>all.sh</code> qui, lorsqu'il est exécuté, produit une séquence d'images numérotées successivement dans le répertoire <code>postproc_images</code>, à la bonne taille, au format jpg, et dans lesquelles la date et l'heure sont incrustées.</p>
+<p>De manière générale, pour produire une vidéo à partir d'une séquence d'images numérotées successivement, il <a href="../../outils/video/">existe plusieurs outils</a>, notamment mencoder, ffmpeg, avconv. Nous allons ici utiliser <code>ffmpeg</code> </p>
+<p>La façon la plus simple de générer une vidéo à partir d'une collection d'images JPEG est d'appeler la commande ci-dessous :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>$<span class="w"> </span>ffmpeg<span class="w"> </span>-i<span class="w"> </span>mesimages/%05d.jpg<span class="w"> </span>mavideo.mp4
+</span></code></pre></div>
+<p>J'ai ici supposé que les images étaient numérotées sur <span class="arithmatex">\(5\)</span> chiffres, c'est ce qu'indique le format "%05d", i.e. un nombre sur <span class="arithmatex">\(5\)</span> chiffres éventuellement précédés de <span class="arithmatex">\(0\)</span>.\</p>
+<p>La vidéo ainsi générée peut paraître lente. C'est dû à ce qu'on appelle le <em>frame rate</em>, i.e. combien d'images sont affichées par seconde. Sachant que nous disposons d'environ <span class="arithmatex">\(2500\)</span> images pour une journée, si on souhaite que le film ne dure que <span class="arithmatex">\(10\)</span> secondes, il va falloir utiliser une vitesse de lecture des images de <span class="arithmatex">\(250\)</span> images par secondes. </p>
+<p>On peut changer la vitesse de lecture de la séquence d'images en précédant l'option "-i" par une option "-r" comme suit :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>$<span class="w"> </span>ffmpeg<span class="w"> </span>-r<span class="w"> </span><span class="m">250</span><span class="w"> </span>-i<span class="w"> </span>mesimages/%05d.jpg<span class="w"> </span>-r<span class="w"> </span><span class="m">25</span><span class="w"> </span>mavideo.mp4
+</span></code></pre></div>
+<p>Pour visualiser la vidéo, vous pouvez faire appel à mplayer, vlc, etc. :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>vlc<span class="w"> </span>mavideo.mp4
+</span></code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>Super important</strong> N'oubliez pas de faire le ménage sur votre compte en enlevant notamment les images dans les répertoires <code>raw_images</code>, <code>images</code> et <code>postproc_images</code>, soyons numériquement responsables !</p>
+</div>
+<h2 id="en-bonus-appliquer-des-fausses-couleurs">En bonus: appliquer des fausses couleurs</h2>
+<p>Jusqu'à maintenant, nous avons utilisé des images noir et blanc. Simplement, la vidéo est beaucoup plus sympa si nous lui appliquons des fausses couleurs. </p>
+<p>Pour appliquer des fausses couleurs, une façon de faire est de se construire un gradient de couleur qui sera indéxé par la luminance de l'image. On peut par exemple créer un gradient sous gimp, ci-dessous une image <span class="arithmatex">\(600\times 30\)</span> avec un dégradé "incandescent".</p>
+<p><a class="glightbox" href="../../assets/soleil_gradient.jpg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Gradient de couleur" src="../../assets/soleil_gradient.jpg" width="100%"></a></p>
+<p>L'application du gradient sur l'image noir et blanc peut alors se faire grâce à imagemagick. Imagemagick sait en effet utiliser des tables de conversion de couleur, voir <a href="http://www.imagemagick.org/Usage/color_mods/#color_lut">http://www.imagemagick.org/Usage/color_mods/#color_lut</a>  (LUT = Look-Up Table):</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>$<span class="w"> </span>convert<span class="w"> </span>src.jpg<span class="w"> </span>-colorspace<span class="w"> </span>gray<span class="w"> </span>gradient.jpg<span class="w"> </span>-clut<span class="w"> </span>out.jpg
+</span></code></pre></div>
+<p>Ce qui nous donne :</p>
+<p><a class="glightbox" href="../../assets/soleil_greyscale.jpg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image du soeil en niveau de gris" src="../../assets/soleil_greyscale.jpg" width="45%"></a>
+<a class="glightbox" href="../../assets/soleil_false_color.jpg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image du soeil en fausses couleurs" src="../../assets/soleil_false_color.jpg" width="45%"></a></p>
+<h2 id="notes-dinstallation-pour-refaire-le-tp-chez-vous">Notes d'installation pour refaire le TP chez vous</h2>
+<p>Si vous voulez refaire ce TP chez vous, vous devez installer certains paquets qui ne sont pas installés par défaut. </p>
+<p>Sous Fedora, vous devez exécuter :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>su<span class="w"> </span>-c<span class="w"> </span><span class="s1">'dnf install -y ffmpeg ImageMagick mplayer'</span>
+</span></code></pre></div>
+<p>en ayant au préalable installé les dépots <a href="http://rpmfusion.org/">rpmfusion</a>. </p>
+<p>Sous Ubuntu, </p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>avconv<span class="w"> </span>imagemagick<span class="w"> </span>mplayer<span class="w"> </span>openjpeg-tools<span class="w"> </span>lynx
+</span></code></pre></div>
+<p>devrait faire l'affaire.</p></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://jeremyfix.github.io/OutilsLibres/">Outils du logiciel libre pour l'ingénieur</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://jeremyfix.github.io">Jeremy Fix</a> is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p> 
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "toc.follow", "toc.integrate"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+      
+        <script src="../../js/mathjax.js"></script>
+      
+        <script src="../../js/asciinema-player.min.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

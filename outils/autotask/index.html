@@ -1,0 +1,1190 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://jeremyfix.github.io/OutilsLibres/outils/autotask/">
+      
+      
+        <link rel="prev" href="../correction/">
+      
+      
+        <link rel="next" href="../num/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Automatisation de tâches avec Makefile (make) - Les outils du logiciel libre pour l'ingénieur</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/asciinema-player.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#automatisation-de-taches-avec-makefile-make" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
+    <a href="../.." title="Les outils du logiciel libre pour l&#39;ingénieur" class="md-header__button md-logo" aria-label="Les outils du logiciel libre pour l'ingénieur" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Les outils du logiciel libre pour l'ingénieur
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Automatisation de tâches avec Makefile (make)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Rechercher" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Recherche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Effacer" aria-label="Effacer" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initialisation de la recherche
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/jeremyfix/OutilsLibres" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Les outils du logiciel libre pour l&#39;ingénieur" class="md-nav__button md-logo" aria-label="Les outils du logiciel libre pour l'ingénieur" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Les outils du logiciel libre pour l'ingénieur
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/jeremyfix/OutilsLibres" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../familiarisation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Familiarisation avec le système Unix
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Outils
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Outils
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../help/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Obtenir de l'aide sur les outils (stackoverflow, nixcraft, man, info, tldr)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../historique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Utiliser l'historique des commandes dans le shell (history, Ctrl+r)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../remote/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interaction avec une machine distante (ssh, scp, rsync, sshfs, screen, byobu)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../code/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Editeur de texte, IDE (vim, emacs, code)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../correction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Correction orthographique/grammaticale (aspell, hunspell, LanguageTool)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Automatisation de tâches avec Makefile (make)
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Automatisation de tâches avec Makefile (make)
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#makefile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Makefile
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-de-compilation-dun-document-latex" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example de compilation d'un document LaTeX
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variables-et-regles-generiques" class="md-nav__link">
+    <span class="md-ellipsis">
+      Variables et règles génériques
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pour-aller-plus-loin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pour aller plus loin
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../num/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Calculs numériques et symboliques (octave, scilab, numpy, pandas, scipy, sympy, matplotlib, seaborn)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../images/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Manipulation d'images (convert, mogrify, animate, compose, gimp)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rapport/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ecrire un rapport, des slides, un poster avec LaTeX (latexmk)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vectoriel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dessin vectoriel (xfig, inkscape, ipe, graphviz)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../capture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capture d'écran photo et vidéo (OpenBroadcast Studio, gnome-screenshot)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../video/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Assembler des images en vidéo (ffmpeg, avconv)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pdf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Manipulation de documents PDF (pdftk, xournalpp)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../recherche/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Recherche de fichier ou de contenu (grep, rg, find, locate)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../filtrage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Filtrage et manipulation de documents (awk, sed)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compare/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Comparer deux fichiers ou deux arborescences (diff)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Archiver/désarchiver (tar, gzip, zip)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../interface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interface utilisateur (zenity, whiptail)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Produire un site web, par exemple de documentation (mkdocs, jekyll, hugo)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    TP
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            TP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tps/bash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bash à sable
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tps/eruption/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    TP : Eruption solaire et transit de Mercure, à partir des données AIA SDO
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tps/meteo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    TP : Évolution des températures aux États-Unis à partir des données NOAA
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<div><h1 id="automatisation-de-taches-avec-makefile-make">Automatisation de tâches avec Makefile (make)</h1>
+<p>L'utilitaire GNU Make permet de construire des cibles en utilisant des règles à
+partir de dépendances elles-mêmes construites à partir de règles dépendantes
+d'autres dépendances, etc. et tout ceci en s'assurant de n'appeler que les
+règles strictement nécessaires pour finalement produire la cible qui vous
+intéresse. De manière générale<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>, GNU make appelle une recette si jamais la cible
+a une date de modification plus ancienne que ses dépendances.</p>
+<p>On a vu et on verra des commandes à exécuter dans un terminal pour résoudre un certain nombre de problèmes (vérifier l'orthographe d'un texte, travailler des images, regrouper des images pour créer une vidéo, lister/modifier un ensemble de fichiers, compiler un document \LaTeX, compiler un programme, etc.). Il peut devenir difficile de se souvenir de la syntaxe
+d'une commande et la syntaxe peut même devenir compliquée quand on
+souhaite enchaîner des commandes. Imaginez alors devoir enchainer plusieurs de
+ces commandes, un cauchemar. GNU Make est un des outils qui permet d'automatiser l'exécution de tâches. L'outil <code>make</code> est installé avec le paquet <code>make</code> et en général installé par défaut avec la distribution. </p>
+<h2 id="makefile">Makefile</h2>
+<p>L'utilisation de <code>make</code> passe par la définition de fichiers Makefile qui sont traités par la commande make. Ces fichiers peuvent s'appeler <em>GNUmakefile</em>, <em>makefile</em>, ou <em>Makefile</em>. Ils contiennent un ensemble de règles avec une forme canonique :</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>cible: dépendances
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>       commandes
+</span></code></pre></div>
+<p>Une règle doit être comprise comme définissant une recette de cuisine (les commandes) permettant de construire une cible si les dépendances ont changé. Les dépendances sont optionnelles, on en verra un exemple un peu plus loin. <strong>Attention</strong> chaque ligne de commande doit être précédée par une tabulation. </p>
+<h2 id="example-de-compilation-dun-document-latex">Example de compilation d'un document LaTeX</h2>
+<p>On considère un exemple assez standard pour illustrer quelques concepts de Make,
+celui de compiler un document LaTeX. On verra plus tard que pour compiler le
+document <em>document.tex</em>, on peut utiliser l'outil <a href="../rapport/">latexmk</a>. Si on devait l'écrire dans
+le terminal on aurait alors :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$<span class="w"> </span>latexmk<span class="w"> </span>-pdf<span class="w"> </span>document.tex
+</span></code></pre></div>
+<p>Avec make, on peut définir une cible <em>document.pdf</em> et un alias <em>tex</em> de la manière suivante :</p>
+<p><strong>Fichier Makefile</strong>
+</p><div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>document.pdf: document.tex
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    latexmk -pdf document.tex
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>tex: document.pdf
+</span></code></pre></div>
+<p>Maintenant, plus besoin de se souvenir de la commande, un simple appel à </p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>make<span class="w"> </span>tex
+</span></code></pre></div>
+<p>suffit à recompiler le document. D'autre part, le document ne sera recompilé que si document.tex change. La compilation
+d'un document LaTeX produit plusieurs fichiers temporaires à supprimer pour faire le ménage. La cible <em>clean</em> ci-dessous
+est un exemple de cible sans dépendance. On ajoute également la cible <em>all</em> qui est la cible appelée par défaut si on exécute <code>make</code> sans préciser de cible ainsi qu'une cible <em>help</em> pour afficher un message d'aide. <strong>Attention</strong>, je rappelle que chaque ligne de commande est précédée d'une tabulation !(et pas des espaces)}.\</p>
+<p><strong>Fichier Makefile</strong>
+</p><div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>document.pdf: document.tex
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    latexmk -pdf document.tex
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>tex: document.pdf
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>clean:
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    latexmk -C
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>all:
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>    make help
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>help:
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>    @echo "Cibles disponibles:"
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>    @echo "clean : nettoie le répertoire"
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>    @echo "tex  : compile le document"
+</span></code></pre></div>
+<h2 id="variables-et-regles-generiques">Variables et règles génériques</h2>
+<p>Avec <code>make</code>, il existe quelques variables et syntaxes particulières, du style %@, %&lt;, %.o qui permettent d'écrire des règles
+génériques. Ces variables ne sont qu'une partie des variables automatiques
+introduites par <code>make</code> (voir <a href="http://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html#Automatic-Variables">http://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html#Automatic-Variables</a>) pour une liste complète des variables automatiques}. Par exemple, si vous écrivez un Makefile pour compiler un projet C++, la règle de compilation est de la forme : </p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>$<span class="w"> </span>gcc<span class="w"> </span>-c<span class="w"> </span>fichier.cc<span class="w"> </span>-o<span class="w"> </span>fichier.o<span class="w">  </span>-O3<span class="w"> </span>-Wall...
+</span></code></pre></div>
+<p>Si mon projet comprend 3 fichiers c++ à compiler et une phase d'édition de lien pour créer l'exécutable, on
+pourrait l'écrire ainsi <strong>mais c'est la mauvaise façon de procéder</strong> :</p>
+<p><strong>Première proposition, non satisfaisante, de Makefile</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>fichier1.o : fichier1.cc
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>          gcc -c fichier1.cc -o fichier1.o -O3 -Wall
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>fichier2.o : fichier2.cc
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>          gcc -c fichier2.cc -o fichier2.o -O3 -Wall
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>fichier3.o : fichier3.cc
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>          gcc -c fichier3.cc -o fichier3.o -O3 -Wall
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>monbinaire: fichier1.o fichier2.o fichier3.o
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>          gcc -o monbinaire fichier1.o fichier2.o fichier3.o
+</span></code></pre></div>
+<p>Les commandes pour compiler fichier*.cc étant les mêmes, on peut les écrire de manière plus compacte :</p>
+<p><strong>Fichier Makefile</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>%.o : %.cc
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>     gcc -c $&lt; -o $@ -O3 -Wall
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>monbinaire: fichier1.o fichier2.o fichier3.o
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>     gcc -o $^
+</span></code></pre></div>
+<p>En appelant </p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>$<span class="w"> </span>make<span class="w"> </span>monbinaire
+</span></code></pre></div>
+<p>make s'occupe de recompiler les fichiers ainsi que le binaire si nécessaire. La variable $@ fait référence à la cible de la règle, $&lt; fait référence à <strong>la</strong> dépendance et $^ à toutes les dépendances. On trouvera plus d'informations sur ces variables spéciales à l'adresse <a href="http://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html">http://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html</a>.</p>
+<p>Enfin, on peut aussi générer la liste des fichiers à compiler automatiquement. Pour cela, on dispose des fonctions wildcard et patsubst. </p>
+<p><strong>Fichier Makefile</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>OBJ := $(patsubst %.cc,%.o,$(wildcard *.cc))
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>%.o : %.cc
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>     gcc -c $&lt; -o $@ -O3 -Wall
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>monbinaire: $(OBJ)
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>     gcc -o $^
+</span></code></pre></div>
+<p>On a ici construit une variable <code>OBJ</code> qui est une liste construite de la manière suivante : on cherche tous les fichiers avec
+l'extension .cc (<code>wildcard *.cc</code>) et on remplace l'extension .cc par .o. Il suffit alors de changer la dépendance du binaire par le contenu de la variable <code>OBJ</code> et le tour est joué. Maintenant, chaque fois qu'on ajoutera un fichier .cc, il sera automatiquement ajouté à la liste des fichiers à compiler. </p>
+<p>On trouvera plus de détails sur les fonctions <em>wildcard</em> et <em>patsubst</em> ainsi que d'autres fonctions utilisables dans les makefiles aux adresses suivantes :</p>
+<ul>
+<li><a href="http://www.gnu.org/software/make/manual/html_node/Wildcard-Function.html#Wildcard-Function">http://www.gnu.org/software/make/manual/html_node/Wildcard-Function.html#Wildcard-Function</a></li>
+<li><a href="http://www.gnu.org/software/make/manual/html_node/Functions.html#Functions">http://www.gnu.org/software/make/manual/html_node/Functions.html#Functions</a></li>
+</ul>
+<h2 id="pour-aller-plus-loin">Pour aller plus loin</h2>
+<p>Il y a plein d'autres aspects que nous n'avons pas abordés comme l'utilisation de makefile récursifs (un makefile à la racine
+  d'un projet appelant des makefile des répertoires fils), la définition et manipulation de variables, et d'autres éléments
+  expliqués dans la documentation.</p>
+<p>On notera aussi qu'il existe une grande variété d'outils pour automatiser des tâches comme <a href="https://cmake.org">cmake</a>, <a href="https://doc.qt.io/qt-6/qmake-manual.html">qmake</a> (surtout utilisé pour des projets reposant sur la librairie Qt), <a href="https://scons.org/">scons</a> (surtout utilisé dans le monde Python), <a href="https://ant.apache.org/">ant</a> ou <a href="https://maven.apache.org/">maven</a> (surtout utilisé dans le monde Java), <a href="https://gradle.org/">gradle</a>, etc. </p>
+<p>Voir aussi :</p>
+<ul>
+<li><a href="https://fr.wikibooks.org/wiki/Programmation/Make">Programmation/Make sur Wikibooks</a></li>
+<li><a href="https://www.gnu.org/software/make/manual/make.html">Documentation de GNU make</a></li>
+</ul>
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Certaines règles peuvent appliquer de manière inconditionnée, sans prendre
+en compte les dates de modification. <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+</ol>
+</div></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://jeremyfix.github.io/OutilsLibres/">Outils du logiciel libre pour l'ingénieur</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://jeremyfix.github.io">Jeremy Fix</a> is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p> 
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "toc.follow", "toc.integrate"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+      
+        <script src="../../js/mathjax.js"></script>
+      
+        <script src="../../js/asciinema-player.min.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

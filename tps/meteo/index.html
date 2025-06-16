@@ -1,0 +1,1596 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://jeremyfix.github.io/OutilsLibres/tps/meteo/">
+      
+      
+        <link rel="prev" href="../eruption/">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>TP : Évolution des températures aux États-Unis à partir des données NOAA - Les outils du logiciel libre pour l'ingénieur</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/asciinema-player.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#tp-evolution-des-temperatures-aux-etats-unis-a-partir-des-donnees-noaa" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
+    <a href="../.." title="Les outils du logiciel libre pour l&#39;ingénieur" class="md-header__button md-logo" aria-label="Les outils du logiciel libre pour l'ingénieur" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Les outils du logiciel libre pour l'ingénieur
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              TP : Évolution des températures aux États-Unis à partir des données NOAA
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Rechercher" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Recherche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Effacer" aria-label="Effacer" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initialisation de la recherche
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/jeremyfix/OutilsLibres" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Les outils du logiciel libre pour l&#39;ingénieur" class="md-nav__button md-logo" aria-label="Les outils du logiciel libre pour l'ingénieur" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Les outils du logiciel libre pour l'ingénieur
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/jeremyfix/OutilsLibres" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/familiarisation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Familiarisation avec le système Unix
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Outils
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Outils
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/help/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Obtenir de l'aide sur les outils (stackoverflow, nixcraft, man, info, tldr)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/historique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Utiliser l'historique des commandes dans le shell (history, Ctrl+r)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/remote/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interaction avec une machine distante (ssh, scp, rsync, sshfs, screen, byobu)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/code/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Editeur de texte, IDE (vim, emacs, code)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/correction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Correction orthographique/grammaticale (aspell, hunspell, LanguageTool)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/autotask/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Automatisation de tâches avec Makefile (make)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/num/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Calculs numériques et symboliques (octave, scilab, numpy, pandas, scipy, sympy, matplotlib, seaborn)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/images/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Manipulation d'images (convert, mogrify, animate, compose, gimp)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/rapport/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ecrire un rapport, des slides, un poster avec LaTeX (latexmk)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/vectoriel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dessin vectoriel (xfig, inkscape, ipe, graphviz)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/capture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capture d'écran photo et vidéo (OpenBroadcast Studio, gnome-screenshot)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/video/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Assembler des images en vidéo (ffmpeg, avconv)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/pdf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Manipulation de documents PDF (pdftk, xournalpp)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/recherche/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Recherche de fichier ou de contenu (grep, rg, find, locate)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/filtrage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Filtrage et manipulation de documents (awk, sed)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/compare/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Comparer deux fichiers ou deux arborescences (diff)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/archive/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Archiver/désarchiver (tar, gzip, zip)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/interface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interface utilisateur (zenity, whiptail)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outils/web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Produire un site web, par exemple de documentation (mkdocs, jekyll, hugo)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    TP
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            TP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bash à sable
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../eruption/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    TP : Eruption solaire et transit de Mercure, à partir des données AIA SDO
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    TP : Évolution des températures aux États-Unis à partir des données NOAA
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    TP : Évolution des températures aux États-Unis à partir des données NOAA
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#presentation-du-projet" class="md-nav__link">
+    <span class="md-ellipsis">
+      Présentation du projet
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mise-en-place-du-projet" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mise en place du projet
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interface-pour-la-requete-zenity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interface pour la requête - zenity
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generation-de-la-sequence-de-dates-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      Génération de la séquence de dates - python
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#telechargement-extraction-et-filtrage-des-donnees-tar-wget-grep-awk-sed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Téléchargement, extraction et filtrage des données - tar wget grep awk sed
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Téléchargement, extraction et filtrage des données - tar wget grep awk sed">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#recuperation-des-donnees-brutes-dune-journee" class="md-nav__link">
+    <span class="md-ellipsis">
+      Récupération des données brutes d'une journée:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtrage-des-donnees-pertinentes-du-fichier-daily-awk-sed-join" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filtrage des données pertinentes du fichier daily: awk, sed, join
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trace-des-donnees-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tracé des données - python
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tracé des données - python">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trace-de-la-carte" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tracé de la carte
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trace-des-donnees-brutes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tracé des données brutes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interpolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interpolation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#et-finalement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Et finalement....
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#incruster-la-date-et-generer-la-video-imagemagick-ffmpeg" class="md-nav__link">
+    <span class="md-ellipsis">
+      Incruster la date et générer la vidéo - imagemagick, ffmpeg
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gerons-les-fichiers-de-donnees-au-dela-de-mai-2007" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gérons les fichiers de données au delà de Mai 2007
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<div><h1 id="tp-evolution-des-temperatures-aux-etats-unis-a-partir-des-donnees-noaa">TP : Évolution des températures aux États-Unis à partir des données NOAA</h1>
+<p><a class="glightbox" href="../../assets/logo_meteo.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Meteo" src="../../assets/logo_meteo.png"></a></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/57YIRuRHne0?si=rJrl3U-9tF3JFX2q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<p><strong>Cas pratique:</strong> Nous allons utiliser une base de données météo disponible en ligne <a href="http://www.ncdc.noaa.gov/orders/qclcd/">http://www.ncdc.noaa.gov/orders/qclcd/</a>.</p>
+<p>Cette base de données contient des archives de relevés météorologiques depuis 1996. Attention, nous utiliserons pour le moment uniquement les
+données de 1996 à 2007 (le format des données a changé en 2007, on adaptera tout à la fin du sujet notre programme pour qu'il puisse gérer ce format légèrement différent). Nous souhaitons écrire un logiciel permettant de visualiser les évolutions de la température sur une période
+donnée. Pour ce faire nous allons utiliser plusieurs des outils disponibles sous Unix~:</p>
+<ul>
+<li>zenity pour saisir les dates limites pour lesquelles effectuer le tracé,</li>
+<li>wget pour récupérer les archives de données à tracer,</li>
+<li>awk pour filtrer les enregistrements et n'extraire que les données à tracer,</li>
+<li>python et le module <a href="http://matplotlib.org/basemap/users/examples.html">basemap</a> pour tracer effectivement les données sélectionnées,</li>
+<li>imagemagick pour post-traiter les images,</li>
+<li>ffmpeg pour générer une vidéo des images tracées précédemment,</li>
+<li>makefile ou bash pour encapsuler l'ensemble dans un script et qui gérera l'exécution de tous les processus précédents.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Les informations qui figurent dans les fichiers sont documentées ici <a href="https://www.ncdc.noaa.gov/orders/qclcd/ExplanationOfCodes.htm">http://www.ncdc.noaa.gov/orders/qclcd/ExplanationOfCodes.htm</a></p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Malheureusement, avec les lois Anti Science et climatosceptiques de l'administration de D. Trump,
+certaines données sont supprimées ! Des initiatives courageuses ont vu le
+jour en vue de maintenir des miroirs. </p>
+<p>En particulier, l'initiative <a href="https://climatemirror.org/">climate mirror</a>
+qui permet de conserver des copies des données avant le passage de
+l'administration de D. Trump.</p>
+<p>Pour ce TP, nous utiliserons le miroir de ncdc.noaa.gov accessible à
+l'adresse
+<a href="https://s3.ca-central-1.amazonaws.com/climate-mirror/index.html">https://s3.ca-central-1.amazonaws.com/climate-mirror/index.html</a></p>
+<p>et en particulier le miroir du dataset qclcd :</p>
+<p><a href="https://s3.ca-central-1.amazonaws.com/climate-mirror/www.ncdc.noaa.gov/orders/qclcd/index.html">https://s3.ca-central-1.amazonaws.com/climate-mirror/www.ncdc.noaa.gov/orders/qclcd/index.html</a></p>
+</div>
+<h2 id="presentation-du-projet">Présentation du projet</h2>
+<p>Les données météo que nous allons utiliser sont disponibles en ligne et fournies par le National Climatic Center de la National Oceanic and Atmospheric Administration (NOAA). Les archives nommées AAAAMM.tar.gz contiennent les mesures pour le mois MM de l'année AAAA. Les archives de ces données (les .tar.gz) contiennent 5 fichiers. </p>
+<ul>
+<li>station.txt : description des stations d'enregistrements (identifiant WBAN, latitude, longitude, etc..)</li>
+<li>AAAAMMhpd.txt : mesure des précipitations</li>
+<li>AAAAMMhourly.txt, AAAAMMdailyavg.txt, AAAAMMdaily.txt : mesures heure par heure ou journalières</li>
+</ul>
+<p>Nous utiliserons par la suite uniquement les fichiers <strong>station.txt</strong> et <strong>AAAAMMdaily.txt</strong>. Les fichiers de mesures contiennent les mesures de température, force du vent etc.. et sont indexées par l'identifiant WBAN (<em>Weather-Bureau-Army-Navy</em>) de la station de mesure. Pour tracer la carte des températures en une date donnée, il faudra donc :</p>
+<ul>
+<li>récupérer l'archive mensuelle qui contient les mesures de cette date</li>
+<li>filtrer le fichier de mesure AAAAMMdaily.txt pour en extraire les mesures à la date souhaitée</li>
+<li>combiner ces mesures avec le fichier station.txt pour formater les données à fournir au script de tracé (voir plus bas)</li>
+<li>tracer ces données</li>
+</ul>
+<p><img alt="Pipeline de traitement pour la production d'une vidéo des températures sur le
+territoire Américain" src="../../assets/meteo_schema.png"></p>
+<p>Je vous propose la conception sur la figure ci-dessus. </p>
+<p>Prenons le temps de la comprendre. Nous souhaitons que l'utilisateur puisse préciser deux dates pour indiquer la période du tracé des mesures (<a href="../../outils/interface/">zenity</a>, va nous aider pour ça). Un module est alors en charge de générer la séquence des jours séparant ces deux dates limites (on utilisera un petit script awk et les commandes mktime et strftime). L'idée est ici de très tôt se coller au format du flux d'images que nous souhaitons produire en sortie (i.e. une image par jour) et de s'adapter ensuite au format des données. Ensuite, étant donnée une date, e.g. 01/06/2007, on se débrouille pour construire l'URL vers le fichier de données et le télécharger à l'aide de awk. On doit maintenant produire un fichier de données spécifique à la journée et aux données à tracer; on facilite ainsi les traitements suivants en excluant beaucoup de données inutiles et en faisant le boulot de la fusion des données géographiques sur les stations et des mesures à proprement parler. Arrivée là, on a quasiment terminé le travail. Il suffit de tracer les données météo et on utilisera Python et le module <a href="http://matplotlib.org/basemap/">Basemap</a>) pour cela<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>. On se retrouve alors avec une collection d'images qu'il nous suffit d'assembler à l'aide de ffmpeg. </p>
+<h2 id="mise-en-place-du-projet">Mise en place du projet</h2>
+<p>On va commencer par structurer notre répertoire de travail avec les répertoires et fichiers ci-dessous :</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Meteo/
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├─ data/
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>├─ images/
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>├─ videos/
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>└─ scripts/
+</span></code></pre></div>
+<div class="admonition question">
+<p class="admonition-title">Question</p>
+<p><strong>Définissez</strong> un script bash <code>clean.sh</code> qui supprime tous les éléments des répertoires data, images et videos.</p>
+</div>
+<h2 id="interface-pour-la-requete-zenity">Interface pour la requête - zenity</h2>
+<p>La première étape consiste à fournir à l'utilisateur une interface simpliste pour saisir les dates de début et de fin de la période à tracer. Comme on ne souhaite pas une interface très évoluée, on va faire appel à un outil très pratique, <a href="../../outils/interface/">zenity</a>. Commençons par voir ce que l'on peut faire avec zenity sachant que vous trouverez une liste complètes des éléments graphiques créables avec zenity dans le <a href="https://help.gnome.org/users/zenity/stable/">manuel</a>. </p>
+<p>Ici, on s'intéresse essentiellement à créer une boite de dialogue avec deux zones de texte pour saisir nos dates, quelque chose qui ressemble à la figure ci-dessous fera l'affaire.</p>
+<p><img alt="Interface zenity pour saisir la plage de dates concernées par le tracé des
+températures" src="../../assets/meteo_zenity.png"></p>
+<p>Exécutez l'exemple ci-dessous. </p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$<span class="w"> </span>zenity<span class="w"> </span>--forms<span class="w"> </span>--text<span class="o">=</span><span class="s2">"Test"</span><span class="w"> </span>--add-entry<span class="o">=</span><span class="s2">"Une entrée"</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>$<span class="w"> </span>zenity<span class="w"> </span>--entry<span class="w"> </span>--text<span class="o">=</span><span class="s2">"Test"</span>
+</span></code></pre></div>
+<p>Saisissez un texte dans la zone de texte et validez. Vous observez alors que le texte que vous avez saisi s'affiche dans le terminal; le résultat de la commande est alors le texte que vous avez entré. On a déjà vu dans les TP précédents qu'il est possible d'exécuter des commandes depuis un script bash et grâce à zenity, vous pouvez même facilement ajouter des éléments graphiques (basiques, je vous l'accorde, mais ça nous suffit ici!). </p>
+<div class="admonition question">
+<p class="admonition-title">Question</p>
+<p>A l'aide de l'aide en ligne sur zenity, à vous de réaliser l'interface graphique dont nous avons besoin pour saisir nos deux dates. Celle de la figure ci-dessus contient un <strong>formulaire</strong> avec deux <strong>entrées</strong> texte et un <strong>titre</strong>. Pour des raisons pratiques pour la suite, ^^assurez-vous^^ que le <strong>séparateur</strong> est le caractère d'espace.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Question</p>
+<p><strong>Placez</strong> l'appel à zenity dans un script bash que nous appellerons <code>get_date.sh</code>.</p>
+</div>
+<h2 id="generation-de-la-sequence-de-dates-python">Génération de la séquence de dates - python</h2>
+<p>Il nous faut maintenant, à partir de deux dates limites, produire la séquence des dates qui les sépare. Appelons ce script que nous aimerions écrire <code>generate_dates.sh</code>, et voyons ce que nous aimerions que ce script fasse.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"01/06/2007 15/07/2007"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>./generate_dates.py<span class="w"> </span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="m">01062007</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="m">02062007</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="m">03062007</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>...
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="m">15072007</span>
+</span></code></pre></div>
+<p>On aimerait donc produire une séquence de dates. Pourquoi ? Parce qu'on va définir un pipeline qui sera en charge de produire le flux d'images 01062007.png, 02062007.png, ..., 15072007.png. Comment faire ? Comment toujours, on a plusieurs solutions. Il en existe une avec <a href="http://stackoverflow.com/questions/4351282/how-to-generate-a-sequence-of-dates-given-starting-and-ending-dates-using-awk-of">awk</a>, elle est courte mais pas très rigolote. Je vous propose de voir, au détour de notre problème, l'utilisation de Python (ce sera notre première application de python et une autre suivra bientôt). La solution que nous allons proposer est, je trouve, beaucoup plus intelligible que la version awk.</p>
+<p>On va donc faire un peu de Python. Pour faire du python, vous pouvez soit définir un script (i.e. un fichier texte dont l'extension est habituellement ".py") soit l'utiliser directement dans le terminal. Avant d'écrire un script qui va générer la séquence des dates, je vous propose de commencer par voir un peu de syntaxe Python directement dans l'interpréteur. Lançons python :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>$<span class="w"> </span>python
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>Python<span class="w"> </span><span class="m">3</span>.10.12<span class="w"> </span><span class="o">(</span>main,<span class="w"> </span>Feb<span class="w">  </span><span class="m">4</span><span class="w"> </span><span class="m">2025</span>,<span class="w"> </span><span class="m">14</span>:57:36<span class="o">)</span><span class="w"> </span><span class="o">[</span>GCC<span class="w"> </span><span class="m">11</span>.4.0<span class="o">]</span><span class="w"> </span>on<span class="w"> </span>linux
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>Type<span class="w"> </span><span class="s2">"help"</span>,<span class="w"> </span><span class="s2">"copyright"</span>,<span class="w"> </span><span class="s2">"credits"</span><span class="w"> </span>or<span class="w"> </span><span class="s2">"license"</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>more<span class="w"> </span>information.
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>&gt;&gt;&gt;
+</span></code></pre></div>
+<p>Pour manipuler les dates, il existe le module Python <a href="https://docs.python.org/3/library/datetime.html">datetime</a>. Pour importer ce module, il suffit d'utiliser la commande import :</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+</span></code></pre></div>
+<p>On peut maintenant instancier des objets du type datetime du module datetime. Par exemple, pour représenter le 01/06/2007 à l'aide d'un objet datetime, on utilisera le code ci-dessous (voir la <a href="http://docs.python.org/3/library/datetime.html#datetime.datetime">documentation</a>) :</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">begin</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="n">day</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2007</span><span class="p">)</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">begin</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2007</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">begin</span><span class="p">)</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2007</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></code></pre></div>
+<p>La première façon de construire un objet de type datetime utilise des arguments nommés, la seconde des arguments positionnels (voir la <a href="http://docs.python.org/3/glossary.html#term-argument">documnetation</a>). L'un des avantages des paramètres nommés est de pouvoir les positionner dans l'ordre que l'on souhaite. </p>
+<p>Ce type datetime nous permet de manipuler des dates. Il fournit notamment des opérateurs pour incrémenter une date d'une durée (type <a href="http://docs.python.org/3/library/datetime.html#datetime.timedelta">datetime.timedelta</a>) arbitraire, de les convertir en une chaîne de caractères avec un format déterminé, de vérifier si une date précède une autre date, etc... Voici quelques exemples :</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">nextday</span> <span class="o">=</span> <span class="n">begin</span> <span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">nextday</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2007</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">nextday</span> <span class="o">=</span> <span class="n">begin</span> <span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">3994</span><span class="p">)</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">nextday</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">nextday</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"</span><span class="si">%d</span><span class="s2">/%m/%Y"</span><span class="p">))</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="mi">08</span><span class="o">/</span><span class="mi">05</span><span class="o">/</span><span class="mi">2018</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">begin</span> <span class="o">&lt;</span> <span class="n">nextday</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="kc">True</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">begin</span> <span class="o">&gt;</span> <span class="n">nextday</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="kc">False</span>
+</span></code></pre></div>
+<p>Il nous manque encore quelques ingrédients pour pouvoir écrire notre script <code>generate_dates.py</code> :</p>
+<ul>
+<li>comment récupérer des arguments passés par l'entrée standard à un script python</li>
+<li>les arguments récupérés étant des chaînes de caractères de la forme dd/mm/YYYY, comment y extraire les entiers correspondants au jour, mois et année</li>
+<li>comment itérer entre deux dates</li>
+</ul>
+<p>Pour récupérer les arguments passés à un script python, qu'on invoquerai <code>python script.py titi ttoto 12</code>, on utiliserait le module "sys" et son attribut, de type liste, sys.argv. Ici, nous allons procéder de manière un peu différente puisqu'on souhaite passer les arguments ^^par l'entrée standard^^, i.e. quelque chose du type :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"01/06/2007 15/07/2007"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>./generate_dates.py
+</span></code></pre></div>
+<p>J'ai ici utilisé echo pour avoir un exemple sous la main pour tester mais en pratique c'est votre script <code>get_dates.sh</code> qui nous fournirait dans la sortie standard les dates limites. En python, on peut lire directement de stdin<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>}. Même si la syntaxe ci-dessous a l'air un peu compliqué, c'est à ma connaissance la seule qui garantisse que python ne bufferise pas ses entrées et les traite bien dés qu'elles sont émises par le script qui écrit dans son entrée standard. Un exemple de script python, que nous appellerons <code>test_stdin.py</code>, est donné ci-dessous :</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="ch">#!/usr/bin/python</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="k">while</span><span class="p">(</span><span class="kc">True</span><span class="p">):</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="n">l</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdin</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>    <span class="k">if</span><span class="p">(</span><span class="n">l</span> <span class="o">==</span> <span class="s1">''</span><span class="p">):</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>        <span class="k">break</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"[test_stdin.py] a lu </span><span class="si">%s</span><span class="s2"> "</span> <span class="o">%</span> <span class="n">l</span><span class="p">)</span>
+</span></code></pre></div>
+<div class="admonition question">
+<p class="admonition-title">Question</p>
+<p>Prenez vous un fichier texte, appelons le monfichier et testez le script ci-dessus :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>$<span class="w"> </span>cat<span class="w"> </span>monfichier<span class="w"> </span><span class="p">|</span><span class="w"> </span>./test_stdin.py
+</span></code></pre></div>
+</div>
+<p>Testons le maintenant avec le type d'entrée qu'il va recevoir :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"01/06/2007 15/07/2007"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>./test_stdin.py
+</span></code></pre></div>
+<p>Maintenant, il va falloir travailler un peu la ligne lue puisque je vous rappelle que nous devons récupérer des entiers correspondants au jour, mois et année des dates de début et fin. Ce qu'on cherche essentiellement à faire, c'est diviser les chaînes de caractères pour :</p>
+<ol>
+<li>isoler la date de début de la date de fin</li>
+<li>extraire les éléments de chacune des dates. </li>
+</ol>
+<p>Testez les exemples ci-dessous :
+</p><div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">l</span> <span class="o">=</span> <span class="s2">"01/06/2007 15/07/2007"</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="p">[</span><span class="s1">'01/06/2007'</span><span class="p">,</span> <span class="s1">'15/07/2007'</span><span class="p">]</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">begin</span><span class="o">=</span><span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">begin</span><span class="p">)</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="p">[</span><span class="s1">'01'</span><span class="p">,</span> <span class="s1">'06'</span><span class="p">,</span> <span class="s1">'2007'</span><span class="p">]</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">dd</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">begin</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">mm</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">begin</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">yyy</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">begin</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</span></code></pre></div>
+<div class="admonition question">
+<p class="admonition-title">Question</p>
+<p>Vous disposez maintenant de tous les éléments pour écrire le script python <code>generate_dates.py</code>. A vous de jouer.</p>
+<p>Testez le :
+</p><div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"01/06/2007 15/07/2007"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>./generate_dates.py<span class="w"> </span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="m">01062007</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="m">02062007</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="m">03062007</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>...
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="m">15072007</span>
+</span></code></pre></div>
+<p>Et bien sûr, testez également le pipeline :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>$<span class="w"> </span>./get_dates.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>./generate_dates.py<span class="w"> </span>
+</span></code></pre></div>
+</div>
+<h2 id="telechargement-extraction-et-filtrage-des-donnees-tar-wget-grep-awk-sed">Téléchargement, extraction et filtrage des données - tar wget grep awk sed</h2>
+<p>Maintenant que nous disposons d'un générateur des dates (<code>generate_dates.py</code> produit la séquence des dates dans la sortie standard), nous pouvons gérer la partie qui consiste à télécharger les données nécessaires au tracé. Nous allons écrire ce script en Bash. </p>
+<p>Vous vous rappelez que nous disposons de données journalières au sein d'une archive mensuelle. Par exemple, l'archive "200706.tar.gz" contient toutes les données pour tous les jours du mois de juin. Il faut donc que notre script de téléchargement/extraction fasse plusieurs choses, étant donnée une date d'entrée :</p>
+<ul>
+<li>vérifie si l'archive du mois de la date est pas déjà téléchargée. Si elle ne l'est pas, on la télécharge, on l'extrait dans le répertoire data (et on renomme le fichier station pour lui ajouter le préfixe YYYYMM)</li>
+<li>filtre le fichier de données pour construire un fichier de données spécifique à la date qui nous intéresse.</li>
+</ul>
+<p><strong>Génération des noms des archives:</strong></p>
+<p>Commençons par le premier point. Les dates vont être fournies par l'entrée standard à notre script <code>get_data.sh</code>. Il faut extraire ce que nous lisons de l'entrée standard (e.g. 01062007) le jour, le mois et l'année. En bash, on peut extraire des sous-chaînes d'une chaîne <code>s</code> par l'appel <code>${s:debut:longueur}</code>, par exemple:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>$<span class="w"> </span><span class="nv">date</span><span class="o">=</span><span class="s2">"01062007"</span><span class="p">;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Day : </span><span class="si">${</span><span class="nv">date</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">2</span><span class="si">}</span><span class="s2">"</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>Day<span class="w"> </span>:<span class="w"> </span><span class="m">01</span>
+</span></code></pre></div>
+<div class="admonition question">
+<p class="admonition-title">Question</p>
+<p>Complétez votre script <code>get_data.sh</code> pour qu'il construire la chaîne de caractère correspondant à l'archive dans laquelle se trouve les données d'une journée. Par exemple, pour le 01/06/2007, cela doit donner 200706.tar.gz.</p>
+<p>Assurez vous du bon fonctionnement de votre script :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"01062007"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>./scripts/get_data.sh
+</span></code></pre></div>
+</div>
+<h3 id="recuperation-des-donnees-brutes-dune-journee">Récupération des données brutes d'une journée:</h3>
+<p>Maintenant que nous disposons du nom de l'archive, e.g. 200706.tar.gz, on va d'abord vérifier si le fichier local <code>Data/200706.tar.gz</code> existe déjà, sinon on le récupère<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup>. En bash, pour vérifier si un fichier existe, on utilise le test conditionnel "if [ -f filename ]", par exemple :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="ch">#!/bin/bash</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"Ce script teste l'existence d'un fichier passé en argument"</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">]</span>
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="k">then</span>
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Vous devez passer un fichier en argument"</span>
+</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="w">    </span><span class="nb">exit</span>
+</span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="k">fi</span>
+</span><span id="__span-16-10"><a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>
+</span><span id="__span-16-11"><a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="o">]</span>
+</span><span id="__span-16-12"><a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="k">then</span>
+</span><span id="__span-16-13"><a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Le fichier </span><span class="nv">$1</span><span class="s2"> existe !"</span>
+</span><span id="__span-16-14"><a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a><span class="k">else</span>
+</span><span id="__span-16-15"><a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Le fichier </span><span class="nv">$1</span><span class="s2"> n'existe pas !"</span>
+</span><span id="__span-16-16"><a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a><span class="k">fi</span>
+</span></code></pre></div>
+<div class="admonition question">
+<p class="admonition-title">Question</p>
+<p>Complétez votre script <code>get_data.sh</code> pour qu'il teste si l'archive recherchée est déjà disponible en local et sinon la télécharge (souvenez vous de la commande wget utilisée dans le premier TP).</p>
+</div>
+<p><strong>Extraction des données pertinentes</strong></p>
+<p>L'archive que nous venons de télécharger est une archive ".tar.gz". Pour l'extraire, nous utilisons l'outil <a href="../../outils/archive/">tar</a> :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>tar<span class="w"> </span>-zxf<span class="w"> </span>monarchive.tar.gz
+</span></code></pre></div>
+<p>Que signifient ces options<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup>? "-x" signifie qu'on extrait (on pourrait aussi créer une archive avec "-c"), "-f" signifie qu'on utilise un fichier (on peut (dé-)compresser l'entrée standard :) ) et "-z" qu'on compresse avec gzip (il existe d'autres méthodes de compression).</p>
+<p>On peut même faire mieux en spécifiant quels fichiers nous souhaitons extraire de l'archive. En effet, nos archives contiennent plus de fichiers que nécessaires et nous ne voulons en extraire que les fichiers xxxxdaily.txt et station.txt. Il suffit de le spécifier sur la ligne de commande :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>tar<span class="w"> </span>-zxf<span class="w"> </span>monarchive.tar.gz<span class="w"> </span>monfichier1.txt<span class="w"> </span>monfichier2.txt<span class="w"> </span>chemin/vers/monfichier3.txt
+</span></code></pre></div>
+<p>Vous savez maintenant comment extraire les deux fichiers "station.txt" et "xxxdaily.txt". </p>
+<p>On va réaliser une dernière opération sur le fichier station.txt qui consiste à en extraire uniquement les données de WBAN, latitude et longitude. A l'aide de awk, extrayez les 3 champs pertinents et redirigez la sortie de votre appel awk dans le fichier xxxxstation.txt avec xxxx un prefixe de la forme YYYYmm. Vous pourrez alors également supprimer le fichier station.txt et l'archive xxxx.tar.gz.</p>
+<h3 id="filtrage-des-donnees-pertinentes-du-fichier-daily-awk-sed-join">Filtrage des données pertinentes du fichier daily: awk, sed, join</h3>
+<p>Pour pouvoir effectuer notre tracé des températures sur le territoire américain, il nous faut plusieurs choses: les températures et les positions géographiques des enregistrements. Les fichiers xxxxdaily.txt contiennent énormément d'informations, dont un grand nombre est inutile pour notre application. Les stations d'enregistrement dans les fichiers xxxxdaily.txt sont indexées par leur WBAN mais la position géographique d'une station est quant à elle disponible dans le fichier xxxxstation.txt que nous venons de créer. Il nous faut donc extraire uniquement les températures et les WBAN du fichier xxxxdaily.txt et combiner cela avec le fichier de station. Nous allons pour cela utiliser plusieurs outils en un pipeline. </p>
+<p>Si vous inspectez un fichier xxxxdaily.txt, vous pouvez remarquer que, parfois, la température est égale à 'M' ou '-' correspondant à une valeur invalide, parfois elle est suffixée par une étoile; on aimerait supprimer les entrées invalides et supprimer les "*" suffixant certaines températures; définissions un pipeline avec :</p>
+<ul>
+<li><code>awk</code> pour extraire uniquement les WBAN et températures moyennes de la date considérée,</li>
+<li><code>awk</code> pour supprimer les entrées pour lesquelles la température est égale à "M" ou '-', ce qui correspond à une entrée invalide,</li>
+<li><code>sed</code> pour substituer les "*" par un caractère vide "".</li>
+</ul>
+<p>Enfin, utilisez <code>join</code> pour combiner les données ainsi générées avec le fichier xxxxstation.txt. join peut prendre deux fichiers en argument pour les combiner mais il accepte également qu'on remplace un des fichiers par l'entrée standard en précisant "-" comme nom de fichier; voyons quelques exemples :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>$<span class="w"> </span>cat<span class="w"> </span>toto.txt
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>a<span class="w"> </span>a1
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>b<span class="w"> </span>b1
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>c<span class="w"> </span>c1
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>$<span class="w"> </span>cat<span class="w"> </span>titi.txt
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>a<span class="w"> </span>a2<span class="w"> </span>a3
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>b<span class="w"> </span>b2<span class="w"> </span>b3
+</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>c<span class="w"> </span>c2<span class="w"> </span>c3
+</span><span id="__span-19-10"><a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>
+</span><span id="__span-19-11"><a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>$<span class="w"> </span>join<span class="w"> </span>toto.txt<span class="w"> </span>titi.txt
+</span><span id="__span-19-12"><a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>a<span class="w"> </span>a1<span class="w"> </span>a2<span class="w"> </span>a3
+</span><span id="__span-19-13"><a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a>b<span class="w"> </span>b1<span class="w"> </span>b2<span class="w"> </span>b3
+</span><span id="__span-19-14"><a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a>c<span class="w"> </span>c1<span class="w"> </span>c2<span class="w"> </span>c3
+</span><span id="__span-19-15"><a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a>
+</span><span id="__span-19-16"><a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a>$<span class="w"> </span>cat<span class="w"> </span>toto.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>join<span class="w"> </span>-<span class="w"> </span>titi.txt
+</span><span id="__span-19-17"><a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a>a<span class="w"> </span>a1<span class="w"> </span>a2<span class="w"> </span>a3
+</span><span id="__span-19-18"><a id="__codelineno-19-18" name="__codelineno-19-18" href="#__codelineno-19-18"></a>b<span class="w"> </span>b1<span class="w"> </span>b2<span class="w"> </span>b3
+</span><span id="__span-19-19"><a id="__codelineno-19-19" name="__codelineno-19-19" href="#__codelineno-19-19"></a>c<span class="w"> </span>c1<span class="w"> </span>c2<span class="w"> </span>c3
+</span></code></pre></div>
+<p>L'intérêt de la dernière commande est de pouvoir mettre l'appel join dans un pipeline pour combiner à la volée l'entrée standard avec un fichier. Vous devriez maintenant avoir tous les éléments pour produire un fichier de données qui contiennent les WBAN, longitudes, latitudes et températures moyennes mesurées. Par exemple, vous devriez pouvoir produire le fichier 01062006.txt ci-dessous en invoquant votre script <code>get_data.sh</code>.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>$<span class="w"> </span>cat<span class="w"> </span>Data/01062006.txt
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="m">03013</span><span class="w"> </span><span class="m">38</span>.04<span class="w"> </span>-102.41<span class="w"> </span><span class="m">67</span><span class="w"> </span>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="m">03016</span><span class="w"> </span><span class="m">39</span>.32<span class="w"> </span>-107.44<span class="w"> </span><span class="m">64</span><span class="w"> </span>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="m">03017</span><span class="w"> </span><span class="m">39</span>.50<span class="w"> </span>-104.4<span class="w"> </span><span class="m">63</span><span class="w"> </span>
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="m">03024</span><span class="w"> </span><span class="m">35</span>.42<span class="w"> </span>-101.23<span class="w"> </span><span class="m">73</span><span class="w"> </span>
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="m">03026</span><span class="w"> </span><span class="m">39</span>.14<span class="w"> </span>-102.17<span class="w"> </span><span class="m">62</span>
+</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="m">03027</span><span class="w"> </span><span class="m">35</span>.00<span class="w"> </span>-105.4<span class="w"> </span><span class="m">63</span><span class="w"> </span>
+</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="m">03028</span><span class="w"> </span><span class="m">37</span>.17<span class="w"> </span>-102.37<span class="w"> </span><span class="m">66</span>
+</span><span id="__span-20-9"><a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>....
+</span></code></pre></div>
+<div class="admonition question">
+<p class="admonition-title">Question</p>
+<p>A vous de jouer et finalisez votre script <code>get_data.sh</code></p>
+</div>
+<h2 id="trace-des-donnees-python">Tracé des données - python</h2>
+<p>Il nous reste maintenant à effectuer le tracé des données extraites. On va partir d'un fichier de données exemple comme Data/01062006.txt. Les mesures sont ponctuelles et nous aimerions les interpoler sur tout le territoire. Nous aimerions également tracer ces données sur une carte du territoire américain. Pour cela, nous allons utiliser Python et ses modules <code>scipy</code> pour l'interpolation et <code>basemap</code> pour le tracé des cartes. Nous allons procéder par étape~:</p>
+<ul>
+<li>tracer la carte,</li>
+<li>récupérer les données brutes et les tracer sur la carte,</li>
+<li>interpoler ces données sur une grille et tracer les données interpolées,</li>
+<li>limiter le tracé aux terres.</li>
+</ul>
+<h3 id="trace-de-la-carte">Tracé de la carte</h3>
+<p>Pour tracer la carte du territoire américain, nous utilisons le module <a href="http://matplotlib.org/basemap/">basemap</a>. Inspirez vous du script d'exemple de basemap sur <a href="https://matplotlib.org/basemap/stable/users/cyl.html">https://matplotlib.org/basemap/stable/users/cyl.html</a> sur les coordonnées cylindriques pour effectuer un tracé du territoire américain. Un exemple de tracé est représenté ci-dessous.</p>
+<p><a class="glightbox" href="../../assets/meteo_coastlines.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Tracé des côtes Américaines avec Basemap" src="../../assets/meteo_coastlines.png"></a></p>
+<h3 id="trace-des-donnees-brutes">Tracé des données brutes</h3>
+<p>La deuxième étape consiste à importer les données précédemment filtrées et à les tracer sur la carte. Pour charger des données d'un fichier texte, organisées en colonnes, le plus simple est d'utiliser la fonction <a href="https://numpy.org">loadtxt du module numpy</a>. Le script ci-dessous vous montre un exemple d'utilisation :</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="ch">#!/usr/bin/python</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="c1"># coding: utf-8</span>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>
+</span><span id="__span-21-8"><a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"Je teste le chargement de données"</span><span class="p">)</span>
+</span><span id="__span-21-9"><a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a>
+</span><span id="__span-21-10"><a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a><span class="k">if</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">):</span>
+</span><span id="__span-21-11"><a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"Usage : </span><span class="si">{}</span><span class="s2"> datefile"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+</span><span id="__span-21-12"><a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a>    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-21-13"><a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a>
+</span><span id="__span-21-14"><a id="__codelineno-21-14" name="__codelineno-21-14" href="#__codelineno-21-14"></a><span class="c1"># On recupere le chemin vers les donnees</span>
+</span><span id="__span-21-15"><a id="__codelineno-21-15" name="__codelineno-21-15" href="#__codelineno-21-15"></a><span class="n">datafile</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</span><span id="__span-21-16"><a id="__codelineno-21-16" name="__codelineno-21-16" href="#__codelineno-21-16"></a>
+</span><span id="__span-21-17"><a id="__codelineno-21-17" name="__codelineno-21-17" href="#__codelineno-21-17"></a><span class="c1"># On les charge</span>
+</span><span id="__span-21-18"><a id="__codelineno-21-18" name="__codelineno-21-18" href="#__codelineno-21-18"></a><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">datafile</span><span class="p">)</span>
+</span><span id="__span-21-19"><a id="__codelineno-21-19" name="__codelineno-21-19" href="#__codelineno-21-19"></a>
+</span><span id="__span-21-20"><a id="__codelineno-21-20" name="__codelineno-21-20" href="#__codelineno-21-20"></a><span class="c1"># Et pour rigoler, on trace les temperatures</span>
+</span><span id="__span-21-21"><a id="__codelineno-21-21" name="__codelineno-21-21" href="#__codelineno-21-21"></a><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+</span><span id="__span-21-22"><a id="__codelineno-21-22" name="__codelineno-21-22" href="#__codelineno-21-22"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">3</span><span class="p">])</span>
+</span><span id="__span-21-23"><a id="__codelineno-21-23" name="__codelineno-21-23" href="#__codelineno-21-23"></a><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Températures moyennes (deg K)"</span><span class="p">)</span>
+</span><span id="__span-21-24"><a id="__codelineno-21-24" name="__codelineno-21-24" href="#__codelineno-21-24"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></code></pre></div>
+<p>Ces données forment un ensemble non structuré de points; pour les tracer, nous utilisons ce qui s'appelle un <strong>scatter plot</strong>. Mais, pour correctement tracer les données, il faut d'abord projeter les longitudes et latitudes des points de mesure sur la carte. L'object Basemap que nous avons construit lors du tracé de la carte peut être appliqué à des vecteurs de longitudes et latitudes pour calculer leur projetés.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1"># On suppose que data est un vecteur à 3 colonnes</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="c1"># data[:,0] contient les longitudes</span>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="c1"># data[:,1] contient les latitudes</span>
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="c1"># data[:,2] contient les températures</span>
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>
+</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="n">m</span> <span class="o">=</span> <span class="n">Basemap</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">'cyl'</span><span class="p">,</span>
+</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>            <span class="n">llcrnrlat</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span><span class="n">urcrnrlat</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>            <span class="n">llcrnrlon</span><span class="o">=-</span><span class="mi">130</span><span class="p">,</span><span class="n">urcrnrlon</span><span class="o">=-</span><span class="mi">60</span><span class="p">,</span><span class="n">resolution</span><span class="o">=</span><span class="s1">'l'</span><span class="p">)</span>
+</span><span id="__span-22-9"><a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>
+</span><span id="__span-22-10"><a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">m</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+</span><span id="__span-22-11"><a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+</span><span id="__span-22-12"><a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a><span class="n">m</span><span class="o">.</span><span class="n">drawcoastlines</span><span class="p">()</span>
+</span><span id="__span-22-13"><a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">data</span><span class="p">[:,</span><span class="mi">2</span><span class="p">])</span>
+</span><span id="__span-22-14"><a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></code></pre></div>
+<div class="admonition question">
+<p class="admonition-title">Question</p>
+<p>Faites maintenant le tracé des mesures brutes. N'oubliez pas de convertir les températures en degrés Celsius. Vous devriez obtenir quelque chose comme la figure ci-dessous pour le 1<span class="arithmatex">\(^{er}\)</span> juin 2006.</p>
+<p><a class="glightbox" href="../../assets/meteo_rawtemp.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Tracé des mesures brutes du 1er juin 2006" src="../../assets/meteo_rawtemp.png"></a></p>
+</div>
+<h2 id="interpolation">Interpolation</h2>
+<p>Il nous faut maintenant interpoler les données brutes pour estimer les températures sur tout le territoire. Il existe plusieurs algorithmes d'interpolation fournis par le module <a href="https://docs.scipy.org/doc/scipy/reference/interpolate.html">scipy</a>. Nous allons utiliser la fonction <code>griddata</code> pour interpoler en 2D à partir de données non-structurées. Vous trouverez un exemple d'utilisation dans la <a href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.griddata.html#scipy.interpolate.griddata">documentation de griddata</a>. </p>
+<div class="admonition question">
+<p class="admonition-title">Question</p>
+<p>Adaptez cet exemple pour interpoler les données météo sur une grille de <span class="arithmatex">\(100\times 100\)</span> points. Quelques exemples de résultat sont illustrés sur la figure ci-dessous.</p>
+<p><a class="glightbox" href="../../assets/meteo_interpolation_1.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Données météo interpolées pour le 1er juin 2006" src="../../assets/meteo_interpolation_1.png"></a>
+<a class="glightbox" href="../../assets/meteo_interpolation_2.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Données météo interpolées pour le 1er janvier 2006" src="../../assets/meteo_interpolation_2.png"></a></p>
+</div>
+<h2 id="et-finalement">Et finalement....</h2>
+<p>Il reste maintenant à intégrer tout ce qu'on a vu pour le tracé des données dans un script <code>plot_temperatures.py</code>. Pour cela, il nous manque encore quelques éléments, à savoir :</p>
+<ol>
+<li>lire dans l'entrée standard, depuis Python, un fichier de données,</li>
+<li>sauvegarder l'image générée par python. </li>
+</ol>
+<p>Pour sauvegarder l'image depuis Python, c'est relativement simple, il suffit d'appeler savefig de la manière suivante :</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">output_filname</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">'tight'</span><span class="p">)</span>
+</span></code></pre></div>
+<p>L'option "bbox_inches='tight'" garantie que la <em>bounding-box</em> de l'image colle au mieux aux éléments graphiques.</p>
+<p>Et pour ce qui est de lire des éléments de l'entrée standard, voici un exemple
+en python :</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-24-5"><a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a>
+</span><span id="__span-24-6"><a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="k">while</span><span class="p">(</span><span class="kc">True</span><span class="p">):</span>
+</span><span id="__span-24-7"><a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>    <span class="n">line</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdin</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+</span><span id="__span-24-8"><a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a>    <span class="k">if</span><span class="p">(</span><span class="n">line</span> <span class="o">==</span> <span class="s1">''</span><span class="p">):</span>
+</span><span id="__span-24-9"><a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a>        <span class="k">break</span>
+</span><span id="__span-24-10"><a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a>
+</span><span id="__span-24-11"><a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a>    <span class="c1"># On supprime le passage à la ligne à la fin de la ligne lue</span>
+</span><span id="__span-24-12"><a id="__codelineno-24-12" name="__codelineno-24-12" href="#__codelineno-24-12"></a>    <span class="n">datafile</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+</span><span id="__span-24-13"><a id="__codelineno-24-13" name="__codelineno-24-13" href="#__codelineno-24-13"></a>
+</span><span id="__span-24-14"><a id="__codelineno-24-14" name="__codelineno-24-14" href="#__codelineno-24-14"></a>    <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">datafile</span><span class="p">)</span>
+</span><span id="__span-24-15"><a id="__codelineno-24-15" name="__codelineno-24-15" href="#__codelineno-24-15"></a>    <span class="n">output_filename</span> <span class="o">=</span> <span class="s2">"Images/</span><span class="si">%05d</span><span class="s2">.png"</span> <span class="o">%</span> <span class="n">count</span>
+</span><span id="__span-24-16"><a id="__codelineno-24-16" name="__codelineno-24-16" href="#__codelineno-24-16"></a>
+</span><span id="__span-24-17"><a id="__codelineno-24-17" name="__codelineno-24-17" href="#__codelineno-24-17"></a>    <span class="o">....</span> <span class="n">on</span> <span class="n">fait</span> <span class="n">le</span> <span class="n">tracé</span> <span class="o">....</span>
+</span><span id="__span-24-18"><a id="__codelineno-24-18" name="__codelineno-24-18" href="#__codelineno-24-18"></a>
+</span><span id="__span-24-19"><a id="__codelineno-24-19" name="__codelineno-24-19" href="#__codelineno-24-19"></a>    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">output_filename</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">'tight'</span><span class="p">)</span>
+</span><span id="__span-24-20"><a id="__codelineno-24-20" name="__codelineno-24-20" href="#__codelineno-24-20"></a>    <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span>
+</span></code></pre></div>
+<h2 id="incruster-la-date-et-generer-la-video-imagemagick-ffmpeg">Incruster la date et générer la vidéo - imagemagick, ffmpeg</h2>
+<p>Pour terminer, il reste à incruster la date dans les images et à générer une vidéo à partir des images que vous venez de produire. Comme pour le TP sur le soleil, nous utiliserons imagemagick et ffmpeg. On attendra également que toutes les images soient produites avant d'exécuter ffmpeg.</p>
+<p><a class="glightbox" href="../../assets/meteo_date.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Tracé avec la date" src="../../assets/meteo_date.png"></a></p>
+<h2 id="gerons-les-fichiers-de-donnees-au-dela-de-mai-2007">Gérons les fichiers de données au delà de Mai 2007</h2>
+<p>Il n'y que peu de modifications à apporter au pipeline pour pouvoir gérer les fichiers de données au delà de mai 2007. En pratique, il y a :</p>
+<ol>
+<li>le nom de l'archive qui change,</li>
+<li>le nom du fichier station dans l'archive. </li>
+</ol>
+<p>Pour adapter votre programme, je vous suggère : </p>
+<ul>
+<li>de modifier <code>generate_dates.py</code> pour qu'il émette deux éléments dans la sortie standard, à savoir la date à laquelle l'image doit être générée et un mode (0 ou 1) qui indique si la date demandée précède ou non mai 2007 (les objets de type datetime en python savent se comparer),</li>
+<li>de modifier <code>get_data.sh</code> pour qu'il capture les deux entrées transmises par <code>generate_dates.py</code>. En fonction du mode il faudra télécharger et gérer les archives différemment.</li>
+</ul>
+<p>Sachez que vous pouvez, tout comme pour une archive .tar.gz, extraire un seul fichier d'un fichier zip :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>$<span class="w"> </span>unzip<span class="w"> </span>-p<span class="w"> </span>monarchive.zip<span class="w"> </span>monfichier1.txt<span class="w"> </span>&gt;<span class="w"> </span>monfichier1.txt
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>$<span class="w"> </span>unzip<span class="w"> </span>-p<span class="w"> </span>monarchive.zip<span class="w"> </span>chemin/vers/monfichier2.txt<span class="w"> </span>&gt;<span class="w"> </span>monfichier2.txt
+</span></code></pre></div>
+<p>Enfin, si plusieurs arguments sont passés dans l'entrée standard d'un script bash, on peut facilement les extraire de la manière ci-dessous : </p>
+<p></p><div class="language-bash highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="ch">#!/bin/bash</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="k">while</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>input
+</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="k">do</span>
+</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="w">    </span><span class="nv">inputarray</span><span class="o">=(</span><span class="nv">$input</span><span class="o">)</span>
+</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">inputarray</span><span class="p">[0]</span><span class="si">}</span><span class="s2"> ; </span><span class="si">${</span><span class="nv">inputarray</span><span class="p">[1]</span><span class="si">}</span><span class="s2">"</span>
+</span><span id="__span-26-7"><a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="k">done</span>
+</span></code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>$ echo "titi toto" | ./stdread_multi.sh 
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>titi ; toto
+</span></code></pre></div>
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn:1">
+<p>On peut faire des tracés très sympa avec basemap!! <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="fn:2">
+<p>on peut même itérer sur le descripteur de fichier sys.stdin, mais cette approche bufferise la lecture... <a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+<li id="fn:3">
+<p>En pratique, on pourrait être un peu plus malin. On ne va retenir qu'une partie des données de l'archive. L'archive est grosse. On pourrait donc vérifier si les données extraites et retenues de l'archive sont déjà présentes <a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">↩</a></p>
+</li>
+<li id="fn:4">
+<p>n'hésitez pas à aller jeter un oeil au manuel:  <code>man tar</code> <a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">↩</a></p>
+</li>
+</ol>
+</div></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://jeremyfix.github.io/OutilsLibres/">Outils du logiciel libre pour l'ingénieur</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://jeremyfix.github.io">Jeremy Fix</a> is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p> 
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "toc.follow", "toc.integrate"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+      
+        <script src="../../js/mathjax.js"></script>
+      
+        <script src="../../js/asciinema-player.min.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

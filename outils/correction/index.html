@@ -1,0 +1,1259 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://jeremyfix.github.io/OutilsLibres/outils/correction/">
+      
+      
+        <link rel="prev" href="../code/">
+      
+      
+        <link rel="next" href="../autotask/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Correction orthographique/grammaticale (aspell, hunspell, LanguageTool) - Les outils du logiciel libre pour l'ingénieur</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/asciinema-player.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#correction-orthographiquegrammaticale-aspell-hunspell-languagetool" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
+    <a href="../.." title="Les outils du logiciel libre pour l&#39;ingénieur" class="md-header__button md-logo" aria-label="Les outils du logiciel libre pour l'ingénieur" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Les outils du logiciel libre pour l'ingénieur
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Correction orthographique/grammaticale (aspell, hunspell, LanguageTool)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Rechercher" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Recherche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Effacer" aria-label="Effacer" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initialisation de la recherche
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/jeremyfix/OutilsLibres" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Les outils du logiciel libre pour l&#39;ingénieur" class="md-nav__button md-logo" aria-label="Les outils du logiciel libre pour l'ingénieur" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Les outils du logiciel libre pour l'ingénieur
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/jeremyfix/OutilsLibres" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../familiarisation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Familiarisation avec le système Unix
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Outils
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Outils
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../help/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Obtenir de l'aide sur les outils (stackoverflow, nixcraft, man, info, tldr)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../historique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Utiliser l'historique des commandes dans le shell (history, Ctrl+r)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../remote/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interaction avec une machine distante (ssh, scp, rsync, sshfs, screen, byobu)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../code/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Editeur de texte, IDE (vim, emacs, code)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Correction orthographique/grammaticale (aspell, hunspell, LanguageTool)
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Correction orthographique/grammaticale (aspell, hunspell, LanguageTool)
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#aspell" class="md-nav__link">
+    <span class="md-ellipsis">
+      Aspell
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hunspell" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hunspell
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#languagetool" class="md-nav__link">
+    <span class="md-ellipsis">
+      LanguageTool
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integrer-un-correcteur-dans-son-ide-emacs-vim-vscode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Intégrer un correcteur dans son IDE emacs, vim, vscode
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autotask/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Automatisation de tâches avec Makefile (make)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../num/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Calculs numériques et symboliques (octave, scilab, numpy, pandas, scipy, sympy, matplotlib, seaborn)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../images/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Manipulation d'images (convert, mogrify, animate, compose, gimp)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rapport/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ecrire un rapport, des slides, un poster avec LaTeX (latexmk)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vectoriel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dessin vectoriel (xfig, inkscape, ipe, graphviz)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../capture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capture d'écran photo et vidéo (OpenBroadcast Studio, gnome-screenshot)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../video/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Assembler des images en vidéo (ffmpeg, avconv)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pdf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Manipulation de documents PDF (pdftk, xournalpp)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../recherche/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Recherche de fichier ou de contenu (grep, rg, find, locate)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../filtrage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Filtrage et manipulation de documents (awk, sed)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compare/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Comparer deux fichiers ou deux arborescences (diff)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Archiver/désarchiver (tar, gzip, zip)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../interface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interface utilisateur (zenity, whiptail)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Produire un site web, par exemple de documentation (mkdocs, jekyll, hugo)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    TP
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            TP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tps/bash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bash à sable
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tps/eruption/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    TP : Eruption solaire et transit de Mercure, à partir des données AIA SDO
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tps/meteo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    TP : Évolution des températures aux États-Unis à partir des données NOAA
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<div><h1 id="correction-orthographiquegrammaticale-aspell-hunspell-languagetool">Correction orthographique/grammaticale (aspell, hunspell, LanguageTool)</h1>
+<p>Il existe un certain nombre de logiciels libres pour la correction orthographique et/ou grammaticale, notamment <code>ispell</code>, <a href="https://github.com/GNUAspell/aspell">aspell</a>, myspell, <a href="https://hunspell.github.io/">hunspell</a>, <a href="https://github.com/languagetool-org/languagetool">LanguageTool</a>, ... . </p>
+<p>L'historique des différentes versions xxxspell n'est pas très clair. ispell semble être le plus ancien, sur lequel est basé myspell; aspell semble avoir été développé pour prendre le relais d'ispell. hunspell quant à lui est le correcteur orthographique qui semble prendre la main<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>; il est utilisé dans un grand nombre d'applications comme Firefox, Thunderbird, Chrome, Eclipse…, </p>
+<p>LanguageTool semble avoir été développé plus récemment et indépendamment. Contrairement
+aux xxx-spell, LanguageTool corrige les formes de style évitant ainsi, par exemple, l'utilisation de pléonasmes (au jour d'aujourd'hui), l'utilisation de deux virgules consécutives, etc.</p>
+<p>Pour installer ces logiciels (on préférera aspell, hunspell ou LanguageTool) sous Fedora :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Aspell</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1">## Sur Fedora/RedHat</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># yum install aspell aspell-fr aspell-en</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>dnf<span class="w"> </span>install<span class="w"> </span>aspell<span class="w"> </span>aspell-fr<span class="w"> </span>aspell-en
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1">## Sur Ubuntu/Debian</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>apt<span class="w"> </span>install<span class="w"> </span>aspell<span class="w"> </span>aspell-fr<span class="w"> </span>aspell-en
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="c1"># Hunspell</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="c1">## Sur Fedora/RedHat</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="c1"># yum install hunspell hunspell-fr hunspell-en</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>dnf<span class="w"> </span>install<span class="w"> </span>hunspell<span class="w"> </span>hunspell-fr<span class="w"> </span>hunspell-en
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="c1">## Sur Ubuntu/Debian</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>apt<span class="w"> </span>install<span class="w"> </span>hunspell<span class="w"> </span>hunspell-fr<span class="w"> </span>hunspell-en
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="c1"># LanguageTool</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="c1"># Aller voir sur la page du projet</span>
+</span></code></pre></div>
+<p>Tous ces outils sont utilisables en ligne de commande (i.e. dans un terminal, depuis un Makefile, ...). Pour tester les possibilités des différents correcteurs, on partira du texte ci-dessous, les fautes étant indiquées en rouge :</p>
+<p>Maître Corbeau, sur un arbre <mark class="critic">perchai</mark>,<br>
+<mark class="critic">Tenais</mark> en son <mark class="critic">beck</mark> un fromage.<br>
+Maître Renard, par l'odeur alléché,<br>
+Lui tint à peu près ce langage :<br>
+"Hé ! bonjour, Monsieur du Corbeau.<br>
+Que vous êtes joli ! que vous me semblez beau !<br>
+Sans mentir, si votre ramage<br>
+Se rapporte à votre plumage,<br>
+Vous êtes le Phénix des hôtes de ces bois. "<br>
+A ces mots le Corbeau ne se sent pas de joie ;<br>
+Et pour montrer sa belle voix,<br>
+Il ouvre un large bec, laisse tomber sa proie.<br>
+Le Renard s'en <mark class="critic">saisie</mark>, et dis : "Mon bon Monsieur,<br>
+<mark class="critic">Apprené</mark> que tout flatteur<br>
+Vit aux dépens de celui qui l'écoute :<br>
+Cette leçon vaut bien un fromage, sans doute. "<br>
+Le Corbeau, honteux et confus,<br>
+Jura, mais un peu tard, qu'on ne l'y prendrait plus.</p>
+<h2 id="aspell">Aspell</h2>
+<p>aspell s'appelle avec une commande de la forme :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$<span class="w"> </span>aspell<span class="w"> </span>check<span class="w"> </span><span class="o">[</span>options<span class="o">]</span><span class="w"> </span>filename
+</span></code></pre></div>
+<p>Plusieurs options sont disponibles, on ne liste que les plus utiles, mais d'autres sont documentées sur la <a href="http://aspell.net/man-html/Spellchecking-Individual-Files.html#Spellchecking-Individual-Files">documentation</a></p>
+<ul>
+<li><code>--lang=name</code> avec name <span class="arithmatex">\(\in\)</span> (fr, en, ..) spécifie le langage,</li>
+<li><code>--mode=mode</code> avec mode <span class="arithmatex">\(\in\)</span> (none, url, email, sgml, tex, texinfo, nroff,
+  ...) permet de filtrer des mots spécifiques de langage (par exemple le mode
+  tex permet de ne pas considérer les mots clefs LaTeX)</li>
+</ul>
+<p>Pour plus d"informations sur les options :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>$<span class="w"> </span>aspell<span class="w"> </span>--help
+</span></code></pre></div>
+<p>Par exemple, pour corriger les fautes d'orthographes d'un fichier texte, on utilisera:
+</p><div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>$<span class="w"> </span>aspell<span class="w"> </span>check<span class="w"> </span>-lfr<span class="w"> </span>text.txt
+</span></code></pre></div>
+<p>Pur corriger les fautes d'orthographes d'un fichier LaTeX, on utilisera:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>$<span class="w"> </span>aspell<span class="w"> </span>check<span class="w"> </span>-lfr<span class="w"> </span>--mode<span class="o">=</span>tex<span class="w"> </span>text.tex
+</span></code></pre></div>
+<p>Ces deux commandes lancent aspell en mode interactif, permettant de corriger les fautes à la volée (le fichier original est modifié). On peut aussi lister les fautes, sans les corriger. Sur le texte de Jean de la Fontaine, aspell retourne :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>$<span class="w"> </span>cat<span class="w"> </span>original.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>aspell<span class="w"> </span>-lfr<span class="w"> </span>list
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>beck
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>Apprené
+</span></code></pre></div>
+<h2 id="hunspell">Hunspell</h2>
+<p>hunspell fonctionne de manière similaire à aspell, les options étant spécifiées de manière un peu différente. Pour avoir plus d'informations sur les options à passer au programme, on utilisera
+</p><div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>$<span class="w"> </span>hunspell<span class="w"> </span>--help
+</span></code></pre></div>
+<p>Pour vérifier l'orthographe d'un texte en français, on utilisera la commande :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>$<span class="w"> </span>hunspell<span class="w"> </span>-d<span class="w"> </span>fr_FR<span class="w"> </span>text.txt
+</span></code></pre></div>
+<p>Pour vérifier un document \LaTeX, on précisera l'option <code>-t</code>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>hunspell<span class="w"> </span>-d<span class="w"> </span>fr_FR<span class="w"> </span>-t<span class="w"> </span>text.tex
+</span></code></pre></div>
+<p>On peut aussi lister les fautes, sans les corriger. Sur le texte de Jean de la Fontaine, hunspell retourne:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>hunspell<span class="w"> </span>-d<span class="w"> </span>fr_FR<span class="w"> </span>-l<span class="w"> </span>original.txt
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>beck
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>Apprené
+</span></code></pre></div>
+<h2 id="languagetool">LanguageTool</h2>
+<p>Il y a plusieurs façons d'utiliser language tool. Parfois, il est directement
+disponible dans votre outil, par exemple, il existe une <a href="https://languagetool.org/insights/fr/poste/languagetool-et-libreoffice/">extension pour
+LibreOffice</a>. Vous pouvez également
+solliciter l'<a href="https://dev.languagetool.org/public-http-api">API http</a> :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>$<span class="w"> </span>curl<span class="w"> </span>-d<span class="w"> </span><span class="s2">"text=This is an test."</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">"language=auto"</span><span class="w"> </span>https://api.languagetool.org/v2/check
+</span></code></pre></div>
+<p>Vous pouvez également faire tourner localement un serveur de correction. Voir <a href="https://dev.languagetool.org/http-server">https://dev.languagetool.org/http-server</a> à ce sujet.</p>
+<p>En lançant LanguageTool en ligne de commande sur notre texte d'exemple :</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>$ java -jar languagetool-commandline.jar -l fr original.txt 
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>Expected text language: French
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>Working on original.txt...
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>1.) Line 1, column 30, Rule ID: ACCORD_R_PERS_VERBE[32] premium: false prio=10
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>Message: Vérifiez l’accord entre le sujet et le verbe « perchai ».
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>Suggestion: perchait
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>Maître Corbeau, sur un arbre perchai, Tenais en son beck un fromage. Maître Renar...
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>                             ^^^^^^^                                             
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>2.) Line 1, column 30, Rule ID: ACCORD_SUJET_VERBE[39] premium: false
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>Message: Un verbe conjugué à la troisième personne du singulier semble plus approprié.
+</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>Suggestion: perchait
+</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>Maître Corbeau, sur un arbre perchai, Tenais en son beck un fromage. Maître Renar...
+</span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>                             ^^^^^^^                                             
+</span><span id="__span-11-16"><a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>
+</span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>3.) Line 2, column 15, Rule ID: FR_SPELLING_RULE premium: false prio=-100
+</span><span id="__span-11-18"><a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>Message: Faute de frappe possible trouvée.
+</span><span id="__span-11-19"><a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a>Suggestion: bec; becs; Besse; teck; Becky
+</span><span id="__span-11-20"><a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a>...Corbeau, sur un arbre perchai, Tenais en son beck un fromage. Maître Renard, par l'odeur alléc...
+</span><span id="__span-11-21"><a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a>                                                ^^^^                                             
+</span><span id="__span-11-22"><a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a>
+</span><span id="__span-11-23"><a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a>4.) Line 8, column 28, Rule ID: PRONOMS_PERSONNELS_MINUSCULE[2] premium: false
+</span><span id="__span-11-24"><a id="__codelineno-11-24" name="__codelineno-11-24" href="#__codelineno-11-24"></a>Message: La majuscule n’est employée qu’au début d’une phrase ou pour les noms propres (noms, toponymes, etc.).
+</span><span id="__span-11-25"><a id="__codelineno-11-25" name="__codelineno-11-25" href="#__codelineno-11-25"></a>Suggestion: . Vous; , vous
+</span><span id="__span-11-26"><a id="__codelineno-11-26" name="__codelineno-11-26" href="#__codelineno-11-26"></a>..., si votre ramage Se rapporte à votre plumage, Vous êtes le Phénix des hôtes de ces bois. " A ce...
+</span><span id="__span-11-27"><a id="__codelineno-11-27" name="__codelineno-11-27" href="#__codelineno-11-27"></a>                                                ^^^^^^                                             
+</span><span id="__span-11-28"><a id="__codelineno-11-28" name="__codelineno-11-28" href="#__codelineno-11-28"></a>
+</span><span id="__span-11-29"><a id="__codelineno-11-29" name="__codelineno-11-29" href="#__codelineno-11-29"></a>5.) Line 10, column 1, Rule ID: A_A_ACCENT[1] premium: false prio=10
+</span><span id="__span-11-30"><a id="__codelineno-11-30" name="__codelineno-11-30" href="#__codelineno-11-30"></a>Message: La préposition « À » placée en début de phrase possède un accent grave.
+</span><span id="__span-11-31"><a id="__codelineno-11-31" name="__codelineno-11-31" href="#__codelineno-11-31"></a>Suggestion: À
+</span><span id="__span-11-32"><a id="__codelineno-11-32" name="__codelineno-11-32" href="#__codelineno-11-32"></a>...Vous êtes le Phénix des hôtes de ces bois. " A ces mots le Corbeau ne se sent pas de joie ;...
+</span><span id="__span-11-33"><a id="__codelineno-11-33" name="__codelineno-11-33" href="#__codelineno-11-33"></a>                                                ^                                             
+</span><span id="__span-11-34"><a id="__codelineno-11-34" name="__codelineno-11-34" href="#__codelineno-11-34"></a>
+</span><span id="__span-11-35"><a id="__codelineno-11-35" name="__codelineno-11-35" href="#__codelineno-11-35"></a>6.) Line 11, column 30, Rule ID: PRONOMS_PERSONNELS_MINUSCULE[2] premium: false
+</span><span id="__span-11-36"><a id="__codelineno-11-36" name="__codelineno-11-36" href="#__codelineno-11-36"></a>Message: La majuscule n’est employée qu’au début d’une phrase ou pour les noms propres (noms, toponymes, etc.).
+</span><span id="__span-11-37"><a id="__codelineno-11-37" name="__codelineno-11-37" href="#__codelineno-11-37"></a>Suggestion: . Il; , il
+</span><span id="__span-11-38"><a id="__codelineno-11-38" name="__codelineno-11-38" href="#__codelineno-11-38"></a>...t pas de joie ; Et pour montrer sa belle voix, Il ouvre un large bec, laisse tomber sa proie. ...
+</span><span id="__span-11-39"><a id="__codelineno-11-39" name="__codelineno-11-39" href="#__codelineno-11-39"></a>                                                ^^^^                                             
+</span><span id="__span-11-40"><a id="__codelineno-11-40" name="__codelineno-11-40" href="#__codelineno-11-40"></a>
+</span><span id="__span-11-41"><a id="__codelineno-11-41" name="__codelineno-11-41" href="#__codelineno-11-41"></a>7.) Line 13, column 27, Rule ID: ACCORD_SUJET_VERBE[35] premium: false
+</span><span id="__span-11-42"><a id="__codelineno-11-42" name="__codelineno-11-42" href="#__codelineno-11-42"></a>Message: Un verbe conjugué à la troisième personne semble plus approprié.
+</span><span id="__span-11-43"><a id="__codelineno-11-43" name="__codelineno-11-43" href="#__codelineno-11-43"></a>Suggestion: dit; disent
+</span><span id="__span-11-44"><a id="__codelineno-11-44" name="__codelineno-11-44" href="#__codelineno-11-44"></a>...e tomber sa proie. Le Renard s'en saisie, et dis : "Mon bon Monsieur, Apprené que tout flatte...
+</span><span id="__span-11-45"><a id="__codelineno-11-45" name="__codelineno-11-45" href="#__codelineno-11-45"></a>                                                ^^^                                             
+</span><span id="__span-11-46"><a id="__codelineno-11-46" name="__codelineno-11-46" href="#__codelineno-11-46"></a>More info: https://languagetool.org/insights/fr/poste/je-me-permet-ou-je-me-permets/
+</span><span id="__span-11-47"><a id="__codelineno-11-47" name="__codelineno-11-47" href="#__codelineno-11-47"></a>
+</span><span id="__span-11-48"><a id="__codelineno-11-48" name="__codelineno-11-48" href="#__codelineno-11-48"></a>8.) Line 14, column 1, Rule ID: FR_SPELLING_RULE premium: false prio=-100
+</span><span id="__span-11-49"><a id="__codelineno-11-49" name="__codelineno-11-49" href="#__codelineno-11-49"></a>Message: Faute de frappe possible trouvée.
+</span><span id="__span-11-50"><a id="__codelineno-11-50" name="__codelineno-11-50" href="#__codelineno-11-50"></a>Suggestion: Apprenne; Apprend; Apprenait; Apprêté; Âpreté
+</span><span id="__span-11-51"><a id="__codelineno-11-51" name="__codelineno-11-51" href="#__codelineno-11-51"></a>...ard s'en saisie, et dis : "Mon bon Monsieur, Apprené que tout flatteur Vit aux dépens de celui qu...
+</span><span id="__span-11-52"><a id="__codelineno-11-52" name="__codelineno-11-52" href="#__codelineno-11-52"></a>                                                ^^^^^^^                                             
+</span><span id="__span-11-53"><a id="__codelineno-11-53" name="__codelineno-11-53" href="#__codelineno-11-53"></a>Time: 1551ms for 7 sentences (4.5 sentences/sec) 
+</span></code></pre></div>
+<h2 id="integrer-un-correcteur-dans-son-ide-emacs-vim-vscode">Intégrer un correcteur dans son IDE emacs, vim, vscode</h2>
+<p>aspell et hunspell peuvent être intégrés à <a href="../code/">emacs</a> pour avoir une correction orthographique à la volée. On peut personnaliser emacs en ajoutant des commandes Lisp au fichier <code>~/.emacs</code>. Pour indiquer qu'on souhaite utiliser aspell pour vérifier l'orthographe, on ajoutera la commande:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>(setq-default ispell-program-name "aspell")
+</span></code></pre></div>
+<p>On utilisera alors la correction orthographique avec les commandes ci-dessous, à exécuter dans le mini-buffer (<code>Meta-X</code>, Alt - X)</p>
+<ul>
+<li>ispell-change-dictionnary , suivi de fr ou en par exemple </li>
+<li>flyspell-buffer : vérifie l'orthographe du fichier en cours d'édition</li>
+<li>flyspell-mode : active/désactive la correction à la volée</li>
+</ul>
+<p>On fera bien attention que lorsque le dictionnaire est changé, il faut relancer la commande <code>flyspell-buffer</code> pour le prendre en compte.</p>
+<p>Dans VIM, pour pouvoir facilement activer la correction orthographique, on peut
+se définir quelques raccourcis dans son <code>~/.vimrc</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>function! ToggleSpellLang()
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>    " toggle between en and fr
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>    if &amp;spelllang =~# 'en'
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>        :set spelllang=fr
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>    else
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>        :set spelllang=en
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>    endif
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>endfunction
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>" Note: with Byobu, press Shift-F12 to disable byobu function keys capture
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>nnoremap &lt;F7&gt; :setlocal spell!&lt;CR&gt; " toggle spell on or off
+</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>nnoremap &lt;F8&gt; :call ToggleSpellLang()&lt;CR&gt; " toggle language
+</span></code></pre></div>
+<p>ce qui permettra d'activer/désactiver la vérification orthographique avec F7, de
+changer la langue avec F8. Ensuite, on passe d'une erreur à l'autre avec les
+touches "[s", on obtient des suggestions de modification avec "z=". On peut
+aussi intégrer LanguageTool en utilisant le plugin <a href="https://github.com/dense-analysis/ale">ALE</a> ou <a href="https://github.com/dpelle/vim-LanguageTool">vim-LanguageTool</a>.</p>
+<p>Sous VSCode, il semble aussi exister des extensions, par exemple <a href="https://marketplace.visualstudio.com/items?itemName=ltex-plus.vscode-ltex-plus">LTex+</a> pour utiliser LanguageTool.</p>
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Plus d'informations sont disponibles sur la page <a href="http://en.wikipedia.org/wiki/Hunspell">http://en.wikipedia.org/wiki/Hunspell</a> <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+</ol>
+</div></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://jeremyfix.github.io/OutilsLibres/">Outils du logiciel libre pour l'ingénieur</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://jeremyfix.github.io">Jeremy Fix</a> is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p> 
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "toc.follow", "toc.integrate"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+      
+        <script src="../../js/mathjax.js"></script>
+      
+        <script src="../../js/asciinema-player.min.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

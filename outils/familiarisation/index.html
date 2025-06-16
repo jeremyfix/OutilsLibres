@@ -1,0 +1,1271 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://jeremyfix.github.io/OutilsLibres/outils/familiarisation/">
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="../help/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Familiarisation avec le système Unix - Les outils du logiciel libre pour l'ingénieur</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/asciinema-player.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#familiarisation-avec-lenvironnement-unix" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
+    <a href="../.." title="Les outils du logiciel libre pour l&#39;ingénieur" class="md-header__button md-logo" aria-label="Les outils du logiciel libre pour l'ingénieur" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Les outils du logiciel libre pour l'ingénieur
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Familiarisation avec le système Unix
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Rechercher" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Recherche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Effacer" aria-label="Effacer" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initialisation de la recherche
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/jeremyfix/OutilsLibres" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Les outils du logiciel libre pour l&#39;ingénieur" class="md-nav__button md-logo" aria-label="Les outils du logiciel libre pour l'ingénieur" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Les outils du logiciel libre pour l'ingénieur
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/jeremyfix/OutilsLibres" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Familiarisation avec le système Unix
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Familiarisation avec le système Unix
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#permissions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Permissions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#systeme-de-fichiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Système de fichiers
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installations-logicielles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installations logicielles
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#philosophie-unix-do-one-thing-and-do-it-well" class="md-nav__link">
+    <span class="md-ellipsis">
+      Philosophie Unix : Do One Thing and Do It Well
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Outils
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Outils
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../help/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Obtenir de l'aide sur les outils (stackoverflow, nixcraft, man, info, tldr)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../historique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Utiliser l'historique des commandes dans le shell (history, Ctrl+r)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../remote/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interaction avec une machine distante (ssh, scp, rsync, sshfs, screen, byobu)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../code/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Editeur de texte, IDE (vim, emacs, code)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../correction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Correction orthographique/grammaticale (aspell, hunspell, LanguageTool)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autotask/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Automatisation de tâches avec Makefile (make)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../num/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Calculs numériques et symboliques (octave, scilab, numpy, pandas, scipy, sympy, matplotlib, seaborn)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../images/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Manipulation d'images (convert, mogrify, animate, compose, gimp)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rapport/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ecrire un rapport, des slides, un poster avec LaTeX (latexmk)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vectoriel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dessin vectoriel (xfig, inkscape, ipe, graphviz)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../capture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Capture d'écran photo et vidéo (OpenBroadcast Studio, gnome-screenshot)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../video/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Assembler des images en vidéo (ffmpeg, avconv)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pdf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Manipulation de documents PDF (pdftk, xournalpp)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../recherche/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Recherche de fichier ou de contenu (grep, rg, find, locate)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../filtrage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Filtrage et manipulation de documents (awk, sed)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compare/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Comparer deux fichiers ou deux arborescences (diff)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Archiver/désarchiver (tar, gzip, zip)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../interface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interface utilisateur (zenity, whiptail)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Produire un site web, par exemple de documentation (mkdocs, jekyll, hugo)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    TP
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            TP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tps/bash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bash à sable
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tps/eruption/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    TP : Eruption solaire et transit de Mercure, à partir des données AIA SDO
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tps/meteo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    TP : Évolution des températures aux États-Unis à partir des données NOAA
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<div><h1 id="familiarisation-avec-lenvironnement-unix">Familiarisation avec l'environnement Unix</h1>
+<h2 id="permissions">Permissions</h2>
+<p>Les permissions sont extrêmement importantes sous Linux. Chaque utilisateur
+Linux a un nom d'utilisateur et appartient à un ou plusieurs groupes.</p>
+<p>Les commandes ci-dessous vous indiquent ces éléments :</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>id
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>echo $USER
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>groups
+</span></code></pre></div>
+<p>En fonction des groupes auxquels un utilisateur appartient, il va disposer de
+droits particuliers. Par exemple :</p>
+<ul>
+<li>un membre du groupe <code>sudo</code> va pouvoir passer <strong>super utilisateur</strong> et faire
+  tout ce qu'il veut sur le système comme installer des logiciels, lire des
+  fichiers de sécurité, supprimer n'importe quoi</li>
+<li>un membre du groupe <code>docker</code> va pouvoir lancer des images docker</li>
+<li>un membre du groupe <code>lpadmin</code> va pouvoir administrer le serveur d'impression
+  CUPS, </li>
+<li>…</li>
+</ul>
+<p>Sur les machines de l'école, vous êtes en général membre d'un groupe regroupant
+l'ensemble des collègues de votre promotion. </p>
+<p>Les permissions données à un groupe dépendent de <em>flags</em>. Ces permissions sont
+de trois types :</p>
+<ul>
+<li>permission de lire un fichier ou lister le contenu d'un répertoire</li>
+<li>permission d'écrire (modifier) un fichier, ou de créer, supprimer, déplacer
+  des éléments d'un répertoire</li>
+<li>permission d'exécuter un fichier et d'accéder au contenu d'un répertoire.</li>
+</ul>
+<p>Ces permissions sont bien souvent notées "rwx" pour r-ead, w-rite, e-x-ecute,
+donc 3 <em>flags</em>, chacun binaire, <span class="arithmatex">\(8\)</span> possibilités en tout de <span class="arithmatex">\(0\)</span> à <span class="arithmatex">\(7\)</span>. Chaque
+fichier/répertoire appartient toujours à un utilisateur et à un groupe, ce qui
+conduit à <span class="arithmatex">\(3\)</span> groupes de permissions :</p>
+<ul>
+<li>le propriétaire du fichier/répertoire</li>
+<li>les membres du groupe propriétaire du fichier/répertoire</li>
+<li>le reste du monde</li>
+</ul>
+<p>Comme on a <span class="arithmatex">\(3\)</span> paquets de <span class="arithmatex">\(3\)</span> permissions, on les représente habituellement en
+octal avec <span class="arithmatex">\(3\)</span> chiffres entre <span class="arithmatex">\(0\)</span> et <span class="arithmatex">\(7\)</span> pour chaque groupe d'utilisateurs. On
+parlera par exemple de permissions :</p>
+<ul>
+<li><span class="arithmatex">\(777\)</span> pour rwx pour les <span class="arithmatex">\(3\)</span> groupes d'utilisateurs</li>
+<li><span class="arithmatex">\(755\)</span> quand on veut <span class="arithmatex">\(rwx\)</span> pour le propriétaire, mais supprimer <span class="arithmatex">\(x\)</span> pour tous
+  les autres</li>
+<li><span class="arithmatex">\(600\)</span> pour <code>rw</code> pour l'utilisateur, mais sans droit de lecture/modification
+  pour les autres, ce qui est requis pour une clé ssh privée</li>
+<li><span class="arithmatex">\(644\)</span> pour <code>rw</code> pour l'utilisateur et les droits de lecture pour les autres,
+  ce qui est requis pour une clé publique SSH.</li>
+</ul>
+<p>Pour accéder aux propriétés d'un fichier/répertoire, un <code>ls -l</code> vous les
+liste, et on trouvera par exemple :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>-rw-r--r--<span class="w">   </span><span class="m">1</span><span class="w"> </span>fix_jer<span class="w"> </span>morbluc<span class="w">        </span><span class="m">5096</span><span class="w"> </span>déc.<span class="w">  </span><span class="m">23</span><span class="w"> </span><span class="m">09</span>:31<span class="w">  </span>.zshrc
+</span></code></pre></div>
+<p>Les permissions sont indiquées tout à gauche : <code>rw-r--r--</code>. Le premier tiret <code>-</code>
+est un flag particulier pour indiquer si on a affaire à un fichier <code>-</code>, un
+répertoire <code>d</code> ou un lien symbolique <code>l</code>.</p>
+<p>Pour les permissions sur ce fichier, si on les décortique :
+- l'utilisateur <code>fix_jer</code> a le droit de lire et modifier le fichier (mais pas
+  d'exécuter)
+- les utilisateurs du groupe <code>morbluc</code> ont le droit de lire le fichier (mais pas
+  d'écrire ni d'exécuter)
+- les autres utilisateurs ont le droit de lire le fichier (mais pas d'écrire ni
+  d'exécuter)</p>
+<p>Prenons un autre exemple </p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ls<span class="w"> </span>-l<span class="w"> </span>/proc/
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>dr-xr-xr-x<span class="w">   </span><span class="m">6</span><span class="w"> </span>root<span class="w"> </span>root<span class="w"> </span><span class="m">0</span><span class="w"> </span>avril<span class="w">  </span><span class="m">1</span><span class="w"> </span><span class="m">06</span>:01<span class="w"> </span>tty
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>-r--r--r--<span class="w">   </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w"> </span><span class="m">0</span><span class="w"> </span>avril<span class="w">  </span><span class="m">1</span><span class="w"> </span><span class="m">06</span>:00<span class="w"> </span>uptime
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>-r--r--r--<span class="w">   </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w"> </span><span class="m">0</span><span class="w"> </span>avril<span class="w">  </span><span class="m">1</span><span class="w"> </span><span class="m">06</span>:01<span class="w"> </span>version
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>-r--r--r--<span class="w">   </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w"> </span><span class="m">0</span><span class="w"> </span>avril<span class="w">  </span><span class="m">1</span><span class="w"> </span><span class="m">06</span>:01<span class="w"> </span>version_signature
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>-r--------<span class="w">   </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w"> </span><span class="m">0</span><span class="w"> </span>avril<span class="w">  </span><span class="m">1</span><span class="w"> </span><span class="m">06</span>:01<span class="w"> </span>vmallocinfo
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>-r--r--r--<span class="w">   </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w"> </span><span class="m">0</span><span class="w"> </span>avril<span class="w">  </span><span class="m">1</span><span class="w"> </span><span class="m">06</span>:01<span class="w"> </span>vmstat
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>-r--r--r--<span class="w">   </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w"> </span><span class="m">0</span><span class="w"> </span>avril<span class="w">  </span><span class="m">1</span><span class="w"> </span><span class="m">06</span>:01<span class="w"> </span>zoneinfo
+</span></code></pre></div>
+<p>On voit ici plusieurs permissions, chaque fois pour l'utilisateur <code>root</code> et le
+groupe <code>root</code>. Si vous avez besoin de modifier les permissions, par exemple pour
+rendre un fichier (non-)modifiable ou exécutable, vous utiliserez la commande
+<code>chmod</code>. Cette commande prend en entrée les nouvelles permissions en octal.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>info "File permissions"
+</span></code></pre></div>
+<h2 id="systeme-de-fichiers">Système de fichiers</h2>
+<p>Les répertoires Linux respectent une certaine organisation. D'abord, ils ne sont
+pas organisés comme sous Windows en "C:/xxxx/yyy/" mais sont explicitement une
+structure arborescente commençant par un slash "/" qui est ce qu'on appelle "la
+racine" du système de fichier. Et on trouve ensuite des sous-répertoires :</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>/
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>/home/fix_jer
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>/etc/
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>/var/log
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>/proc/
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>/opt/
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>/tmp/
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>/usr/
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>...
+</span></code></pre></div>
+<p>Et je vous invite à lire les pages de manuel à ce sujet :</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>info file-hierarchy
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>man file-hierarchy
+</span></code></pre></div>
+<p>Vos fichiers/répertoires sont dans votre espace utilisateur, qu'on appelle "le
+home". On peut le localiser avec la variable d'environnement <code>$HOME</code> :</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>echo $HOME
+</span></code></pre></div>
+<p>Vous avez en général toutes les permissions pour faire ce que vous voulez dans
+cet espace. On trouvera ensuite des répertoires qui hébergent des fichiers pour
+une certaine fonction :</p>
+<ul>
+<li><code>/etc</code> va contenir des fichiers de configuration. Par exemple un serveur nginx mettre ses fichiers de configuration dans <code>/etc/nginx</code>. Le gestionnaire de paquet sous Ubuntu met ses fichiers de configuration dans <code>/etc/apt/</code>, ...</li>
+<li><code>/var/log</code> va contenir les logs de différents processus qui tournent sur votre
+  système. Par exemple <code>/var/log/Xorg.0.log</code> contiendra les logs du serveur
+  d'affichage Xorg, <code>/var/log/apacha</code></li>
+<li><code>/usr/bin</code> contient les exécutables</li>
+<li><code>/usr/include</code> les fichiers d'entête des librairies C/C++ installées</li>
+<li><code>/usr/lib</code> les librairies installées</li>
+<li><code>/run/user/</code> des fichiers temporaires des processus en cours d'exécution pour un
+  utilisateur</li>
+<li><code>/tmp</code> un répertoire nettoyé au démarage qui n'a vocation qu'à héberger des
+  fichiers temporaires</li>
+<li><code>/dev/</code> un répertoire contenant des fichiers pour interagir avec des
+  périphériques. Par exemple <code>/dev/js0</code> pour un joystick, <code>/dev/video0</code> pour une
+  webcam, ...</li>
+<li><code>/mnt</code> contient en général les points de montage par exemple de clés/disques
+  USB branchés, de périphériques réseaux, etc..</li>
+<li>...</li>
+</ul>
+<h2 id="installations-logicielles">Installations logicielles</h2>
+<p>Pour installer des logiciels, il existe plein de façon, mais disons que la
+première à privilégier est de passer par le <strong>gestionnaire de paquets</strong> de votre
+distribution. En fonction des familles de distribution, ce ne sera pas le même
+gestionnaire :</p>
+<ul>
+<li>fedora/redhat : dnf, yum</li>
+<li>debian/ubuntu : apt</li>
+<li>arch : pacman</li>
+<li>MacOS : brew</li>
+</ul>
+<p>Le gestionnaire de paquet est construit pour gérer lui même les éventuelles
+dépendances d'un logiciel. Pas besoin de le faire vous même. Il garde également
+une trace des paquets installés par dépendance, de telle que si vous supprimez
+un paquet, il peut vous suggérer de supprimer les paquets installés par
+dépendance. Pratique pour faire le ménage !</p>
+<p>Il existe des serveurs officiels, centralisés, sécurisés, qui hébergent les
+logiciels. Bien sûr, tout un chacun peut également offrir un serveur de logiciel
+et à ce moment-là, à vous de choisir de prendre ou non le risque d'ajouter ce
+dépôt logiciel. </p>
+<p>Par exemple, pour installer VS Code sous Ubuntu </p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>info<span class="w"> </span>code
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>Package:<span class="w"> </span>code
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>Version:<span class="w"> </span><span class="m">1</span>.99.1-1743784529
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>Priority:<span class="w"> </span>optional
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>Section:<span class="w"> </span>devel
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>Maintainer:<span class="w"> </span>Microsoft<span class="w"> </span>Corporation<span class="w"> </span>&lt;vscode-linux@microsoft.com&gt;
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>Installed-Size:<span class="w"> </span><span class="m">423</span><span class="w"> </span>MB
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>Provides:<span class="w"> </span>visual-studio-code
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>Depends:<span class="w"> </span>ca-certificates,<span class="w"> </span>libasound2<span class="w"> </span><span class="o">(</span>&gt;<span class="o">=</span><span class="w"> </span><span class="m">1</span>.0.17<span class="o">)</span>,<span class="w"> </span>libatk-bridge2.0-0<span class="w"> </span><span class="o">(</span>&gt;<span class="o">=</span><span class="w"> </span><span class="m">2</span>.5.3<span class="o">)</span>,<span class="w"> </span>libatk1.0-0<span class="w"> </span><span class="o">(</span>&gt;<span class="o">=</span><span class="w"> </span><span class="m">2</span>.11.90<span class="o">)</span>,<span class="w"> </span>libatspi2.0-0<span class="w"> </span><span class="o">(</span>&gt;<span class="o">=</span><span class="w"> </span><span class="m">2</span>.9.90<span class="o">)</span>,<span class="w"> </span>libc6<span class="w"> </span><span class="o">(</span>&gt;<span class="o">=</span><span class="w"> </span><span class="m">2</span>.14<span class="o">)</span>,<span class="w"> </span>libc6<span class="w"> </span><span class="o">(</span>&gt;<span class="o">=</span><span class="w"> </span><span class="m">2</span>.16<span class="o">)</span>,<span class="w"> </span>libc6<span class="w"> </span><span class="o">(</span>&gt;<span class="o">=</span><span class="w"> </span><span class="m">2</span>.17<span class="o">)</span>,<span class="w"> </span>libc6<span class="w"> </span><span class="o">(</span>&gt;<span class="o">=</span><span class="w"> </span><span class="m">2</span>.2.5<span class="o">)</span>,<span class="w"> </span>libc6<span class="w"> </span><span class="o">(</span>&gt;<span class="o">=</span><span class="w"> </span><span class="m">2</span>.25<span class="o">)</span>,<span class="w"> </span>libc6<span class="w"> </span><span class="o">(</span>&gt;<span class="o">=</span><span class="w"> </span><span class="m">2</span>.28<span class="o">)</span>,<span class="w"> </span>libcairo2<span class="w"> </span><span class="o">(</span>&gt;<span class="o">=</span><span class="w"> </span><span class="m">1</span>.6.0<span class="o">)</span>,<span class="w"> </span>libcurl3-gnutls<span class="w"> </span><span class="p">|</span><span class="w"> </span>libcurl3-nss<span class="w"> </span><span class="p">|</span><span class="w"> </span>libcurl4<span class="w"> </span><span class="p">|</span><span class="w"> </span>libcurl3,<span class="w"> </span>libdbus-1-3<span class="w"> </span><span class="o">(</span>&gt;<span class="o">=</span><span class="w"> </span><span class="m">1</span>.9.14<span class="o">)</span>,<span class="w"> </span>libexpat1<span class="w"> </span><span class="o">(</span>&gt;<span class="o">=</span><span class="w"> </span><span class="m">2</span>.1~beta3<span class="o">)</span>,<span class="w"> </span>libgbm1<span class="w"> </span><span class="o">(</span>&gt;<span class="o">=</span><span class="w"> </span><span class="m">17</span>.1.0~rc2<span class="o">)</span>,<span class="w"> </span>libglib2.0-0<span class="w"> </span><span class="o">(</span>&gt;<span class="o">=</span><span class="w"> </span><span class="m">2</span>.37.3<span class="o">)</span>,<span class="w"> </span>libgtk-3-0<span class="w"> </span><span class="o">(</span>&gt;<span class="o">=</span><span class="w"> </span><span class="m">3</span>.9.10<span class="o">)</span>,<span class="w"> </span>libgtk-3-0<span class="w"> </span><span class="o">(</span>&gt;<span class="o">=</span><span class="w"> </span><span class="m">3</span>.9.10<span class="o">)</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>libgtk-4-1,<span class="w"> </span>libnspr4<span class="w"> </span><span class="o">(</span>&gt;<span class="o">=</span><span class="w"> </span><span class="m">2</span>:4.9-2~<span class="o">)</span>,<span class="w"> </span>libnss3<span class="w"> </span><span class="o">(</span>&gt;<span class="o">=</span><span class="w"> </span><span class="m">2</span>:3.30<span class="o">)</span>,<span class="w"> </span>libnss3<span class="w"> </span><span class="o">(</span>&gt;<span class="o">=</span><span class="w"> </span><span class="m">3</span>.26<span class="o">)</span>,<span class="w"> </span>libpango-1.0-0<span class="w"> </span><span class="o">(</span>&gt;<span class="o">=</span><span class="w"> </span><span class="m">1</span>.14.0<span class="o">)</span>,<span class="w"> </span>libudev1<span class="w"> </span><span class="o">(</span>&gt;<span class="o">=</span><span class="w"> </span><span class="m">183</span><span class="o">)</span>,<span class="w"> </span>libx11-6,<span class="w"> </span>libx11-6<span class="w"> </span><span class="o">(</span>&gt;<span class="o">=</span><span class="w"> </span><span class="m">2</span>:1.4.99.1<span class="o">)</span>,<span class="w"> </span>libxcb1<span class="w"> </span><span class="o">(</span>&gt;<span class="o">=</span><span class="w"> </span><span class="m">1</span>.9.2<span class="o">)</span>,<span class="w"> </span>libxcomposite1<span class="w"> </span><span class="o">(</span>&gt;<span class="o">=</span><span class="w"> </span><span class="m">1</span>:0.4.4-1<span class="o">)</span>,<span class="w"> </span>libxdamage1<span class="w"> </span><span class="o">(</span>&gt;<span class="o">=</span><span class="w"> </span><span class="m">1</span>:1.1<span class="o">)</span>,<span class="w"> </span>libxext6,<span class="w"> </span>libxfixes3,<span class="w"> </span>libxkbcommon0<span class="w"> </span><span class="o">(</span>&gt;<span class="o">=</span><span class="w"> </span><span class="m">0</span>.5.0<span class="o">)</span>,<span class="w"> </span>libxkbfile1<span class="w"> </span><span class="o">(</span>&gt;<span class="o">=</span><span class="w"> </span><span class="m">1</span>:1.1.0<span class="o">)</span>,<span class="w"> </span>libxrandr2,<span class="w"> </span>xdg-utils<span class="w"> </span><span class="o">(</span>&gt;<span class="o">=</span><span class="w"> </span><span class="m">1</span>.0.2<span class="o">)</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>Recommends:<span class="w"> </span>libvulkan1
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>Conflicts:<span class="w"> </span>visual-studio-code
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>Replaces:<span class="w"> </span>visual-studio-code
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>Homepage:<span class="w"> </span>https://code.visualstudio.com/
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>Download-Size:<span class="w"> </span><span class="m">104</span><span class="w"> </span>MB
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>APT-Sources:<span class="w"> </span>https://packages.microsoft.com/repos/code<span class="w"> </span>stable/main<span class="w"> </span>amd64<span class="w"> </span>Packages
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>Description:<span class="w"> </span>Code<span class="w"> </span>editing.<span class="w"> </span>Redefined.
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="w"> </span>Visual<span class="w"> </span>Studio<span class="w"> </span>Code<span class="w"> </span>is<span class="w"> </span>a<span class="w"> </span>new<span class="w"> </span>choice<span class="w"> </span>of<span class="w"> </span>tool<span class="w"> </span>that<span class="w"> </span>combines<span class="w"> </span>the<span class="w"> </span>simplicity<span class="w"> </span>of
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="w"> </span>a<span class="w"> </span>code<span class="w"> </span>editor<span class="w"> </span>with<span class="w"> </span>what<span class="w"> </span>developers<span class="w"> </span>need<span class="w"> </span><span class="k">for</span><span class="w"> </span>the<span class="w"> </span>core<span class="w"> </span>edit-build-debug<span class="w"> </span>cycle.
+</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="w"> </span>See<span class="w"> </span>https://code.visualstudio.com/docs/setup/linux<span class="w"> </span><span class="k">for</span><span class="w"> </span>installation
+</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="w"> </span>instructions<span class="w"> </span>and<span class="w"> </span>FAQ.
+</span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>
+</span><span id="__span-7-22"><a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a>$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>code
+</span><span id="__span-7-23"><a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a>...
+</span></code></pre></div>
+<h2 id="philosophie-unix-do-one-thing-and-do-it-well">Philosophie Unix : Do One Thing and Do It Well</h2>
+<p>Comme vous le verrez dans la suite du site et pendant les TPs, on va combiner
+pleins de "petites" commandes. La philosophie Unix est d'écrire des "petits"
+programmes qui s'attaquent à un problème en particulier avec l'idée de pouvoir
+combiner tout ces programmes entre eux. </p>
+<p>La manière de combiner des programmes entre eux se fait grâce au "pipe", le
+symbole <code>|</code>. Dans le TP <a href="../../tps/bash/">Bash à sable</a>, on discutera justement
+de l'"entrée standard", la "sortie standard" et la "sortie d'erreur". Ce sont
+des entrées/sorties qui sont connectées par des "pipe" (tuyaux).</p>
+<p>Par exemple, pour <strong>trouver les <span class="arithmatex">\(10\)</span> plus gros fichiers dans un répertoire</strong>, on
+peut combiner :</p>
+<ul>
+<li><code>du</code> qui retourne la taille occupée par un fichier/répertoire</li>
+<li><code>sort</code> qui trie ce qu'il reçoit en entrée avec la possibilité que les nombres
+  à trier soient suffixés d'une unité <strong>M</strong>ega, <strong>G</strong>iga</li>
+<li><code>tail</code> qui ne retient que les <span class="arithmatex">\(x\)</span> dernières lignes de ce qu'il reçoit en
+  entrée</li>
+</ul>
+<p>Combinez ensemble, on obtient la commande <code>du * -sh | sort -h | tail -10</code> qui va
+vous retourner les <span class="arithmatex">\(10\)</span> plus gros fichiers/répertoires dans le répertoire
+courant.</p>
+<p>Autre exemple, pour calculer <strong>combien de fichiers sont présents dans un
+répertoire</strong>, on peut combiner :</p>
+<ul>
+<li><code>ls</code> qui liste tous les éléments présents dans un répertoire et, avec l'option
+  <code>-p</code> lui demander de suffixer les répertoires du symbole <code>/</code></li>
+<li><code>grep</code> qui permet de rechercher un motif. On lui demande de recherche le motif
+  <code>/</code> et de retourner ce qui ne contient pas ce motif <code>-v</code></li>
+<li><code>wc</code> qui permet de compter le nombre de lignes <code>-l</code> (mais peut aussi compter
+  le nombre de mots <code>-w</code>, de caractères <code>-c</code>, ...)</li>
+</ul>
+<p>Ce qui donne la commande <code>ls -p | grep -v / | wc -l</code></p></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://jeremyfix.github.io/OutilsLibres/">Outils du logiciel libre pour l'ingénieur</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://jeremyfix.github.io">Jeremy Fix</a> is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p> 
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "toc.follow", "toc.integrate"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+      
+        <script src="../../js/mathjax.js"></script>
+      
+        <script src="../../js/asciinema-player.min.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>
