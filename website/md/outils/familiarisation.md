@@ -159,7 +159,7 @@ première à privilégier est de passer par le **gestionnaire de paquets** de vo
 distribution. En fonction des familles de distribution, ce ne sera pas le même
 gestionnaire :
 
-- fedora/redhat : yum
+- fedora/redhat : dnf, yum
 - debian/ubuntu : apt
 - arch : pacman
 - MacOS : brew

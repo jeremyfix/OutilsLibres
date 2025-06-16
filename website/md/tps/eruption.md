@@ -551,7 +551,7 @@ Sous Fedora, vous devez exécuter :
 
 
 ```bash
-su -c 'yum install -y ffmpeg ImageMagick mplayer'
+su -c 'dnf install -y ffmpeg ImageMagick mplayer'
 ```
 
 en ayant au préalable installé les dépots [rpmfusion](http://rpmfusion.org/). 

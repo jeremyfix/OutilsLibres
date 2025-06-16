@@ -12,10 +12,23 @@ Pour installer ces logiciels (on préférera aspell, hunspell ou LanguageTool) s
 ```bash
 
 # Aspell
-yum install aspell aspell-fr aspell-en
+
+## Sur Fedora/RedHat
+# yum install aspell aspell-fr aspell-en
+dnf install aspell aspell-fr aspell-en
+
+## Sur Ubuntu/Debian
+apt install aspell aspell-fr aspell-en
+
 
 # Hunspell
-yum install hunspell hunspell-fr hunspell-en
+
+## Sur Fedora/RedHat
+# yum install hunspell hunspell-fr hunspell-en
+dnf install hunspell hunspell-fr hunspell-en
+
+## Sur Ubuntu/Debian
+apt install hunspell hunspell-fr hunspell-en
 
 # LanguageTool
 # Aller voir sur la page du projet

@@ -48,9 +48,9 @@ Linux permet d’installer facilement des logiciels via un gestionnaire de paque
 
 - Sous Fedora :
 
-	- `yum search` : chercher un paquet
-	- `yum install` : installer
-	- `yum remove` : désinstaller
+	- `dnf search` : chercher un paquet
+	- `dnf install` : installer
+	- `dnf remove` : désinstaller
 
 - Sous Ubuntu:
 
