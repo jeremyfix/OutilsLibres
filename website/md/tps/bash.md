@@ -7,6 +7,15 @@ Le but de ce TP d'introduction est de se familiariser avec l'environnement Unix 
 - rechercher/installer des packages
 - ...
 
+Nous allons voir quelques commandes dans ce TP mais il existe des serious games,
+en ligne, qui vous apprennent à prendre en main le shell, des ressources que je
+tire de ce post de LinuxFr : [https://linuxfr.org/users/ckiller/journaux/new-skills-linux](https://linuxfr.org/users/ckiller/journaux/new-skills-linux):
+
+- [GameShell](https://github.com/phyver/GameShell/) : `wget https://github.com/phyver/GameShell/releases/download/latest/gameshell.sh && bash gameshell.sh`
+- [OverTheWire](https://overthewire.org/wargames/)
+- [SadServers](https://sadservers.com/scenarios) : pour des techniques plus
+  avancées
+
 ## Prise en main
 
 Pendant tous les TPs, nous allons utiliser deux outils : la console (ou terminal) et l'éditeur `emacs`. Les scripts seront exécutés depuis un terminal et écrits avec `emacs`.
